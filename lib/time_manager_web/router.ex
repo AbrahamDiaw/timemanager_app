@@ -9,6 +9,8 @@ defmodule TIME_MANAGERWeb.Router do
     pipe_through :api
 
     resources "/users", UserController, except: [:new, :edit]
+
+    post "/workingtimes/:userID", WorkingtimeController, :create
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

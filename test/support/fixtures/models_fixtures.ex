@@ -18,4 +18,49 @@ defmodule TIME_MANAGER.ModelsFixtures do
 
     user
   end
+
+  @doc """
+  Generate a workingtime.
+  """
+  def workingtime_fixture(attrs \\ %{}) do
+    {:ok, workingtime} =
+      attrs
+      |> Enum.into(%{
+        end: ~N[2023-10-23 13:28:00],
+        time: ~N[2023-10-23 13:28:00]
+      })
+      |> TIME_MANAGER.Models.create_workingtime()
+
+    workingtime
+  end
+
+  @doc """
+  Generate a workingtime.
+  """
+  def workingtime_fixture(attrs \\ %{}) do
+    {:ok, workingtime} =
+      attrs
+      |> Enum.into(%{
+        end: ~N[2023-10-23 15:17:00],
+        start: ~N[2023-10-23 15:17:00]
+      })
+      |> TIME_MANAGER.Models.create_workingtime()
+
+    workingtime
+  end
+
+  @doc """
+  Generate a workingtime.
+  """
+  def workingtime_fixture(attrs \\ %{}) do
+    {:ok, workingtime} =
+      attrs
+      |> Enum.into(%{
+        end: ~N[2023-10-23 16:11:00],
+        start: ~N[2023-10-23 16:11:00]
+      })
+      |> TIME_MANAGER.Models.create_workingtime()
+
+    workingtime
+  end
 end
