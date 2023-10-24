@@ -22,9 +22,18 @@ defmodule TIME_MANAGERWeb.WorkingtimeController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"userID" => id_user, "id" => id}) do
     workingtime = Models.get_workingtime!(id)
-    render(conn, :show, workingtime: workingtime)
+
+    if workingtime.user == String.to_integer(id_user) do
+      render(conn, :show, workingtime: workingtime)
+    else
+      conn
+      |> put_status(:forbidden)  # Utilisez un autre code d'état HTTP si nécessaire
+      |> put_view(TIME_MANAGERWeb.ErrorView)
+      |> put_layout(false)
+      |> render("403.json", message: "Unauthorized access to this workingtime")
+    end
   end
 
   def update(conn, %{"id" => id, "workingtime" => workingtime_params}) do

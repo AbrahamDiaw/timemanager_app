@@ -71,3 +71,7 @@ config :time_manager, TIME_MANAGER.Repo,
 - Display routes
 
 `mix phx.routes`
+
+
+Log
+IO.inspect("blal")
