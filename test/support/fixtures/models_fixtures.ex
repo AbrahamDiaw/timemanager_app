@@ -63,4 +63,19 @@ defmodule TIME_MANAGER.ModelsFixtures do
 
     workingtime
   end
+
+  @doc """
+  Generate a clock.
+  """
+  def clock_fixture(attrs \\ %{}) do
+    {:ok, clock} =
+      attrs
+      |> Enum.into(%{
+        status: true,
+        time: ~N[2023-10-23 15:49:00]
+      })
+      |> TIME_MANAGER.Models.create_clock()
+
+    clock
+  end
 end

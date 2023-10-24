@@ -1,0 +1,30 @@
+### POST
+
+### Add Clocks (Check required)
+POST http://localhost:4000/api/clocks/1
+Content-Type: application/json
+
+{
+  "clock": {
+  }
+}
+
+### POST
+
+### Add clocks
+POST http://localhost:4000/api/clocks/2
+Content-Type: application/json
+
+{
+  "clock": {
+    "time": "2023-10-24T16:13:18+0100",
+    "status": true
+  }
+}
+
+
+### GET
+
+### Get by id
+GET http://localhost:4000/api/clocks/4
+
