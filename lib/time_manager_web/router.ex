@@ -13,6 +13,7 @@ defmodule TIME_MANAGERWeb.Router do
     post "/workingtimes/:userID", WorkingtimeController, :create
     delete "/workingtimes/:id", WorkingtimeController, :delete
     put "/workingtimes/:id", WorkingtimeController, :update
+    get "workingtimes/:userID/:id", WorkingtimeController, :show
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
