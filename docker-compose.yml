@@ -1,13 +1,14 @@
 version: "3.8"
 
 services:
-    #elixir-phoenix:
-    #    image: bitwalker/alpine-elixir-phoenix:latest
-    #    volumes:
-    #        - .:/app
-    #    restart: always
-    #    environment:
-    #        MIX_ENV: dev
+    elixir-phoenix:
+        image: bitwalker/alpine-elixir-phoenix:latest
+        volumes:
+            - .:/app
+        restart: always
+        environment:
+            MIX_ENV: dev
+        command: ["iex"]
     #command:
     #    - /bin/sh
     #    - -c
