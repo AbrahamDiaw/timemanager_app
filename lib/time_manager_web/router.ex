@@ -11,8 +11,10 @@ defmodule TIME_MANAGERWeb.Router do
     resources "/users", UserController, except: [:new, :edit]
 
     post "/workingtimes/:userID", WorkingtimeController, :create
-    get "/clocks/:id", ClockController, :show
-    post "/clocks/:id", ClockController, :create
+    delete "/workingtimes/:id", WorkingtimeController, :delete
+    put "/workingtimes/:id", WorkingtimeController, :update
+    get "workingtimes/:userID/:id", WorkingtimeController, :show
+    get "workingtimes/:userID", WorkingtimeController, :all
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

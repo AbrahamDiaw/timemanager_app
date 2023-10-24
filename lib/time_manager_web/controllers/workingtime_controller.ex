@@ -1,6 +1,8 @@
 defmodule TIME_MANAGERWeb.WorkingtimeController do
   use TIME_MANAGERWeb, :controller
 
+  import Ecto.Query
+
   alias TIME_MANAGER.Models
   alias TIME_MANAGER.Models.Workingtime
 
@@ -32,8 +34,30 @@ defmodule TIME_MANAGERWeb.WorkingtimeController do
       |> put_status(:forbidden)  # Utilisez un autre code d'état HTTP si nécessaire
       |> put_view(TIME_MANAGERWeb.ErrorView)
       |> put_layout(false)
-      |> render("403.json", message: "Unauthorized access to this workingtime")
+      |> render(conn, message: "Unauthorized access to this workingtime")
     end
+  end
+
+  def all(conn, %{"userID" => id}) do
+    start_param = conn.query_params["start"]
+    end_param = conn.query_params["end"]
+
+    query = from w in Workingtime,
+                 where: w.user == ^String.to_integer(id)
+
+    if not is_nil(start_param) do
+      query = from w in query,
+                   where: fragment("? <= ?", w.start, ^start_param)
+    end
+
+    if not is_nil(end_param) do
+      query = from w in query,
+                   where: fragment("? >= ?", w.end, ^end_param)
+    end
+
+    workingtimes = TIME_MANAGER.Repo.all(query)
+
+    render(conn,:show, workingtimes: workingtimes)
   end
 
   def update(conn, %{"id" => id, "workingtime" => workingtime_params}) do

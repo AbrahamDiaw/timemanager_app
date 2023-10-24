@@ -49,3 +49,13 @@ Content-Type: application/json
     "end": "2029-01-01 16:00:45"
   }
 }
+
+
+### show one Workingtimes
+GET http://localhost:4000/api/workingtimes/1/30
+Content-Type: application/json
+
+
+### show all Workingtimes
+GET http://localhost:4000/api/workingtimes/1
+Content-Type: application/json
