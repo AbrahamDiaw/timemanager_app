@@ -1,4 +1,4 @@
-FROM bitwalker/alpine-elixir-phoenix:latest
+FROM  bitwalker/alpine-elixir-phoenix:latest
 
 WORKDIR /app
 

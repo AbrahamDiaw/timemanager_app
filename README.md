@@ -16,3 +16,58 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+
+https://hexdocs.pm/phoenix/
+
+## Theme 01
+
+### Install Phoenix on the system
+
+```
+mix archive.install hex phx_new
+```
+
+### Create the project
+
+```
+mix phx.new TIME_MANAGER --app time_manager --module TIME_MANAGER --no-html --no-assets
+```
+
+### Create Schema
+
+- Users
+
+mix phx.gen.json Models User users username:string email:string
+
+```
+ mix phx.gen.schema User.User users username:string email:string
+```
+
+### Configure the database
+
+- `config/dev.exs`
+
+```
+config :time_manager, TIME_MANAGER.Repo,
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "time_manager_dev",
+  port: 5432,
+  stacktrace: true,
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
+```
+
+### Configure the routes
+
+- `lib/time_manager_web/router.ex`
+
+```
+
+```
+
+- Display routes
+
+`mix phx.routes`
