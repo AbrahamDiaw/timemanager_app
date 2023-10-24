@@ -35,7 +35,7 @@ defmodule TIME_MANAGERWeb.WorkingtimeController do
     end
   end
 
-  def delete(conn, %{"userID" => id}) do
+  def delete(conn, %{"id" => id}) do
     workingtime = Models.get_workingtime!(id)
 
     with {:ok, %Workingtime{}} <- Models.delete_workingtime(workingtime) do

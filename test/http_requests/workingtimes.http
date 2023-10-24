@@ -35,5 +35,17 @@ Content-Type: application/json
 
 
 ### delete Workingtimes
-DELETE http://localhost:4000/api/workingtimes/1
+DELETE http://localhost:4000/api/workingtimes/2
 Content-Type: application/json
+
+
+### update Workingtimes
+PUT http://localhost:4000/api/workingtimes/3
+Content-Type: application/json
+
+{
+  "workingtime": {
+    "start": "2024-10-25 16:30:45",
+    "end": "2029-01-01 16:00:45"
+  }
+}
