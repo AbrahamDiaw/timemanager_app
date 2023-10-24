@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+    #elixir-phoenix:
+    #    image: bitwalker/alpine-elixir-phoenix:latest
+    #    volumes:
+    #        - .:/app
+    #    restart: always
+    #    environment:
+    #        MIX_ENV: dev
+    #command:
+    #    - /bin/sh
+    #    - -c
+    #    - |
+    #        mix archive.install hex phx_new
+    #        mix phx.server
+    #    command: ["iex"] # Interactive Elixir
+
+    server:
+        build:
+            context: .
+        ports:
+            - "4000:4000"
+        volumes:
+            - .:/app
+        environment:
+            MIX_ENV: dev
+        depends_on:
+            - db
+        command: ["mix", "phx.server"]
+        restart: always
+
+    db:
+        image: postgres:latest
+        ports:
+            - "5432:5432"
+        volumes:
+            - ./pg_data:/var/lib/postgresql/data
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: time_manager_dev

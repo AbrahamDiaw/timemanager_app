@@ -1,0 +1,20 @@
+### Add Users (Check required)
+POST http://localhost:4000/api/users
+Content-Type: application/json
+
+{
+  "user": {
+  }
+}
+
+### Add Users (String)
+POST http://localhost:4000/api/users
+Content-Type: application/json
+
+{
+  "user": {
+	"username": 1,
+	"email": 1
+  }
+}
+
