@@ -4,7 +4,7 @@ import { GlobalVars } from "../../vars/Global.ts";
 
 export class UserService {
 	
-	public static async getUserById(userId: string): Promise<User> {
+	public static async getById(userId: string): Promise<User> {
 		let user = await UHttp.get(
 			`${ GlobalVars.BASE_URL_API }users/${ userId }`,
 			UHttp.defaultHeaders()
@@ -16,7 +16,7 @@ export class UserService {
 		
 	}
 	
-	public static async getUserByEmail(email: string): Promise<User> {
+	public static async getByEmail(email: string): Promise<User> {
 		let user = await UHttp.get(
 			`${ GlobalVars.BASE_URL_API }users?email=${ email }`,
 			UHttp.defaultHeaders()
@@ -28,7 +28,7 @@ export class UserService {
 		
 	}
 	
-	public static async addUser(data: any): Promise<User> {
+	public static async add(data: any): Promise<User> {
 		let user = await UHttp.post(
 			`${ GlobalVars.BASE_URL_API }users`,
 			{ user: data },
@@ -41,7 +41,7 @@ export class UserService {
 		
 	}
 	
-	public static async updateUser(data: any): Promise<User> {
+	public static async update(data: any): Promise<User> {
 		let user = await UHttp.patch(
 			`${ GlobalVars.BASE_URL_API }users`,
 			{ user: data },
@@ -54,7 +54,7 @@ export class UserService {
 		
 	}
 	
-	public static async deleteUser(userId: string): Promise<User> {
+	public static async delete(userId: string): Promise<User> {
 		let user = await UHttp.delete(
 			`${ GlobalVars.BASE_URL_API }users/${ userId }`,
 			UHttp.defaultHeaders()
