@@ -35,6 +35,13 @@ export class UHttp {
 		});
 	}
 	
+	public static delete(url: string, headers: any = {}): Promise<Response> {
+		return fetch(url, {
+			method: "DELETE",
+			headers
+		});
+	}
+	
 	public static defaultHeaders(): { Accept: string; "Content-Type": string } {
 		return {
 			'Accept': 'application/json, text/plain, */*',
