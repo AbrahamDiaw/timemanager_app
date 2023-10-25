@@ -11,18 +11,20 @@ defmodule TIME_MANAGERWeb.ClockController do
     render(conn, :index, clocks: clocks)
   end
 
-  def create(conn, %{"id" => id , "clock" => clock_params}) do
-    user = Models.get_clock!(id)
+  def create(conn, %{"userID" => id , "clock" => clock_params}) do
+    user = Models.get_user!(id)
 
-    with {:ok, %Clock{} = clock} <- Models.create_clock(Map.put(clock_params, "user", user.id)) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", ~p"/api/clocks/#{clock}")
-      |> render(:show, clock: clock)
+    if not is_nil(user) do
+      with {:ok, %Clock{} = clock} <- Models.create_clock(Map.put(clock_params, "user", user.id)) do
+        conn
+        |> put_status(:created)
+        |> put_resp_header("location", ~p"/api/clocks/#{clock}")
+        |> render(:show, clock: clock)
+      end
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"userID" => id}) do
     clock = Models.get_clock!(id)
     render(conn, :show, clock: clock)
   end

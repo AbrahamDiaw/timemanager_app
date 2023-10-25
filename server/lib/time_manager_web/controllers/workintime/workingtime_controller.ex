@@ -16,11 +16,13 @@ defmodule TIME_MANAGERWeb.WorkingtimeController do
   def create(conn, %{"userID" => id, "workingtime" => workingtime_params}) do
     user = Models.get_user!(id)
 
-    with {:ok, %Workingtime{} = workingtime} <- Models.create_workingtime(Map.put(workingtime_params, "user", user.id)) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", ~p"/api/workingtimes/#{workingtime}")
-      |> render(:show, workingtime: workingtime)
+    if not is_nil(user) do
+      with {:ok, %Workingtime{} = workingtime} <- Models.create_workingtime(Map.put(workingtime_params, "user", user.id)) do
+        conn
+        |> put_status(:created)
+        |> put_resp_header("location", ~p"/api/workingtimes/#{workingtime}")
+        |> render(:show, workingtime: workingtime)
+      end
     end
   end
 

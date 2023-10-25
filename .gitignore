@@ -1,3 +1,6 @@
 .idea
 
 todo.md
+
+# db volumes
+/pg_data

@@ -27,7 +27,5 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 time_manager-*.tar
 
-# db volumes
-pg_data
 
 ../todo.md
