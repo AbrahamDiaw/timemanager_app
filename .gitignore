@@ -29,3 +29,5 @@ time_manager-*.tar
 
 # db volumes
 pg_data
+
+todo.md
