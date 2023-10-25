@@ -3,7 +3,7 @@ import { UHttp } from "../utils/UHttp.ts";
 import { GlobalVars } from "../../vars/Global.ts";
 
 export class WorkingTimesService {
-	public static async getByUserId(userId: string): Promise<WorkingTimes> {
+	public async getByUserId(userId: string): Promise<WorkingTimes> {
 		let user = await UHttp.get(
 			`${ GlobalVars.BASE_URL_API }workingtimes/${ userId }`,
 			UHttp.defaultHeaders()
@@ -14,7 +14,7 @@ export class WorkingTimesService {
 		return response.data
 	}
 	
-	public static async getByUserIdAndId(userId: string, workingTimesId: string): Promise<WorkingTimes> {
+	public async getByUserIdAndId(userId: string, workingTimesId: string): Promise<WorkingTimes> {
 		let user = await UHttp.get(
 			`${ GlobalVars.BASE_URL_API }workingtimes/${ userId }/${ workingTimesId }`,
 			UHttp.defaultHeaders()
@@ -25,7 +25,7 @@ export class WorkingTimesService {
 		return response.data
 	}
 	
-	public static async addByUserId(userId: string, data: WorkingTimes): Promise<WorkingTimes> {
+	public async addByUserId(userId: string, data: WorkingTimes): Promise<WorkingTimes> {
 		let user = await UHttp.post(
 			`${ GlobalVars.BASE_URL_API }workingtimes/${ userId }`,
 			{ workingtime: data },
@@ -37,7 +37,7 @@ export class WorkingTimesService {
 		return response.data
 	}
 	
-	public static async updateById(workingTimesId: string, data: WorkingTimes): Promise<WorkingTimes> {
+	public async updateById(workingTimesId: string, data: WorkingTimes): Promise<WorkingTimes> {
 		let user = await UHttp.patch(
 			`${ GlobalVars.BASE_URL_API }workingtimes/${ workingTimesId }`,
 			{ workingtime: data },
@@ -49,7 +49,7 @@ export class WorkingTimesService {
 		return response.data
 	}
 	
-	public static async deleteById(workingTimesId: string): Promise<WorkingTimes> {
+	public async deleteById(workingTimesId: string): Promise<WorkingTimes> {
 		let user = await UHttp.delete(
 			`${ GlobalVars.BASE_URL_API }workingtimes/${ workingTimesId }`,
 			UHttp.defaultHeaders()
