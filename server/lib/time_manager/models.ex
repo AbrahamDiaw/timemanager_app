@@ -230,6 +230,26 @@ defmodule TIME_MANAGER.Models do
   def get_clock!(id), do: Repo.get!(Clock, id)
 
   @doc """
+  Gets a multiple clock by userId.
+
+  Raises `Ecto.NoResultsError` if the Clock does not exist.
+
+  ## Examples
+
+      iex> get_clocks_by_user_id!(123)
+      %Clock{}
+
+      iex> get_clocks_by_user_id!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+
+  def get_clocks_by_user_id(user_id) do
+    from(c in Clock, where: c.user == ^user_id)
+    |> Repo.all()
+  end
+
+  @doc """
   Creates a clock.
 
   ## Examples

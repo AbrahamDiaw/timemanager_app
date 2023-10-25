@@ -11,8 +11,8 @@ defmodule TIME_MANAGERWeb.ClockController do
     render(conn, :index, clocks: clocks)
   end
 
-  def create(conn, %{"userID" => id , "clock" => clock_params}) do
-    user = Models.get_user!(id)
+  def create(conn, %{"userID" => user_id , "clock" => clock_params}) do
+    user = Models.get_user!(user_id)
 
     if not is_nil(user) do
       with {:ok, %Clock{} = clock} <- Models.create_clock(Map.put(clock_params, "user", user.id)) do
@@ -24,9 +24,20 @@ defmodule TIME_MANAGERWeb.ClockController do
     end
   end
 
-  def show(conn, %{"userID" => id}) do
-    clock = Models.get_clock!(id)
-    render(conn, :show, clock: clock)
+  def show(conn,  %{"userID" => user_id}) do
+    user = Models.get_user!(user_id)
+
+    if not is_nil(user) do
+      clocks = Models.get_clocks_by_user_id(user_id)
+      conn
+      |> put_status(:ok)
+      |> render(:index, clocks: clocks)
+    else
+      conn
+      |> put_status(:not_found)
+      |> render("error.json", message: "User not found")
+    end
+
   end
 
   def update(conn, %{"id" => id, "clock" => clock_params}) do
