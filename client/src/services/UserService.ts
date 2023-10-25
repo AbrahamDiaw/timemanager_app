@@ -54,7 +54,7 @@ export class UserService {
 		
 	}
 	
-	public static async delete(userId: string): Promise<User> {
+	public static async deleteById(userId: string): Promise<User> {
 		let user = await UHttp.delete(
 			`${ GlobalVars.BASE_URL_API }users/${ userId }`,
 			UHttp.defaultHeaders()
