@@ -28,7 +28,7 @@ export class UserService {
 		
 	}
 	
-	public static async add(data: any): Promise<User> {
+	public static async add(data: User): Promise<User> {
 		let user = await UHttp.post(
 			`${ GlobalVars.BASE_URL_API }users`,
 			{ user: data },
@@ -41,9 +41,9 @@ export class UserService {
 		
 	}
 	
-	public static async update(data: any): Promise<User> {
+	public static async updateById(userId: string, data: User): Promise<User> {
 		let user = await UHttp.patch(
-			`${ GlobalVars.BASE_URL_API }users`,
+			`${ GlobalVars.BASE_URL_API }users/${ userId }`,
 			{ user: data },
 			UHttp.defaultHeaders()
 		)
