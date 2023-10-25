@@ -16,7 +16,4 @@ defmodule TIME_MANAGER.Models.Clock do
     |> cast(attrs, [:time, :status, :user])
     |> validate_required([:time, :status], message: "Required - can't be null")
   end
-
-
-
 end

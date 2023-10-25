@@ -26,8 +26,8 @@ Content-Type: application/json
 
 {
   "user": {
-    "username": "john2",
-    "email": "john.doe2@gmail.com"
+    "username": "john3",
+    "email": "john.doe3@gmail.com"
   }
 }
 
