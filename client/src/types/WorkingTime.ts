@@ -1,4 +1,4 @@
-export type WorkingTimes = {
+export type WorkingTime = {
 	id?: string;
 	start: string;
 	end: string;

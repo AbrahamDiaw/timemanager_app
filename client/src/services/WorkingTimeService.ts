@@ -1,9 +1,9 @@
-import { WorkingTimes } from "../types/WorkingTime.ts";
+import { WorkingTime } from "../types/WorkingTime.ts";
 import { UHttp } from "../utils/UHttp.ts";
 import { GlobalVars } from "../../vars/Global.ts";
 
-export class WorkingTimesService {
-	public async getByUserId(userId: string): Promise<WorkingTimes> {
+export class WorkingTimeService {
+	public async getByUserId(userId: string): Promise<WorkingTime[]> {
 		let user = await UHttp.get(
 			`${ GlobalVars.BASE_URL_API }workingtimes/${ userId }`,
 			UHttp.defaultHeaders()
@@ -14,9 +14,9 @@ export class WorkingTimesService {
 		return response.data
 	}
 	
-	public async getByUserIdAndId(userId: string, workingTimesId: string): Promise<WorkingTimes> {
+	public async getByUserIdAndId(userId: string, workingTimeId: string): Promise<WorkingTime> {
 		let user = await UHttp.get(
-			`${ GlobalVars.BASE_URL_API }workingtimes/${ userId }/${ workingTimesId }`,
+			`${ GlobalVars.BASE_URL_API }workingtimes/${ userId }/${ workingTimeId }`,
 			UHttp.defaultHeaders()
 		)
 		
@@ -25,7 +25,7 @@ export class WorkingTimesService {
 		return response.data
 	}
 	
-	public async addByUserId(userId: string, data: WorkingTimes): Promise<WorkingTimes> {
+	public async addByUserId(userId: string, data: WorkingTime): Promise<WorkingTime> {
 		let user = await UHttp.post(
 			`${ GlobalVars.BASE_URL_API }workingtimes/${ userId }`,
 			{ workingtime: data },
@@ -37,9 +37,9 @@ export class WorkingTimesService {
 		return response.data
 	}
 	
-	public async updateById(workingTimesId: string, data: WorkingTimes): Promise<WorkingTimes> {
+	public async updateById(workingTimeId: string, data: WorkingTime): Promise<WorkingTime> {
 		let user = await UHttp.patch(
-			`${ GlobalVars.BASE_URL_API }workingtimes/${ workingTimesId }`,
+			`${ GlobalVars.BASE_URL_API }workingtimes/${ workingTimeId }`,
 			{ workingtime: data },
 			UHttp.defaultHeaders()
 		)
@@ -49,9 +49,9 @@ export class WorkingTimesService {
 		return response.data
 	}
 	
-	public async deleteById(workingTimesId: string): Promise<WorkingTimes> {
+	public async deleteById(workingTimeId: string): Promise<WorkingTime> {
 		let user = await UHttp.delete(
-			`${ GlobalVars.BASE_URL_API }workingtimes/${ workingTimesId }`,
+			`${ GlobalVars.BASE_URL_API }workingtimes/${ workingTimeId }`,
 			UHttp.defaultHeaders()
 		)
 		
