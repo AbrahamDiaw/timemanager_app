@@ -6,7 +6,7 @@ interface UserState {
 	userById: User | null;
 }
 
-const initialState = {
+const initialState: UserState = {
 	users: [],
 	userById: null,
 };
