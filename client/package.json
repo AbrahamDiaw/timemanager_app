@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "vue": "^3.3.7",
+    "vue-router": "^4.2.5",
     "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
+    "fantasticon": "^2.0.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
     "vue-tsc": "^1.8.5"

@@ -2,8 +2,12 @@
 import HelloWorld from './components/HelloWorld.vue'
 import { mapGetters, mapActions } from "vuex";
 export default {
+
   components: {
-    HelloWorld
+    Headers,
+    Header,
+    User,
+    Home
   },
   methods: {
     ...mapActions(["addByUserId"]),
