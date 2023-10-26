@@ -35,8 +35,10 @@ export const ClocksStore: Module<ClockState, Clock> = {
 			// Commit a mutation to update the state if needed.
 			// state.dataByUserId.push(clock);
 		},
-		// async getAllByUserId({ state }: { state: ClockState }, id: string) {
-		// 	state.dataByUserId = await clockService.getClockByUserId(id);
-		// }
+		async getAllByUserId({ state }: { state: ClockState }, payload: { id: string }): Promise<void> {
+			const { id }: { id: string} = payload;
+			// state.dataByUserId = await clockService.getClockByUserId(id);
+			console.log(id)
+		}
 	}
 };
