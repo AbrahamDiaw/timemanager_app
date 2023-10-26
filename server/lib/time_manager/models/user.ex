@@ -5,6 +5,7 @@ defmodule TIME_MANAGER.Models.User do
   schema "users" do
     field :username, :string
     field :email, :string
+    field :role, Ecto.Enum, values: [:employee, :manager, :general_manager]
 
     timestamps(type: :utc_datetime)
   end
@@ -12,11 +13,12 @@ defmodule TIME_MANAGER.Models.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:username, :email])
+    |> cast(attrs, [:username, :email, :role])
     |> unique_constraint(:email)
-    |> validate_required([:username, :email], message: "Required - can't be null")
+    |> validate_required([:username, :email, :role], message: "Required - can't be null")
     |> validate_format(:email, ~r/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, message: "X@X.X")
     |> validate_type(:username, :string, "Username must be a string")
+    |> validate_type(:email, :string, "Email must be a string")
   end
 
   defp validate_type(changeset, field, expected_type, message) do

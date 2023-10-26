@@ -11,6 +11,13 @@ defmodule TIME_MANAGERWeb.UserController do
     render(conn, :index, users: users)
   end
 
+  def index(conn, %{ "email" => email, "username" => username }) do
+    if not is_nil(email) and not is_nil(username) do
+      user = UserRepo.get_by_email_and_username!(email, username)
+      render(conn, :show, user: user)
+    end
+  end
+
   def create(conn, %{"user" => user_params}) do
     with {:ok, %User{} = user} <- UserRepo.create_user(user_params) do
       conn
