@@ -2,7 +2,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 import Home from "./components/pages/Home.vue"
-import User from "./components/specifics/User.vue";
+import User from "./components/specifics/Sidebar.vue";
 import Header from "./components/specifics/Header.vue";
 
 export default {
@@ -50,7 +50,7 @@ export default {
 
   .main-container {
     position: absolute;
-    width: 100%;
+    width: calc(100% - var(--sidebar-width));
     top: 0;
     left: var(--sidebar-width);
   }
