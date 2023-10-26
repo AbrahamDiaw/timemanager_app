@@ -1,6 +1,6 @@
-import { User } from "../types/User.ts";
-import { UHttp } from "../utils/UHttp.ts";
-import { GlobalVars } from "../../vars/Global.ts";
+import { User } from "../types/User";
+import { UHttp } from "../utils/UHttp";
+import { GlobalVars } from "../../vars/Global";
 
 export class UserService {
 	

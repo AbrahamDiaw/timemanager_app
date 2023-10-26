@@ -1,5 +1,5 @@
-import { WorkingTimeService } from "../services/WorkingTimeService.ts";
-import { WorkingTime } from "../types/WorkingTime.ts";
+import { WorkingTimeService } from "../services/WorkingTimeService";
+import { WorkingTime } from "../types/WorkingTime";
 
 interface WorkingTimeState {
 	workingTimeByUserId: WorkingTime[];

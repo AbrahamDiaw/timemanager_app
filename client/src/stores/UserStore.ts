@@ -1,5 +1,5 @@
-import { UserService } from "../services/UserService.ts";
-import { User } from "../types/User.ts";
+import { UserService } from "../services/UserService";
+import { User } from "../types/User";
 
 interface UserState {
 	users: User[];

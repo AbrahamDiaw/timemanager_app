@@ -1,6 +1,6 @@
-import { WorkingTime } from "../types/WorkingTime.ts";
-import { UHttp } from "../utils/UHttp.ts";
-import { GlobalVars } from "../../vars/Global.ts";
+import { WorkingTime } from "../types/WorkingTime";
+import { UHttp } from "../utils/UHttp";
+import { GlobalVars } from "../../vars/Global";
 
 export class WorkingTimeService {
 	public async getByUserId(userId: string): Promise<WorkingTime[]> {
