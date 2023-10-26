@@ -15,7 +15,7 @@ const initialState: ClockState = {
 
 const clockService = new ClockService();
 
-export const ClocksStore: Module<ClockState, Clock> = {
+export const ClocksStore: Module<any, any> = {
 	state: () => initialState,
 	getters: {
 		getByUserId: (state: ClockState) => {

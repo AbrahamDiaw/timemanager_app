@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 import { mapGetters} from "vuex";
 
 export default {
@@ -12,7 +12,7 @@ export default {
       }
   },
   mounted() {
-    let userId=this.$route.params.id
+    let userId = this.$route.params.id
     this.$store.dispatch("getWorkingTimeByUserId",userId)
   },
 }

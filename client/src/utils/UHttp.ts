@@ -15,7 +15,7 @@ export class UHttp {
 	public static post(url: string, data: any, headers: any = {}): Promise<Response> {
 		return fetch(url, {
 			method: "POST",
-			body: data,
+			body: JSON.stringify(data),
 			headers
 		});
 	}
@@ -30,7 +30,7 @@ export class UHttp {
 	public static patch(url: string, data: any, headers: any = {}): Promise<Response> {
 		return fetch(url, {
 			method: "PATCH",
-			body: data,
+			body: JSON.stringify(data),
 			headers
 		});
 	}

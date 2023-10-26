@@ -1,16 +1,19 @@
 <script lang="ts">
-  export default {
-    name: "Home",
-    components: {
-    }
+import Users from "../specifics/Users.vue";
+
+export default {
+  name: "Home",
+  components: {
+    Users
   }
+}
 </script>
 
 
 <template>
-<div>
-  Home kjhdsqkjdhqskjdh
-</div>
+  <div>
+    <Users />
+  </div>
 </template>
 
 <style scoped>

@@ -6,14 +6,16 @@ import  "./components/generics/Icon/css/icons.css";
 
 import App from "./App.vue";
 import {ClocksStore} from "./stores/ClocksStore";
-import {WorkingTimeStore} from "./stores/WorkingTimeStore";
 import router from "./router";
+import {WorkingTimeStore} from "./stores/WorkingTimeStore";
+import {UserStore} from "./stores/UserStore";
 
 // Create a new store instance.
 const store = createStore({
 	modules: {
 		Clocks: ClocksStore,
-		WorkingTime: WorkingTimeStore
+		WorkingTime: WorkingTimeStore,
+		User: UserStore
 	}
 })
 

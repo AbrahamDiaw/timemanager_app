@@ -24,3 +24,89 @@ html, body {
     width: 100vw;
     height: 100vh;
 }
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: none;
+    text-align: left;
+}
+
+.edit-button{
+    border-radius: 0.375rem; /* équivaut à rounded-md */
+    background-color: #4f46e5; /* équivaut à bg-indigo-600 */
+    padding: 0.75rem 1rem; /* équivaut à px-3 py-2 */
+    text-align: center; /* équivaut à text-center */
+    font-size: 0.875rem; /* équivaut à text-sm */
+    font-weight: 600; /* équivaut à font-semibold */
+    color: #ffffff; /* équivaut à text-white */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.1); /* équivaut à shadow-sm */
+    transition: background-color 0.2s; /* Animation de survol */
+    cursor: pointer;
+    border: none;
+    width: 120px;
+}
+
+.edit-button:hover {
+    background-color: #4338d0;
+}
+
+.edit-button:focus-visible {
+    outline: 2px solid #4f46e5; /* équivaut à focus-visible:outline-2 */
+    outline-offset: 0.5rem; /* équivaut à focus-visible:outline-offset-2 */
+    background-color: #4338d0; /* équivaut à focus-visible:outline-indigo-60 */
+}
+
+.delete-button{
+    border-radius: 0.375rem; /* équivaut à rounded-md */
+    background-color: #bd2130; /* équivaut à bg-indigo-600 */
+    padding: 0.75rem 1rem; /* équivaut à px-3 py-2 */
+    text-align: center; /* équivaut à text-center */
+    font-size: 0.875rem; /* équivaut à text-sm */
+    font-weight: 600; /* équivaut à font-semibold */
+    color: #ffffff; /* équivaut à text-white */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.1); /* équivaut à shadow-sm */
+    transition: background-color 0.2s; /* Animation de survol */
+    cursor: pointer;
+    border: none;
+    width: 120px;
+}
+
+.delete-button:hover {
+    background-color: #dc3545;
+}
+
+.delete-button:focus-visible {
+    outline: 2px solid #dc3545; /* équivaut à focus-visible:outline-2 */
+    outline-offset: 0.5rem; /* équivaut à focus-visible:outline-offset-2 */
+    background-color: #dc3545; /* équivaut à focus-visible:outline-indigo-60 */
+}
+
+.add-button{
+    border-radius: 0.375rem; /* équivaut à rounded-md */
+    background-color: #1c7430; /* équivaut à bg-indigo-600 */
+    padding: 0.75rem 1rem; /* équivaut à px-3 py-2 */
+    text-align: center; /* équivaut à text-center */
+    font-size: 0.875rem; /* équivaut à text-sm */
+    font-weight: 600; /* équivaut à font-semibold */
+    color: #ffffff; /* équivaut à text-white */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.1); /* équivaut à shadow-sm */
+    transition: background-color 0.2s; /* Animation de survol */
+    cursor: pointer;
+    border: none;
+    width: 120px;
+}
+
+.add-button:hover {
+    background-color: #1e7e34;
+}
+
+.add-button:focus-visible {
+    outline: 2px solid #1e7e34; /* équivaut à focus-visible:outline-2 */
+    outline-offset: 0.5rem; /* équivaut à focus-visible:outline-offset-2 */
+    background-color: #1e7e34; /* équivaut à focus-visible:outline-indigo-60 */
+}

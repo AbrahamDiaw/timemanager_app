@@ -16,7 +16,7 @@ const initialState: WorkingTimeState = {
 const workingTimesService = new WorkingTimeService();
 
 export const WorkingTimeStore:  Module<any, any>  = {
-	state: initialState,
+	state: () => initialState,
 
 	mutations: {
 		setWorkingTimes(state: any, data: any) {
@@ -35,7 +35,7 @@ export const WorkingTimeStore:  Module<any, any>  = {
 				 commit("setWorkingTimes",workingTimes )
 			 });
 		},
-		getByUserIdAndId({ state, commit }: { state: WorkingTimeState, commit: any }, userId: string, workingTimesId: string): void {
+		/*getByUserIdAndId({ state, commit }: { state: WorkingTimeState, commit: any }, userId: string, workingTimesId: string): void {
 			workingTimesService.getByUserIdAndId(userId, workingTimesId).then((workingTime) => {
 				commit("setWorkingTime",workingTime )
 			})
@@ -44,7 +44,7 @@ export const WorkingTimeStore:  Module<any, any>  = {
 			 workingTimesService.addByUserId(userId, data).then((workingTime)=> {
 				 commit("addWorkingTime",workingTime)
 			 })
-		},
+		},*/
 		// updateById({ state }: { state: WorkingTimeState }, workingTimesId: string, data: WorkingTime): Promise<void> {
 		// 	state.currentWorkingTime = await workingTimesService.updateById(workingTimesId, data)
 		// },
