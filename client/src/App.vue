@@ -1,5 +1,28 @@
-<script setup lang="ts">
+<script  lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
+import { mapGetters, mapActions } from "vuex";
+export default {
+  components: {
+    HelloWorld
+  },
+  methods: {
+    ...mapActions(["addByUserId"]),
+  },
+  computed: {
+    ...mapGetters(["getByUserId"]),
+  },
+  mounted() {
+    let payload = {
+      id: "10",
+      data: { status: false, time: "--heure" }
+    };
+
+    this.addByUserId(payload)
+
+  }
+}
+
+
 </script>
 
 <template>
