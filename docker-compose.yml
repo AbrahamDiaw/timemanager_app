@@ -1,18 +1,10 @@
 version: "3.8"
 
 services:
-  #elixir-phoenix:
-  #image: elixir:latest
-  #volumes:
-  # - .:/app
-  #restart: always
-  #environment:
-  #MIX_ENV: dev
-  #command: [ "iex" ] # Interactive Elixir
-
   server:
     build:
       context: ./server
+    container_name: timemanager_server
     ports:
       - "4000:4000"
     volumes:
@@ -29,17 +21,9 @@ services:
         mix phx.server
     restart: always
 
-  #client:
-   # image: client
-    #container_name: client
-    #build:
-     # context: ./client
-      #dockerfile: Dockerfile
-    #ports:
-     # - "3030:3030"
-
   db:
     image: postgres:latest
+    container_name: timemanager_db
     ports:
       - "5432:5432"
     volumes:

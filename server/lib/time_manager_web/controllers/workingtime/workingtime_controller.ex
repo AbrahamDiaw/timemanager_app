@@ -4,6 +4,7 @@ defmodule TIME_MANAGERWeb.WorkingtimeController do
   import Ecto.Query
 
   alias TIME_MANAGER.WorkingtimeRepo
+  alias TIME_MANAGER.UserRepo
   alias TIME_MANAGER.Models.Workingtime
 
   action_fallback TIME_MANAGERWeb.FallbackController
@@ -14,7 +15,7 @@ defmodule TIME_MANAGERWeb.WorkingtimeController do
   end
 
   def create(conn, %{"userID" => id, "workingtime" => workingtime_params}) do
-    user = WorkingtimeRepo.get_user!(id)
+    user = UserRepo.get_user!(id)
 
     if not is_nil(user) do
       with {:ok, %Workingtime{} = workingtime} <- WorkingtimeRepo.create_workingtime(Map.put(workingtime_params, "user", user.id)) do
@@ -26,7 +27,7 @@ defmodule TIME_MANAGERWeb.WorkingtimeController do
     end
   end
 
-  def show(conn, %{"userID" => id_user, "id" => id}) do
+  def one(conn, %{"userID" => id_user, "id" => id}) do
     workingtime = WorkingtimeRepo.get_workingtime!(id)
 
     if workingtime.user == String.to_integer(id_user) do
@@ -40,30 +41,9 @@ defmodule TIME_MANAGERWeb.WorkingtimeController do
     end
   end
 
-  def all(conn, %{"userID" => id}) do
-    start_param =  conn.query_params["start"]
-    end_param = conn.query_params["end"]
-
-    query = from w in Workingtime,
-                 where: w.user == ^String.to_integer(id)
-
-    query = if not is_nil(start_param) do
-      {:ok, date_time} = NaiveDateTime.from_iso8601(start_param)
-      from w in query,
-           where: w.start >= ^date_time
-    else
-      query
-    end
-
-    query = if not is_nil(end_param) do
-      {:ok, date_time} = NaiveDateTime.from_iso8601(end_param)
-      from w in query,
-           where: w.end <= ^date_time
-    else
-      query
-    end
-
-    render(conn,:index, workingtimes: TIME_MANAGER.Repo.all(query))
+  def all(conn, %{"userID" => id, "start" => start_param, "end" => end_param}) do
+    workingtimes= WorkingtimeRepo.get_user_workingtime!(String.to_integer(id), start_param, end_param)
+    render(conn,:index, workingtimes: workingtimes)
   end
 
   def update(conn, %{"id" => id, "workingtime" => workingtime_params}) do

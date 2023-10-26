@@ -39,6 +39,20 @@ defmodule TIME_MANAGER.WorkingtimeRepo do
   def get_workingtime!(id), do: Repo.get!(Workingtime, id)
 
   @doc """
+  """
+  def get_user_workingtime!(user_id, start_param, end_param) do
+    {:ok, start_date_time, z } = DateTime.from_iso8601(start_param)
+    {:ok, end_date_time, z } = DateTime.from_iso8601(end_param)
+
+    query = from w in Workingtime,
+                 where: w.user == ^user_id and w.start >= ^start_date_time and w.end <= ^end_date_time
+
+                 IO.inspect(query)
+
+    TIME_MANAGER.Repo.all(query)
+  end
+  
+  @doc """
   Creates a workingtime.
 
   ## Examples

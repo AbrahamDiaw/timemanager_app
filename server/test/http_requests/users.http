@@ -1,5 +1,3 @@
-### POST
-
 ### Add Users (Check required)
 POST http://localhost:4000/api/users
 Content-Type: application/json
@@ -20,18 +18,41 @@ Content-Type: application/json
   }
 }
 
-### Add User
+### Add User employee
 POST http://localhost:4000/api/users
 Content-Type: application/json
 
 {
   "user": {
-    "username": "john3",
-    "email": "john.doe3@gmail.com"
+    "username": "john",
+    "email": "john.doe@gmail.com",
+    "role": "employee"
   }
 }
 
-### PUT
+### Add User manager
+POST http://localhost:4000/api/users
+Content-Type: application/json
+
+{
+  "user": {
+    "username": "jane",
+    "email": "jane.doe@gmail.com",
+    "role": "manager"
+  }
+}
+
+### Add User general manager
+POST http://localhost:4000/api/users
+Content-Type: application/json
+
+{
+  "user": {
+    "username": "ben",
+    "email": "ben.doe@gmail.com",
+    "role": "general_manager"
+  }
+}
 
 ### Update user
 PUT http://localhost:4000/api/users/1
@@ -40,19 +61,19 @@ Content-Type: application/json
 {
   "user": {
     "username": "john01",
-    "email": "john01.doe@gmail.com"
+    "email": "john01.doe@gmail.com",
+    "role": "manager"
   }
 }
 
-### GET
+### Get all
+GET http://localhost:4000/api/users
 
 ### Get by id
 GET http://localhost:4000/api/users/1
 
-### Get by email
-GET  http://localhost:4000/api/users?email=john01.doe@gmail.com
-
-### DELETE
+### Get by email and username
+GET  http://localhost:4000/api/users?email=john.doe@gmail.com&username=john
 
 ### Delete user
 DELETE http://localhost:4000/api/users/1
