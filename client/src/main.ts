@@ -3,6 +3,7 @@ import { createStore } from 'vuex'
 import './style.css'
 import App from './App.vue'
 import {ClocksStore} from "./stores/ClocksStore";
+import router from "./router";
 
 // Create a new store instance.
 const store = createStore({
@@ -13,4 +14,5 @@ const store = createStore({
 
 createApp(App)
 	.use(store)
+	.use(router)
 	.mount('#app')

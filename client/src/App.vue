@@ -9,12 +9,15 @@ export default {
     User,
     Home
   },
+
   methods: {
     ...mapActions(["addByUserId"]),
   },
+
   computed: {
     ...mapGetters(["getByUserId"]),
   },
+
   mounted() {
     let payload = {
       id: "10",
@@ -42,18 +45,15 @@ export default {
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
+  .main {
+    width: 100%;
+    height: 100%;
+  }
 
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+  .main-container {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: var(--sidebar-width);
+  }
 </style>
