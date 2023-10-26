@@ -4,11 +4,8 @@ import { GlobalVars } from "../../vars/Global";
 
 export class WorkingTimeService {
 	public async getByUserId(userId: string): Promise<WorkingTime[]> {
-		console.log("trrtr", userId, `${ GlobalVars.BASE_URL_API }workingtimes/${ userId }`)
-
-
 		let user = await UHttp.get(
-			 GlobalVars.BASE_URL_API + "workingtimes/" + 1,
+			 GlobalVars.BASE_URL_API + "workingtimes/" + userId,
 			UHttp.defaultHeaders()
 		)
 		
@@ -52,14 +49,14 @@ export class WorkingTimeService {
 		return response.data
 	}
 	
-	public async deleteById(workingTimeId: string): Promise<WorkingTime> {
-		let user = await UHttp.delete(
-			`${ GlobalVars.BASE_URL_API }workingtimes/${ workingTimeId }`,
-			UHttp.defaultHeaders()
-		)
-		
-		let response = await user.json();
-		
-		return response.data
-	}
+	// public async deleteById(workingTimeId: string): Promise<WorkingTime> {
+	// 	let user = await UHttp.delete(
+	// 		`${ GlobalVars.BASE_URL_API }workingtimes/${ workingTimeId }`,
+	// 		UHttp.defaultHeaders()
+	// 	)
+	//
+	// 	let response = await user.json();
+	//
+	// 	return response.data
+	// }
 }

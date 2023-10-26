@@ -1,48 +1,56 @@
 import { WorkingTimeService } from "../services/WorkingTimeService";
 import { WorkingTime } from "../types/WorkingTime";
+import {Module} from "vuex";
+import {Clock} from "../types/Clock";
 
 interface WorkingTimeState {
 	workingTimes: WorkingTime[];
-	workingTimeByUserIdAndId: WorkingTime | null;
+	currentWorkingTime: WorkingTime | null;
 }
 
 const initialState: WorkingTimeState = {
 	workingTimes: [],
-	workingTimeByUserIdAndId: null,
+	currentWorkingTime: null,
 };
 
 const workingTimesService = new WorkingTimeService();
 
-export const WorkingTimeStore = {
+export const WorkingTimeStore:  Module<any, any>  = {
 	state: initialState,
 
 	mutations: {
-		setByUserIdAndId(state: any, data: any) {
+		setWorkingTimes(state: any, data: any) {
 			state.workingTimes = data
+		},
+		setWorkingTime(state: any, data: any) {
+			state.currentWorkingTime = data
+		},
+		addWorkingTime(state: any, data: any) {
+			state.workingTimes.push(data)
 		}
 	},
 	actions: {
-		 getWorkingTimeByUserId({ state, commit }: { state: WorkingTimeState }, userId: string): void {
+		 getWorkingTimeByUserId({ state, commit }: { state: WorkingTimeState, commit: any }, userId: string): void {
 			 workingTimesService.getByUserId(userId).then((workingTimes) => {
-				 console.log("erere", workingTimes)
-				 commit("setByUserIdAndId",workingTimes )
+				 commit("setWorkingTimes",workingTimes )
 			 });
 		},
-		
-		async getByUserIdAndId({ state }: { state: WorkingTimeState }, userId: string, workingTimesId: string): Promise<void> {
-			state.workingTimeByUserIdAndId = await workingTimesService.getByUserIdAndId(userId, workingTimesId)
+		getByUserIdAndId({ state, commit }: { state: WorkingTimeState, commit: any }, userId: string, workingTimesId: string): void {
+			workingTimesService.getByUserIdAndId(userId, workingTimesId).then((workingTime) => {
+				commit("setWorkingTime",workingTime )
+			})
 		},
-		
-		async addByUserId({ state }: { state: WorkingTimeState }, userId: string, data: WorkingTime): Promise<void> {
-			const _workingTime = await workingTimesService.addByUserId(userId, data)
-			state.workingTimes.push(_workingTime)
+		 addByUserId({ state, commit }: { state: WorkingTimeState, commit: any }, userId: string, data: WorkingTime): void {
+			 workingTimesService.addByUserId(userId, data).then((workingTime)=> {
+				 commit("addWorkingTime",workingTime)
+			 })
 		},
-		async updateById({ state }: { state: WorkingTimeState }, workingTimesId: string, data: WorkingTime): Promise<void> {
-			state.workingTimeByUserIdAndId = await workingTimesService.updateById(workingTimesId, data)
-		},
-		
-		async deleteById({ state }: { state: WorkingTimeState }, workingTimesId: string): Promise<void> {
-			state.workingTimeByUserIdAndId = await workingTimesService.deleteById(workingTimesId)
-		},
+		// updateById({ state }: { state: WorkingTimeState }, workingTimesId: string, data: WorkingTime): Promise<void> {
+		// 	state.currentWorkingTime = await workingTimesService.updateById(workingTimesId, data)
+		// },
+		//
+		// deleteById({ state }: { state: WorkingTimeState }, workingTimesId: string): Promise<void> {
+		// 	state.currentWorkingTime = await workingTimesService.deleteById(workingTimesId)
+		// },
 	},
 };
