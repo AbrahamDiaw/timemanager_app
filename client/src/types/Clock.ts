@@ -1,6 +1,6 @@
 export type Clock = {
-    id: string;
+    id?: string;
     status: boolean;
     time: string;
-    user: string;
+    user?: string;
 }

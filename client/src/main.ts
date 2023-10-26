@@ -2,13 +2,12 @@ import { createApp } from 'vue'
 import { createStore } from 'vuex'
 import './style.css'
 import App from './App.vue'
-import { UserStore } from "./stores/UserStore.ts";
-
+import {ClocksStore} from "./stores/ClocksStore";
 
 // Create a new store instance.
 const store = createStore({
-	module: {
-		Users: UserStore
+	modules: {
+		Clocks: ClocksStore
 	}
 })
 
