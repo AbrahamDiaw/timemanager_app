@@ -11,12 +11,6 @@ export default {
         data: []
       }
   },
-  components: {
-
-  },
-  methods: {
-
-  },
   mounted() {
     let userId=this.$route.params.id
     this.$store.dispatch("getWorkingTimeByUserId",userId)
@@ -27,10 +21,24 @@ export default {
 
 <template>
   <div>
-    <div v-for="(workingtime) in this.$store.state.WorkingTime.workingTimes">
-      <p>{{workingtime.start}}</p>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Start</th>
+            <th>End</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(workingtime) in this.$store.state.WorkingTime.workingTimes">
+            <td>{{workingtime.start}}</td>
+            <td>{{workingtime.end}}</td> 
+          </tr>
+        </tbody>
+
+      </table>
     </div>
-    WorkingTimes kjhdsqkjdhqskjdh
+
   </div>
 </template>
 
