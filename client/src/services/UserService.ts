@@ -5,15 +5,14 @@ import { GlobalVars } from "../../vars/Urls";
 export class UserService {
 	
 	public async getAll(): Promise<User[]> {
-		let user = await UHttp.get(
+		const response = await UHttp.get(
 			`${ GlobalVars.BASE_URL_API }users`,
 			UHttp.defaultHeaders()
 		)
+
+		const jsonResponse = await response.json();
 		
-		let response = await user.json();
-		
-		return response.data
-		
+		return jsonResponse.data;
 	}
 	
 	public async getById(userId: string): Promise<User> {

@@ -1,19 +1,14 @@
 <script>
-import {defineComponent} from 'vue'
 
-export default defineComponent({
+import { UserStore } from "../../stores/UserStore";
+
+export default {
+
   name: "Users",
 
   data() {
     return {
-      people: [
-        {
-          email: 'lindsay.walton@example.com',
-          username: 'Lindsay Walton',
-          role: 'Employee'
-        }
-      ],
-      userStore: this.$store.state.User
+      users: UserStore(state => state.users)
     }
   },
 
@@ -33,12 +28,11 @@ export default defineComponent({
     }
   },
 
-  computed: {},
-
   mounted() {
-    this.$store.dispatch("getAllUsers")
+      UserStore(state => state.findAll());
   }
-})
+
+}
 
 </script>
 
@@ -59,7 +53,7 @@ export default defineComponent({
         </tr>
         </thead>
         <tbody class="table-body-content">
-        <tr v-for="user in userStore.users" :key="user.email">
+        <tr v-for="user in users" :key="user.email">
           <td @click="navigateToUser(user.id)">{{ user.email }}</td>
           <td>{{ user.username }}</td>
           <td>{{ user.id }}</td>

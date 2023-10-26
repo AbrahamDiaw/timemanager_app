@@ -1,6 +1,6 @@
 import { Module } from 'vuex';
-import { Clock } from "../types/Clock";
-import { ClockService } from "../services/ClockService";
+import { Clock } from "../../types/Clock";
+import { ClockService } from "../../services/ClockService";
 
 interface ClockState {
 	dataByUserId: Clock[];
@@ -15,7 +15,7 @@ const initialState: ClockState = {
 
 const clockService = new ClockService();
 
-export const ClocksStore: Module<any, any> = {
+export const ClockModule: Module<any, any> = {
 	state: () => initialState,
 	getters: {
 		getByUserId: (state: ClockState) => {
