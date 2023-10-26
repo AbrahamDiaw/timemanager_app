@@ -1,20 +1,24 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-import {Routes} from "../../../vars/Routes";
+<script>
 
-export default defineComponent({
+import { Routes } from "../../../vars/Routes";
+import Icon from "../generics/Icon/Icon.vue";
+import {Icons} from "../generics/Icon/Icons";
 
-  name: "User",
-  computed: {
-    Routes() {
-      return Routes
-    }
+export default {
 
-  },
+  name: "Sidebar",
+    computed: {
+        Icon() {
+            return Icon
+        }
+    },
+    components: {Icon},
 
   data() {
     return {
       testUserCurrent: {id:1, username:"john doe", email:'john@dmail.com'},
+        Routes: Routes,
+        Icons: Icons
     }
   },
 
@@ -22,17 +26,17 @@ export default defineComponent({
     console.log(`Component User(Sidebar).`)
   }
 
-})
+}
 </script>
 
 <template>
   <div class="sidebar-container">
     <div class="sidebar-navigation">
-      <router-link :to="{path: Routes.HOME }">Users</router-link>
+      <router-link :to="{path: Routes.HOME }"><Icon :name="Icons.IconUsers" />Users</router-link>
       <router-link :to="{path: Routes.WORKINGTIMES+ '/' + testUserCurrent.id}">Working times</router-link>
     </div>
     <div class="user-current" >
-      <p>icon</p>
+      <Icon :name="Icons.IconAccountCircle" />
       <p>{{testUserCurrent.username}}</p>
     </div>
   </div>

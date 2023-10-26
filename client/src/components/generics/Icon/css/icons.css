@@ -1,0 +1,26 @@
+@font-face {
+font-family: "icons";
+src: url("../fonts/icons.eot?5b30987849d963d98e9b4d68fa14aef1#iefix") format("embedded-opentype"),
+url("../fonts/icons.svg?5b30987849d963d98e9b4d68fa14aef1#icons") format("svg"),
+url("../fonts/icons.ttf?5b30987849d963d98e9b4d68fa14aef1") format("truetype"),
+url("../fonts/icons.woff?5b30987849d963d98e9b4d68fa14aef1") format("woff"),
+url("../fonts/icons.woff2?5b30987849d963d98e9b4d68fa14aef1") format("woff2");
+}
+
+  i[class^="icon-"]:before, i[class*=" icon-"]:before {
+font-family: icons !important;
+font-style: normal;
+font-weight: normal !important;
+font-variant: normal;
+text-transform: none;
+line-height: 1;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+    .icon-account-circle:before {
+  content: "\f101";
+  }
+    .icon-users:before {
+  content: "\f102";
+  }
