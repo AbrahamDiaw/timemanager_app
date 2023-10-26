@@ -1,14 +1,20 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-
+import {Routes} from "../../../vars/Routes";
 
 export default defineComponent({
 
   name: "User",
+  computed: {
+    Routes() {
+      return Routes
+    }
+
+  },
 
   data() {
     return {
-      testUserCurrent: [{id:1, username:"john", email:'john@dmail.com'}]
+      testUserCurrent: {id:1, username:"john doe", email:'john@dmail.com'},
     }
   },
 
@@ -22,12 +28,12 @@ export default defineComponent({
 <template>
   <div class="sidebar-container">
     <div class="sidebar-navigation">
-      <router-link to="/">Users</router-link>
-      <router-link to="/WorkingTimes">Working times</router-link>
+      <router-link :to="{path: Routes.HOME }">Users</router-link>
+      <router-link :to="{path: Routes.WORKINGTIMES+ '/' + testUserCurrent.id}">Working times</router-link>
     </div>
-    <div class="user-current">
+    <div class="user-current" >
       <p>icon</p>
-      <p>John Doe</p>
+      <p>{{testUserCurrent.username}}</p>
     </div>
   </div>
 </template>

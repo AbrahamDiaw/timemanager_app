@@ -21,6 +21,7 @@ export class UHttp {
 	}
 
 	public static get(url: string, headers: any = {}): Promise<Response> {
+		console.log("url", url)
 		return fetch(url, {
 			method: "GET",
 			headers

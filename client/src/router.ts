@@ -13,6 +13,11 @@ const routes = [
         path: Routes.WORKINGTIMES,
         name: "WorkingTimes",
         component: WonkingTimes,
+    },
+    {
+        path: Routes.WORKINGTIMES_ID,
+        name: "WorkingTimesId",
+        component: WonkingTimes,
     }
 ];
 

@@ -23,12 +23,7 @@ export default {
   },
 
   mounted() {
-    let payload = {
-      id: "10",
-      data: { status: false, time: "--heure" }
-    };
 
-    this.addByUserId(payload)
 
   }
 }

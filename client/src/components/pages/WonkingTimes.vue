@@ -1,4 +1,6 @@
 <script lang="ts">
+import { mapGetters} from "vuex";
+
 export default {
   name: "WorkingTimes",
   props: {
@@ -12,19 +14,12 @@ export default {
   components: {
 
   },
+  methods: {
+
+  },
   mounted() {
-    const testData = [
-        {id:1,start:"", end: "", user: 1},
-        {id:2,start:"", end: "", user: 1},
-        {id:3,start:"", end: "", user: 1},
-        {id:4,start:"", end: "", user: 2},
-        {id:5,start:"", end: "", user: 2},
-        {id:6,start:"", end: "", user: 2},
-        {id:7,start:"", end: "", user: 2},
-        {id:8,start:"", end: "", user: 3},
-        {id:9,start:"", end: "", user: 3},
-        {id:10,start:"", end: "", user: 3},
-    ]
+    let userId=this.$route.params.id
+    this.$store.dispatch("getWorkingTimeByUserId",userId)
   },
 }
 </script>
@@ -32,6 +27,9 @@ export default {
 
 <template>
   <div>
+    <div v-for="(workingtime) in this.$store.state.WorkingTime.workingTimes">
+      <p>{{workingtime.start}}</p>
+    </div>
     WorkingTimes kjhdsqkjdhqskjdh
   </div>
 </template>

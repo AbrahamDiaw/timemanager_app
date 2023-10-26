@@ -2,7 +2,8 @@ export enum Routes {
 	
 	HOME = '/',
 	USERS = "",
-	WORKINGTIMES = "/WorkingTimes",
+	WORKINGTIMES = "/workingtimes",
+	WORKINGTIMES_ID = "/workingtimes/:id",
 	WORKINGTIME = "",
 	CLOCKMANAGER = ""
 	

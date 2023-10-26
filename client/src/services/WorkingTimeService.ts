@@ -4,8 +4,11 @@ import { GlobalVars } from "../../vars/Global";
 
 export class WorkingTimeService {
 	public async getByUserId(userId: string): Promise<WorkingTime[]> {
+		console.log("trrtr", userId, `${ GlobalVars.BASE_URL_API }workingtimes/${ userId }`)
+
+
 		let user = await UHttp.get(
-			`${ GlobalVars.BASE_URL_API }workingtimes/${ userId }`,
+			 GlobalVars.BASE_URL_API + "workingtimes/" + 1,
 			UHttp.defaultHeaders()
 		)
 		
