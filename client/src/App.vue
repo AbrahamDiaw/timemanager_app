@@ -1,6 +1,10 @@
 <script  lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
 import { mapGetters, mapActions } from "vuex";
+
+import Home from "./components/pages/Home.vue"
+import User from "./components/specifics/User.vue";
+import Header from "./components/specifics/Header.vue";
+
 export default {
 
   components: {
@@ -33,15 +37,14 @@ export default {
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo"/>
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo"/>
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue"/>
+  <main class="main">
+    <User/>
+    <div class="main-container">
+      <Header/>
+<!--      <Headers />-->
+      <router-view />
+    </div>
+  </main>
 </template>
 
 <style scoped>
