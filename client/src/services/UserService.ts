@@ -1,6 +1,6 @@
 import { User } from "../types/User";
 import { UHttp } from "../utils/UHttp";
-import { GlobalVars } from "../../vars/Global";
+import { GlobalVars } from "../../vars/Urls";
 
 export class UserService {
 	
