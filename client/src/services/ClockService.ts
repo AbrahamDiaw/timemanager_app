@@ -1,6 +1,6 @@
 import {Clock} from "../types/Clock"
 import {UHttp as UHttp} from "../utils/UHttp";
-import {GlobalVars} from "../../vars/Global";
+import {GlobalVars} from "../../vars/Urls";
 
 
 export class ClockService {

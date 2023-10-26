@@ -1,6 +1,6 @@
 import { WorkingTime } from "../types/WorkingTime";
 import { UHttp } from "../utils/UHttp";
-import { GlobalVars } from "../../vars/Global";
+import { GlobalVars } from "../../vars/Urls";
 
 export class WorkingTimeService {
 	public async getByUserId(userId: string): Promise<WorkingTime[]> {
