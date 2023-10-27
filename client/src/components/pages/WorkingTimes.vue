@@ -1,21 +1,22 @@
 <script>
-import { mapGetters} from "vuex";
-
 export default {
   name: "WorkingTimes",
 
   props: {
 
   },
+
   data() {
       return {
         data: []
       }
   },
+
   mounted() {
     let userId = this.$route.params.id
     this.$store.dispatch("getWorkingTimeByUserId",userId)
-  },
+  }
+
 }
 </script>
 
@@ -32,8 +33,8 @@ export default {
         </thead>
         <tbody>
           <tr v-for="(workingtime) in this.$store.state.WorkingTime.workingTimes">
-            <td>{{workingtime.start}}</td>
-            <td>{{workingtime.end}}</td> 
+            <td>{{ workingtime.start }}</td>
+            <td>{{ workingtime.end }}</td>
           </tr>
         </tbody>
 

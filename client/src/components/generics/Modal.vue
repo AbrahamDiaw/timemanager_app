@@ -52,8 +52,8 @@ export default {
 </script>
 
 <template>
-  <div class="modal-background" v-if="isOpen" @click="closeModalOnBackgroundClick">
-      <div class="modal" @click="preventModalClose">
+  <div class="modal-background" v-if="isOpen" @pointerdown="closeModalOnBackgroundClick">
+      <div class="modal" @pointerdown="preventModalClose">
           <div class="header">
               <h2 class="title"></h2>
               <Icon :name="Icons.IconClose" class-name="cursor-pointer" :on-click="() => ModalStore(state => state.closeModal())" />
