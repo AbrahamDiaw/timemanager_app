@@ -1,10 +1,10 @@
 @font-face {
 font-family: "icons";
-src: url("../fonts/icons.eot?5b30987849d963d98e9b4d68fa14aef1#iefix") format("embedded-opentype"),
-url("../fonts/icons.svg?5b30987849d963d98e9b4d68fa14aef1#icons") format("svg"),
-url("../fonts/icons.ttf?5b30987849d963d98e9b4d68fa14aef1") format("truetype"),
-url("../fonts/icons.woff?5b30987849d963d98e9b4d68fa14aef1") format("woff"),
-url("../fonts/icons.woff2?5b30987849d963d98e9b4d68fa14aef1") format("woff2");
+src: url("../fonts/icons.eot?3991e7d0722d104756a7083dcf2e83dc#iefix") format("embedded-opentype"),
+url("../fonts/icons.svg?3991e7d0722d104756a7083dcf2e83dc#icons") format("svg"),
+url("../fonts/icons.ttf?3991e7d0722d104756a7083dcf2e83dc") format("truetype"),
+url("../fonts/icons.woff?3991e7d0722d104756a7083dcf2e83dc") format("woff"),
+url("../fonts/icons.woff2?3991e7d0722d104756a7083dcf2e83dc") format("woff2");
 }
 
   i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -21,6 +21,9 @@ line-height: 1;
     .icon-account-circle:before {
   content: "\f101";
   }
-    .icon-users:before {
+    .icon-close:before {
   content: "\f102";
+  }
+    .icon-users:before {
+  content: "\f103";
   }

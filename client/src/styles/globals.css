@@ -25,6 +25,10 @@ html, body {
     height: 100vh;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 button {
     background: none;
     border: none;

@@ -1,10 +1,22 @@
 <script>
 
-import { UserStore } from "../../stores/UserStore";
+import { UserStore } from "../../../stores/UserStore";
+import {Components} from "../../_components/Components";
+import Modal from "../../generics/Modal.vue";
+import {ModalStore} from "../../../stores/ModalStore";
 
 export default {
 
   name: "Users",
+
+  computed: {
+      Modal() {
+          return Modal
+      },
+      Components() {
+          return Components
+      }
+  },
 
   data() {
     return {
@@ -13,11 +25,12 @@ export default {
   },
 
   methods: {
+      ModalStore,
+      UserStore,
     navigateToUser(userId) {
       this.$router.push(`/users/${userId}`);
     },
     addUser() {
-      this.$store.dispatch("addNewUser")
     },
     editUser() {
       console.log("edit")
@@ -40,7 +53,7 @@ export default {
   <div class="users-container">
     <div class="header-button">
       <div class="header-content">
-        <button type="button" class="add-button" @click="addUser()">Add</button>
+        <button type="button" class="add-button" @click="() => ModalStore(state => state.openModal(Components.AddUser))">Add</button>
       </div>
     </div>
     <div class="table-container">
