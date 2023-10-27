@@ -36,7 +36,7 @@ export default {
 <template>
   <main class="main">
     <User/>
-    <div class="main-container">
+    <div class="main-content">
       <Header/>
 <!--      <Headers />-->
       <router-view />
@@ -47,14 +47,17 @@ export default {
 
 <style scoped>
   .main {
+      position: relative;
     width: 100%;
     height: 100%;
+      display: flex;
+      flex-direction: row;
   }
 
-  .main-container {
-    position: absolute;
-    width: calc(100% - var(--sidebar-width));
+  .main-content {
+    position: relative;
+    width: 100%;
+      height: 100%;
     top: 0;
-    left: var(--sidebar-width);
   }
 </style>

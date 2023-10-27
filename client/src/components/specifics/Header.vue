@@ -52,8 +52,6 @@ export default defineComponent({
   display: flex;
   align-items: center;
   height: 40px;
-  background: green;
-  color: #fff;
 }
 
 .header-title {
