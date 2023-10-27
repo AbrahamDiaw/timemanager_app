@@ -1,7 +1,7 @@
 <script lang="ts">
 
-import { ROLES, User } from "../../types/User";
-import { UserStore } from "../../stores/UserStore";
+import { ROLES, User } from "../../../types/User";
+import { UserStore } from "../../../stores/UserStore";
 
 export default {
   name: "EditUser",
@@ -26,7 +26,6 @@ export default {
 
   methods: {
     editUser() {
-      console.log(this.currentUser)
       UserStore((state) => state.updateById(this.currentUser.id, this.currentUser))
     },
   },

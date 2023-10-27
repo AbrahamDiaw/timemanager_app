@@ -1,6 +1,8 @@
 <script>
 
-import { UserStore } from "../../stores/UserStore";
+import { UserStore } from "../../../stores/UserStore";
+import {ModalStore} from "../../../stores/ModalStore";
+import {Components} from "../../_components/Components";
 
 export default {
 
@@ -17,14 +19,15 @@ export default {
       this.$router.push(`/users/${userId}`);
     },
     addUser() {
-      this.$store.dispatch("addNewUser")
+     ModalStore((state) => state.openModal(Components.AddUser));
     },
-    editUser() {
-      console.log("edit")
+    editUser(userId) {
+      UserStore(state => state.findById(userId));
+      ModalStore((state) => state.openModal(Components.EditUser));
     },
 
-    deleteUser() {
-      console.log("delete")
+    deleteUser(userId) {
+      UserStore(state => state.deleteById(userId));
     }
   },
 
@@ -47,18 +50,19 @@ export default {
       <table>
         <thead class="bg-gray-50">
         <tr>
-          <th scope="col" v-for="key in ['Email', 'Username', 'ID']" :key="key">{{ key }}</th>
+          <th scope="col" v-for="key in ['ID', 'Email', 'Username', 'Role']" :key="key">{{ key }}</th>
           <th scope="col"><span></span></th>
           <th scope="col"><span></span></th>
         </tr>
         </thead>
         <tbody class="table-body-content">
         <tr v-for="user in users" :key="user.email">
+          <td @click="navigateToUser(user.id)">{{ user.id }}</td>
           <td @click="navigateToUser(user.id)">{{ user.email }}</td>
           <td>{{ user.username }}</td>
-          <td>{{ user.id }}</td>
-          <button type="button" class="edit-button" @click="editUser()">Edit</button>
-          <button type="button" class="delete-button" @click="deleteUser()">Delete</button>
+          <td>{{ user.role }}</td>
+          <button type="button" class="edit-button" @click="editUser(user.id)">Edit</button>
+          <button type="button" class="delete-button" @click="deleteUser(user.id)">Delete</button>
         </tr>
         </tbody>
       </table>
