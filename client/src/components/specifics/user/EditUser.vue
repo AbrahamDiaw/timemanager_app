@@ -42,7 +42,7 @@ export default {
   <form @submit.prevent="editUser" class="form-container" v-if="currentUser">
     <h1>Edit User <span>{{ currentUser.username }}</span></h1>
     <input v-model="currentUser.username" type="text" placeholder="username">
-    <input v-model="currentUser.email" type="text" placeholder="email">
+    <input v-model="currentUser.email" type="email" placeholder="email">
     <select v-model="currentUser.role">
       <option disabled value="">Choisir un rôle</option>
       <option v-for="role in roles" :key="role">{{ role }}</option>
