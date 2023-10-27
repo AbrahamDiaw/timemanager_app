@@ -1,10 +1,10 @@
 @font-face {
 font-family: "icons";
-src: url("../fonts/icons.eot?950610efceb74173ff2174f99f275bca#iefix") format("embedded-opentype"),
-url("../fonts/icons.svg?950610efceb74173ff2174f99f275bca#icons") format("svg"),
-url("../fonts/icons.ttf?950610efceb74173ff2174f99f275bca") format("truetype"),
-url("../fonts/icons.woff?950610efceb74173ff2174f99f275bca") format("woff"),
-url("../fonts/icons.woff2?950610efceb74173ff2174f99f275bca") format("woff2");
+src: url("../fonts/icons.eot?3fa1138fb24e57c02b0d947338e2e7e1#iefix") format("embedded-opentype"),
+url("../fonts/icons.svg?3fa1138fb24e57c02b0d947338e2e7e1#icons") format("svg"),
+url("../fonts/icons.ttf?3fa1138fb24e57c02b0d947338e2e7e1") format("truetype"),
+url("../fonts/icons.woff?3fa1138fb24e57c02b0d947338e2e7e1") format("woff"),
+url("../fonts/icons.woff2?3fa1138fb24e57c02b0d947338e2e7e1") format("woff2");
 }
 
   i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -33,9 +33,15 @@ line-height: 1;
     .icon-close:before {
   content: "\f105";
   }
-    .icon-logout-circle:before {
+    .icon-edit:before {
   content: "\f106";
   }
-    .icon-users:before {
+    .icon-logout-circle:before {
   content: "\f107";
+  }
+    .icon-settings:before {
+  content: "\f108";
+  }
+    .icon-users:before {
+  content: "\f109";
   }

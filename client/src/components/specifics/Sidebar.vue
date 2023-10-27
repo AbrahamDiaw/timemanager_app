@@ -3,11 +3,16 @@
 import {Routes} from "../../../vars/Routes";
 import Icon from "../generics/Icon/Icon.vue";
 import {Icons} from "../generics/Icon/Icons";
+import {ModalStore} from "../../stores/ModalStore";
+import {Components} from "../_components/Components";
 
 export default {
 
     name: "Sidebar",
     computed: {
+        Components() {
+            return Components
+        },
         Icon() {
             return Icon
         }
@@ -24,6 +29,7 @@ export default {
     },
 
     methods: {
+        ModalStore,
         setIsOpen(isOpen) {
             this.isOpen = isOpen;
         }
@@ -45,7 +51,10 @@ export default {
 
         <div class="sidebar-content-container">
             <div class="sidebar-header">
-                <Icon :name="Icons.IconAccountCircle"/>
+                <div class="sidebar-header-icons">
+                    <Icon :name="Icons.IconAccountCircle"/>
+                    <Icon v-if="isOpen" :name="Icons.IconSettings" @click="() => ModalStore(state => state.openModal(Components.UserSettings))" />
+                </div>
                 <p v-if="isOpen"> Hi {{ testUserCurrent.username }} !</p>
             </div>
 
@@ -129,13 +138,29 @@ export default {
     flex-direction: column;
 }
 
-.sidebar-header i {
-    font-size: 1.8rem;
-}
-
 .sidebar-header p {
     margin-top: 15px;
     font-size: 1rem;
+}
+
+.sidebar-header-icons {
+
+}
+
+.sidebar-header-icons i:first-child {
+    cursor: auto;
+    font-size: 2.5rem;
+    color: #000;
+}
+
+.sidebar-header-icons i {
+    font-size: .9rem;
+    cursor: pointer;
+    color: grey;
+}
+
+.sidebar-header-icons i:hover {
+    color: #000000;
 }
 
 .sidebar-content-wrapper {

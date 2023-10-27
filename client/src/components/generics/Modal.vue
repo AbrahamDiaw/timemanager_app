@@ -5,6 +5,7 @@ import {Components} from "../_components/Components";
 import AddUser from "../specifics/user/AddUser.vue";
 import {Icons} from "./Icon/Icons";
 import Icon from "./Icon/Icon.vue";
+import UserSettings from "../specifics/user/UserSettings.vue";
 
 export default {
     components: {Icon},
@@ -32,6 +33,9 @@ export default {
             switch (composantName) {
                 case Components.AddUser:
                     comp = AddUser;
+                    break;
+                case Components.UserSettings:
+                    comp = UserSettings;
                     break;
             }
 
