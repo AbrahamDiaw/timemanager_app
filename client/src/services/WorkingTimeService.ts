@@ -3,9 +3,9 @@ import { UHttp } from "../utils/UHttp";
 import { GlobalVars } from "../../vars/Urls";
 
 export class WorkingTimeService {
-	public async getByUserId(userId: string): Promise<WorkingTime[]> {
+	public async getByUserId(workingTime: WorkingTime): Promise<WorkingTime[]> {
 		let user = await UHttp.get(
-			 GlobalVars.BASE_URL_API + "workingtimes/" + userId,
+			 `${GlobalVars.BASE_URL_API}workingtimes/${workingTime.id}?start=${workingTime.start}Z&end=${workingTime.end}Z`,
 			UHttp.defaultHeaders()
 		)
 		

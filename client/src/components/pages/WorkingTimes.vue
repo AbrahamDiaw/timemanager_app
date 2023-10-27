@@ -1,22 +1,35 @@
 <script>
+import {WorkingTimeStore} from "../../stores/WorkingTimeStore";
+
 export default {
   name: "WorkingTimes",
-
-  props: {
-
-  },
-
   data() {
       return {
-        data: []
+        workingTimes: WorkingTimeStore(state => state.workingTimes),
+        start: null,
+        end: null
       }
   },
-
   mounted() {
-    let userId = this.$route.params.id
-    this.$store.dispatch("getWorkingTimeByUserId",userId)
-  }
+    const today = new Date();
+    today.setHours(2, 0, 0, 0)
+    const isoDateToday = today.toISOString().split('.')[0];
 
+    let firstDayOfCurrentMonth = new Date(today.getFullYear(), today.getMonth(), 1, 2,0,0);
+    let isoDateFirstDay = firstDayOfCurrentMonth.toISOString().split('.')[0];
+
+    this.start = isoDateFirstDay.replace("T", " ");
+    this.end = isoDateToday.replace("T", " ");
+
+
+
+    let dataSend = {
+      id: this.$route.params.id,
+      start: this.start,
+      end: this.end
+    }
+    WorkingTimeStore(state => state.getWorkingTimeByUserId(dataSend))
+  },
 }
 </script>
 
@@ -32,9 +45,9 @@ export default {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(workingtime) in this.$store.state.WorkingTime.workingTimes">
-            <td>{{ workingtime.start }}</td>
-            <td>{{ workingtime.end }}</td>
+          <tr v-for="(workingtime) in workingTimes">
+            <td>{{workingtime.start}}</td>
+            <td>{{workingtime.end}}</td> 
           </tr>
         </tbody>
 
