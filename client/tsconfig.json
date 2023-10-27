@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
     "target": "es6",
     "useDefineForClassFields": true,
     "module": "ESNext",
@@ -12,12 +11,8 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
-    "noEmit": true,
-    "allowJs": true,
-    "incremental": true
+    "noEmit": true
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "exclude": [
-    "node_modules"
-  ]
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,25 +1,10 @@
-import { createApp } from "vue";
-import { createStore } from "vuex";
-
-import "./style.css";
+import "./styles/globals.css";
 import  "./components/generics/Icon/css/icons.css";
 
-import App from "./App.vue";
-import {ClocksStore} from "./stores/ClocksStore";
+import { createApp } from "vue";
+import App from "./components/App.vue";
 import router from "./router";
-import {WorkingTimeStore} from "./stores/WorkingTimeStore";
-import {UserStore} from "./stores/UserStore";
-
-// Create a new store instance.
-const store = createStore({
-	modules: {
-		Clocks: ClocksStore,
-		WorkingTime: WorkingTimeStore,
-		User: UserStore
-	}
-})
 
 createApp(App)
-	.use(store)
 	.use(router)
-	.mount('#app')
+	.mount('#app');

@@ -1,13 +1,15 @@
-<script  lang="ts">
+<script lang="ts">
 import { mapGetters, mapActions } from "vuex";
 
-import Home from "./components/pages/Home.vue"
-import User from "./components/specifics/Sidebar.vue";
-import Header from "./components/specifics/Header.vue";
+import Home from "./pages/Home.vue"
+import User from "./specifics/Sidebar.vue";
+import Header from "./specifics/Header.vue";
+import Modal from "./generics/Modal.vue";
 
 export default {
 
   components: {
+	  Modal,
     Headers,
     Header,
     User,
@@ -39,6 +41,7 @@ export default {
 <!--      <Headers />-->
       <router-view />
     </div>
+      <Modal/>
   </main>
 </template>
 
