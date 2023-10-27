@@ -1,6 +1,5 @@
 export enum Components {
-
 	AddUser = "AddUser",
-	UserSettings = "UserSettings"
-
+	UserSettings = "UserSettings",
+	EditUser = "EditUser",
 }

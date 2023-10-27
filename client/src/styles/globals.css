@@ -113,3 +113,10 @@ button {
     outline-offset: 0.5rem; /* équivaut à focus-visible:outline-offset-2 */
     background-color: #1e7e34; /* équivaut à focus-visible:outline-indigo-60 */
 }
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 5px;
+}

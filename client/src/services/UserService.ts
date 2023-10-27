@@ -40,40 +40,39 @@ export class UserService {
 	}
 	
 	public async add(data: User): Promise<User> {
-		let user = await UHttp.post(
+		let response = await UHttp.post(
 			`${ GlobalVars.BASE_URL_API }users`,
 			{ user: data },
 			UHttp.defaultHeaders()
 		)
 		
-		let response = await user.json();
+		let user = await response.json();
 		
-		return response.data
+		return user.data
 		
 	}
 	
 	public async updateById(userId: string, data: User): Promise<User> {
-		let user = await UHttp.patch(
+		let response = await UHttp.patch(
 			`${ GlobalVars.BASE_URL_API }users/${ userId }`,
 			{ user: data },
 			UHttp.defaultHeaders()
 		)
 		
-		let response = await user.json();
+		let user = await response.json();
 		
-		return response.data
+		return user.data
 		
 	}
 	
-	public async deleteById(userId: string): Promise<User> {
-		let user = await UHttp.delete(
+	public async deleteById(userId: string): Promise<boolean> {
+		let response = await UHttp.delete(
 			`${ GlobalVars.BASE_URL_API }users/${ userId }`,
 			UHttp.defaultHeaders()
 		)
 		
-		let response = await user.json();
 		
-		return response.data
+		return response.ok
 		
 	}
 	
