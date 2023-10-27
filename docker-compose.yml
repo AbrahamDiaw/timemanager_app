@@ -18,6 +18,7 @@ services:
       - -c
       - |
         mix deps.get
+        mix ecto.migrate
         mix phx.server
     restart: always
 
