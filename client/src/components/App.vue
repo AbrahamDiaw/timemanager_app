@@ -5,6 +5,8 @@ import Home from "./pages/Home.vue"
 import User from "./specifics/Sidebar.vue";
 import Header from "./specifics/Header.vue";
 import Modal from "./generics/Modal.vue";
+import AddUser from "./specifics/AddUser.vue";
+import EditUser from "./specifics/EditUser.vue"
 
 export default {
 
@@ -13,7 +15,9 @@ export default {
     Headers,
     Header,
     User,
-    Home
+    Home,
+    AddUser,
+    EditUser
   },
 
   methods: {
@@ -38,6 +42,8 @@ export default {
     <User/>
     <div class="main-content">
       <Header/>
+      <AddUser/>
+      <EditUser/>
 <!--      <Headers />-->
       <router-view />
     </div>
