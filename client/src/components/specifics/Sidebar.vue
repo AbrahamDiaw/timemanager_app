@@ -35,7 +35,7 @@ export default {
       <router-link :to="{path: Routes.HOME }"><Icon :name="Icons.IconUsers" />Users</router-link>
       <router-link :to="{path: Routes.WORKINGTIMES+ '/' + testUserCurrent.id}">Working times</router-link>
     </div>
-    <div class="user-current" >
+    <div class="user-current">
       <Icon :name="Icons.IconAccountCircle" />
       <p>{{testUserCurrent.username}}</p>
     </div>

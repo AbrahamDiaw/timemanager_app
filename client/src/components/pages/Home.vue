@@ -1,5 +1,5 @@
 <script lang="ts">
-import Users from "../specifics/Users.vue";
+import Users from "../specifics/user/Users.vue";
 
 export default {
   name: "Home",

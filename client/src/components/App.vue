@@ -41,7 +41,7 @@ export default {
 <!--      <Headers />-->
       <router-view />
     </div>
-      <Modal/>
+    <Modal/>
   </main>
 </template>
 

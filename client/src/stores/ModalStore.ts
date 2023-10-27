@@ -1,21 +1,22 @@
 import create from "zustand-vue";
+import { Components } from "../components/_components/Components";
 
 export type ModalState = {
 	isOpen: boolean;
-	component: undefined;
+	componentName: undefined | Components;
 	openModal(component: any): void;
 	closeModal(): void;
 }
 
 export const ModalStore = create<ModalState>((set) => ({
 	isOpen: false,
-	component: undefined,
+	componentName: undefined,
 
-	openModal: (component: any) => {
-		set({ isOpen: true, component });
+	openModal: (componentName: Components) => {
+		set({ isOpen: true, componentName });
 	},
 
 	closeModal: () => {
-		set({ isOpen: false, component: undefined });
+		set({ isOpen: false, componentName: undefined });
 	}
 }));
