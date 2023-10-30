@@ -17,7 +17,7 @@ export default {
             }
 
             if (this.cursorPointer) {
-                classes.push('cursor-pointer');
+                classes.push("cursor-pointer");
             }
 
             return classes.join(' ');

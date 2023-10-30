@@ -17,7 +17,7 @@ export default {
 
 
   data(): any {
-    let currentUser: User | undefined;
+    let currentUser: any;
 
     return {
       currentUser
@@ -26,7 +26,7 @@ export default {
 
   methods: {
     editUser() {
-      UserStore((state) => state.updateById(this.currentUser.id, this.currentUser))
+		  UserStore((state) => state.updateById(this.currentUser.id, this.currentUser))
     },
   },
 
