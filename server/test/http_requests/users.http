@@ -25,7 +25,7 @@ Content-Type: application/json
 {
   "user": {
     "username": "john",
-    "email": "john.doe2@gmail.com",
+    "email": "john25@gmail.com",
     "role": "employee"
   }
 }
@@ -67,7 +67,8 @@ Content-Type: application/json
 }
 
 ### Get all
-GET http://localhost:4000/api/users
+GET http://localhost:4000/api/v1/users
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDExMDk0MTgsImlhdCI6MTY5ODY5MDIxOCwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiY2Y5MWRkNjctNTIxYS00MGY1LTlkNTgtNzdkNzlmY2QxMjVkIiwibmJmIjoxNjk4NjkwMjE3LCJzdWIiOiIyMSIsInR5cCI6ImFjY2VzcyJ9.9J30ZFvOe6iTU9Y86TIaYSiAb1XztAzOHDwfyEPrzj4V3H3YVW8g1GFSgK4LT8vNARMKOE28euPoLdrc-tAyDQ
 
 ### Get by id
 GET http://localhost:4000/api/users/1

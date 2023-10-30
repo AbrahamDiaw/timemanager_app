@@ -1,0 +1,8 @@
+### Signin Users (jwt)
+POST http://localhost:4000/api/sign_in
+Content-Type: application/json
+
+{
+  "email": "john24@gmail.com",
+  "password": "password"
+}

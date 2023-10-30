@@ -46,6 +46,9 @@ defmodule TIME_MANAGER.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:plug_cowboy, "~> 2.5"},
       {:cors_plug, "~> 3.0"},
+      {:comeonin, "~> 4.0"},
+      {:bcrypt_elixir, "~> 1.0"},
+      {:guardian, "~> 1.0"}
     ]
   end
 

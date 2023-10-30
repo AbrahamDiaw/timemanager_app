@@ -21,4 +21,11 @@ defmodule TIME_MANAGERWeb.FallbackController do
     |> put_view(html: TIME_MANAGERWeb.ErrorHTML, json: TIME_MANAGERWeb.ErrorJSON)
     |> render(:"404")
   end
+
+  # This clause is used to process server requests without authentication.
+  def call(conn, {:error, :unauthorized}) do
+    conn
+    |> put_status(:unauthorized)
+    |> json(%{error: "authentication error"})
+  end
 end

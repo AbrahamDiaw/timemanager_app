@@ -1,11 +1,13 @@
 defmodule TIME_MANAGER.Models.User do
   use Ecto.Schema
   import Ecto.Changeset
+  import Comeonin.Bcrypt, only: [hashpwsalt: 1]
 
   schema "users" do
     field :username, :string
     field :email, :string
     field :role, Ecto.Enum, values: [:employee, :manager, :general_manager]
+    field :password_hash, :string
 
     timestamps(type: :utc_datetime)
   end
@@ -13,12 +15,15 @@ defmodule TIME_MANAGER.Models.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:username, :email, :role])
+    |> cast(attrs, [:username, :email, :role, :password_hash])
     |> unique_constraint(:email)
     |> validate_required([:username, :email, :role], message: "Required - can't be null")
+    |> validate_length(:password_hash, min: 8, max: 20, message: "The password must contain between 8 and 20 characters.")
     |> validate_format(:email, ~r/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, message: "X@X.X")
     |> validate_type(:username, :string, "Username must be a string")
     |> validate_type(:email, :string, "Email must be a string")
+    |> put_password_hash
+
   end
 
   defp validate_type(changeset, field, expected_type, message) do
@@ -36,5 +41,15 @@ defmodule TIME_MANAGER.Models.User do
 
   defp is_expected_type?(_value, _expected_type) do
     false
+  end
+
+  defp put_password_hash(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{password_hash: pass}}
+      ->
+        put_change(changeset, :password_hash, hashpwsalt(pass))
+      _ ->
+        changeset
+    end
   end
 end
