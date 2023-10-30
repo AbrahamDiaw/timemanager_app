@@ -1,9 +1,22 @@
 version: "3.8"
 
 services:
+  client:
+    image: node:latest
+    container_name: timemanager_client
+    entrypoint: /bin/sh
+    ports:
+      - "3030:3030"
+    working_dir: /srv/app
+    volumes:
+      -   type: bind
+          source: ./client
+          target: /srv/app
+    command: ["-c", "npm install && npm run dev"]
+    tty: true
+
   server:
-    build:
-      context: ./server
+    image: elixir:latest
     container_name: timemanager_server
     ports:
       - "4000:4000"
@@ -17,6 +30,8 @@ services:
       - /bin/sh
       - -c
       - |
+        mix local.hex --force
+        mix local.rebar --force
         mix deps.get
         mix ecto.migrate
         mix phx.server
