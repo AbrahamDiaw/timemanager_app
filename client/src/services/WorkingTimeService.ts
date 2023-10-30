@@ -49,14 +49,11 @@ export class WorkingTimeService {
 		return response.data
 	}
 	
-	// public async deleteById(workingTimeId: string): Promise<WorkingTime> {
-	// 	let user = await UHttp.delete(
-	// 		`${ GlobalVars.BASE_URL_API }workingtimes/${ workingTimeId }`,
-	// 		UHttp.defaultHeaders()
-	// 	)
-	//
-	// 	let response = await user.json();
-	//
-	// 	return response.data
-	// }
+	public async deleteById(workingTimeId: string): Promise<boolean> {
+		let response = await UHttp.delete(
+			`${ GlobalVars.BASE_URL_API }workingtimes/${workingTimeId}`,
+			UHttp.defaultHeaders()
+		)
+		return response.ok
+	}
 }

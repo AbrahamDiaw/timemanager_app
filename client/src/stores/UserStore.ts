@@ -23,7 +23,6 @@ export const UserStore = create<UserState>(
 			email: "",
 			role: ""
 		},
-		
 		findAll: () => {
 			userService.getAll()
 				.then((users) => {
@@ -53,7 +52,6 @@ export const UserStore = create<UserState>(
 				})
 				.catch((err) => console.error(err.message))
 		},
-		
 		updateById: (userId: string, data: User) => {
 			userService.updateById(userId, data)
 				.then((newUserData) => {
@@ -83,7 +81,7 @@ export const UserStore = create<UserState>(
 					});
 				})
 				.catch((err) => {
-					console.error(err.message);
+					console.error(err);
 				});
 		},
 	})
