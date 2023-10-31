@@ -1,6 +1,8 @@
 <script>
 import {WorkingTimeStore} from "../../stores/WorkingTimeStore";
 import WorkingTime from "./WorkingTime.vue";
+import {ModalStore} from "../../stores/ModalStore";
+import {Components} from "../_components/Components";
 export default {
   name: "WorkingTimes",
   components: {
@@ -26,6 +28,9 @@ export default {
         this.dataSend.end = event.target.value.replace("T", " ") + ":00";
         WorkingTimeStore(state => state.getWorkingTimeByUserId(this.dataSend))
       }
+    },
+    addWorkingTime() {
+      ModalStore((state) => state.openModal(Components.AddWorkingTime));
     }
   },
   mounted() {
@@ -45,6 +50,11 @@ export default {
 
 <template>
   <div>
+    <div class="header-button">
+      <div class="header-content">
+        <button type="button" class="add-button" @click="addWorkingTime()">Add</button>
+      </div>
+    </div>
     <div>
       <label for="start">start:</label>
       <input type="datetime-local" id="start" v-model="dataSend.start" @change="onChange('start', $event)">

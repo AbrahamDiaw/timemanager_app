@@ -8,9 +8,7 @@ export class WorkingTimeService {
 			 `${GlobalVars.BASE_URL_API}workingtimes/${workingTime.id}?start=${workingTime.start}Z&end=${workingTime.end}Z`,
 			UHttp.defaultHeaders()
 		)
-		
 		let response = await user.json();
-		
 		return response.data
 	}
 	
@@ -19,21 +17,18 @@ export class WorkingTimeService {
 			`${ GlobalVars.BASE_URL_API }workingtimes/${ userId }/${ workingTimeId }`,
 			UHttp.defaultHeaders()
 		)
-		
 		let response = await user.json();
-		
+
 		return response.data
 	}
 	
-	public async addByUserId(userId: string, data: WorkingTime): Promise<WorkingTime> {
+	public async addByUserId( data: WorkingTime): Promise<WorkingTime> {
 		let user = await UHttp.post(
-			`${ GlobalVars.BASE_URL_API }workingtimes/${ userId }`,
+			`${ GlobalVars.BASE_URL_API }workingtimes/${ data.id }`,
 			{ workingtime: data },
 			UHttp.defaultHeaders()
 		)
-		
 		let response = await user.json();
-		
 		return response.data
 	}
 	
@@ -43,9 +38,7 @@ export class WorkingTimeService {
 			{ workingtime: data },
 			UHttp.defaultHeaders()
 		)
-		
 		let response = await user.json();
-		
 		return response.data
 	}
 	
