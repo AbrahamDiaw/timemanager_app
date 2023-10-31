@@ -12,11 +12,26 @@ defmodule TIME_MANAGERWeb.ClockController do
     render(conn, :index, clocks: clocks)
   end
 
-  def create(conn, %{"userID" => user_id , "clock" => clock_params}) do
+  def create(conn, %{"userID" => user_id}) do
     user = UserRepo.get_user!(user_id)
 
     if not is_nil(user) do
-      with {:ok, %Clock{} = clock} <- ClockRepo.create_clock(Map.put(clock_params, "user", user.id)) do
+      clock = ClockRepo.get_today_clock_by_user_id(user_id)
+
+      status =
+        case clock do
+          nil -> false
+          _ -> true
+        end
+
+      clock_params =
+        %{
+          "time" => DateTime.utc_now(),
+          "status" => status,
+          "user" => user.id
+        }
+
+      with {:ok, %Clock{} = clock} <- ClockRepo.create_clock(clock_params) do
         conn
         |> put_status(:created)
         |> put_resp_header("location", ~p"/api/clocks/#{clock}")

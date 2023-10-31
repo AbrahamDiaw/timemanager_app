@@ -51,10 +51,36 @@ defmodule TIME_MANAGER.ClockRepo do
       ** (Ecto.NoResultsError)
 
   """
-
   def get_clocks_by_user_id(user_id) do
     from(c in Clock, where: c.user == ^user_id)
     |> Repo.all()
+  end
+
+  @doc """
+  Get.
+
+  """
+  def get_today_clock_by_user_id(user_id) do
+    unix_timestamp = :os.system_time(:seconds)
+
+    {:ok, datetime} = DateTime.from_unix(unix_timestamp)
+    IO.inspect(datetime)
+
+   date = DateTime.to_date(datetime)
+
+    {:ok, start_date} = Date.new(date.year, date.month, date.day)
+    {:ok, end_date} = Date.new(date.year, date.month, date.day + 1)
+
+    {:ok, start_datetime} = NaiveDateTime.new(date.year, date.month, date.day, 0, 0, 0)
+    {:ok, end_datetime} = NaiveDateTime.new(date.year, date.month, date.day, 23, 59, 59)
+
+
+    from(c in Clock,
+      where:
+        c.user == ^user_id and c.time >= ^start_datetime and c.time < ^end_datetime
+    )
+
+    |> Repo.one()
   end
 
   @doc """

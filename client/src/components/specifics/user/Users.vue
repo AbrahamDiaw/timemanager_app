@@ -18,9 +18,11 @@ export default {
     navigateToUser(userId) {
       this.$router.push(`/users/${userId}`);
     },
+
     addUser() {
      ModalStore((state) => state.openModal(Components.AddUser));
     },
+
     editUser(userId) {
       UserStore(state => state.findById(userId));
       ModalStore((state) => state.openModal(Components.EditUser));

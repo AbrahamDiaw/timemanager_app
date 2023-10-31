@@ -9,6 +9,7 @@ import {Components} from "../_components/Components";
 export default {
 
     name: "Sidebar",
+
     computed: {
         Components() {
             return Components
@@ -17,12 +18,13 @@ export default {
             return Icon
         }
     },
+
     components: {Icon},
 
     data() {
         return {
             isOpen: true,
-            testUserCurrent: {id: 1, username: "john doe", email: 'john@dmail.com'},
+            testUserCurrent: {id: 1, username: "john", email: 'john@dmail.com'},
             Routes: Routes,
             Icons: Icons
         }
@@ -33,14 +35,14 @@ export default {
         setIsOpen(isOpen) {
             this.isOpen = isOpen;
         }
-
     },
 
     mounted() {
-        console.log(`Component User(Sidebar).`)
+
     }
 
 }
+
 </script>
 
 <template>
@@ -66,7 +68,11 @@ export default {
                     </router-link>
                     <router-link :to="{ path: Routes.WORKINGTIMES + '/' + testUserCurrent.id}">
                         <Icon :name="Icons.IconAlarms"/>
-                        <span v-if="isOpen">Working times</span>
+                        <span v-if="isOpen">My Working times</span>
+                    </router-link>
+                    <router-link :to="{ path: Routes.CLOCK_MANAGER + '/' + testUserCurrent.username}">
+                        <Icon :name="Icons.IconAlarms"/>
+                        <span v-if="isOpen">My Clock</span>
                     </router-link>
                 </div>
             </div>

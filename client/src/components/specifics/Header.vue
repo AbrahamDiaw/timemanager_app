@@ -7,7 +7,7 @@ type HeaderData = {
   title: string
 };
 
-export default defineComponent({
+export default {
   name: "Header",
 
   data(): HeaderData {
@@ -36,7 +36,7 @@ export default defineComponent({
     })
   }
 
-})
+}
 
 </script>
 
