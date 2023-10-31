@@ -1,5 +1,5 @@
-import {createRouter, createWebHistory} from "vue-router";
-import {Routes} from "../vars/Routes";
+import { createRouter, createWebHistory } from "vue-router";
+import { Routes } from "../vars/Routes";
 import Home from "./components/pages/Home.vue";
 import WonkingTimes from "./components/pages/WorkingTimes.vue";
 import ClockManager from "./components/specifics/ClockManager.vue";
