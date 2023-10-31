@@ -3,6 +3,7 @@ defmodule TIME_MANAGERWeb.UserController do
 
   alias TIME_MANAGER.UserRepo
   alias TIME_MANAGER.Models.User
+  alias TIME_MANAGER.Guardian
 
   action_fallback TIME_MANAGERWeb.FallbackController
 
@@ -11,7 +12,7 @@ defmodule TIME_MANAGERWeb.UserController do
     render(conn, :index, users: users)
   end
 
-  def index(conn, %{ "email" => email, "username" => username }) do
+  def search(conn, %{ "email" => email, "username" => username }) do
     if not is_nil(email) and not is_nil(username) do
       user = UserRepo.get_by_email_and_username!(email, username)
       render(conn, :show, user: user)
@@ -19,13 +20,15 @@ defmodule TIME_MANAGERWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    with {:ok, %User{} = user} <- UserRepo.create_user(user_params) do
+    password_hash = "password"
+    with {:ok, %User{} = user} <- UserRepo.create_user(Map.put(user_params, "password_hash", password_hash)) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/api/users/#{user}")
       |> render(:show, user: user)
     end
   end
+
 
   def show(conn, %{"id" => id}) do
     user = UserRepo.get_user!(id)

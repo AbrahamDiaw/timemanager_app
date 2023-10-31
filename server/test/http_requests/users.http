@@ -1,6 +1,8 @@
 ### Add Users (Check required)
 POST http://localhost:4000/api/users
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDExNjk5MzEsImlhdCI6MTY5ODc1MDczMSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiYmEwZGQxZGEtZDg4NC00MDYyLWFjYWUtYTA2MmUyYTg4MWEyIiwibmJmIjoxNjk4NzUwNzMwLCJzdWIiOiIyMSIsInR5cCI6ImFjY2VzcyJ9.pQxCZlhfm735SblAzwob1kQXqMNKL234BxBE0cu5_Fajd3YbNLo77MK5IOOS3I2CmHgVXwMj5JU2FwQmn3Tm1w
+
 
 {
   "user": {
@@ -10,6 +12,8 @@ Content-Type: application/json
 ### Add Users (Check string)
 POST http://localhost:4000/api/users
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDExNjk5MzEsImlhdCI6MTY5ODc1MDczMSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiYmEwZGQxZGEtZDg4NC00MDYyLWFjYWUtYTA2MmUyYTg4MWEyIiwibmJmIjoxNjk4NzUwNzMwLCJzdWIiOiIyMSIsInR5cCI6ImFjY2VzcyJ9.pQxCZlhfm735SblAzwob1kQXqMNKL234BxBE0cu5_Fajd3YbNLo77MK5IOOS3I2CmHgVXwMj5JU2FwQmn3Tm1w
+
 
 {
   "user": {
@@ -21,11 +25,13 @@ Content-Type: application/json
 ### Add User employee
 POST http://localhost:4000/api/users
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDExNjk5MzEsImlhdCI6MTY5ODc1MDczMSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiYmEwZGQxZGEtZDg4NC00MDYyLWFjYWUtYTA2MmUyYTg4MWEyIiwibmJmIjoxNjk4NzUwNzMwLCJzdWIiOiIyMSIsInR5cCI6ImFjY2VzcyJ9.pQxCZlhfm735SblAzwob1kQXqMNKL234BxBE0cu5_Fajd3YbNLo77MK5IOOS3I2CmHgVXwMj5JU2FwQmn3Tm1w
+
 
 {
   "user": {
     "username": "john",
-    "email": "john.doe2@gmail.com",
+    "email": "john25@gmail.com",
     "role": "employee"
   }
 }
@@ -33,6 +39,8 @@ Content-Type: application/json
 ### Add User manager
 POST http://localhost:4000/api/users
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDExNjk5MzEsImlhdCI6MTY5ODc1MDczMSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiYmEwZGQxZGEtZDg4NC00MDYyLWFjYWUtYTA2MmUyYTg4MWEyIiwibmJmIjoxNjk4NzUwNzMwLCJzdWIiOiIyMSIsInR5cCI6ImFjY2VzcyJ9.pQxCZlhfm735SblAzwob1kQXqMNKL234BxBE0cu5_Fajd3YbNLo77MK5IOOS3I2CmHgVXwMj5JU2FwQmn3Tm1w
+
 
 {
   "user": {
@@ -57,6 +65,8 @@ Content-Type: application/json
 ### Update user
 PUT http://localhost:4000/api/users/1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDExNjk5MzEsImlhdCI6MTY5ODc1MDczMSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiYmEwZGQxZGEtZDg4NC00MDYyLWFjYWUtYTA2MmUyYTg4MWEyIiwibmJmIjoxNjk4NzUwNzMwLCJzdWIiOiIyMSIsInR5cCI6ImFjY2VzcyJ9.pQxCZlhfm735SblAzwob1kQXqMNKL234BxBE0cu5_Fajd3YbNLo77MK5IOOS3I2CmHgVXwMj5JU2FwQmn3Tm1w
+
 
 {
   "user": {
@@ -68,12 +78,18 @@ Content-Type: application/json
 
 ### Get all
 GET http://localhost:4000/api/users
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDExNjk5MzEsImlhdCI6MTY5ODc1MDczMSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiYmEwZGQxZGEtZDg4NC00MDYyLWFjYWUtYTA2MmUyYTg4MWEyIiwibmJmIjoxNjk4NzUwNzMwLCJzdWIiOiIyMSIsInR5cCI6ImFjY2VzcyJ9.pQxCZlhfm735SblAzwob1kQXqMNKL234BxBE0cu5_Fajd3YbNLo77MK5IOOS3I2CmHgVXwMj5JU2FwQmn3Tm1w
 
 ### Get by id
-GET http://localhost:4000/api/users/1
+GET http://localhost:4000/api/users/21
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDExODQ2NTcsImlhdCI6MTY5ODc2NTQ1NywiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiNWIzZTYxYTItMDkyMi00MmU0LWI2ODQtMzQ2NDMzZDcyNmU3IiwibmJmIjoxNjk4NzY1NDU2LCJzdWIiOiIyMSIsInR5cCI6ImFjY2VzcyJ9.Wp6YJkSZtmJ5Pa0L_wi4tpWILK2fKlCLxEKdxkdlhKVL57p4jzE7_WKSuzZLhu6AyYcFVjk3iQxCgFxywoFXpw
+
 
 ### Get by email and username
-GET  http://localhost:4000/api/users?email=john.doe@gmail.com&username=john
+GET  http://localhost:4000/api/users?email=john.doe2@gmail.com&username=john
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDExNjk5MzEsImlhdCI6MTY5ODc1MDczMSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiYmEwZGQxZGEtZDg4NC00MDYyLWFjYWUtYTA2MmUyYTg4MWEyIiwibmJmIjoxNjk4NzUwNzMwLCJzdWIiOiIyMSIsInR5cCI6ImFjY2VzcyJ9.pQxCZlhfm735SblAzwob1kQXqMNKL234BxBE0cu5_Fajd3YbNLo77MK5IOOS3I2CmHgVXwMj5JU2FwQmn3Tm1w
+
 
 ### Delete user
 DELETE http://localhost:4000/api/users/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDExNjk5MzEsImlhdCI6MTY5ODc1MDczMSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiYmEwZGQxZGEtZDg4NC00MDYyLWFjYWUtYTA2MmUyYTg4MWEyIiwibmJmIjoxNjk4NzUwNzMwLCJzdWIiOiIyMSIsInR5cCI6ImFjY2VzcyJ9.pQxCZlhfm735SblAzwob1kQXqMNKL234BxBE0cu5_Fajd3YbNLo77MK5IOOS3I2CmHgVXwMj5JU2FwQmn3Tm1w

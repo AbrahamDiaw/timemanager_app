@@ -5,6 +5,14 @@ export type User = {
 	role: string;
 }
 
+export type AuthUser = {
+	token?: string,
+	id?: string;
+	username: string;
+	email: string;
+	role: string;
+}
+
 export enum ROLES {
 	EMPLOYEE= "employee",
 	MANAGER= "manager",

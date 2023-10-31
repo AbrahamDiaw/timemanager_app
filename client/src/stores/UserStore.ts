@@ -1,13 +1,16 @@
 import create from "zustand-vue";
-import { User } from "../types/User";
+import { AuthUser, User } from "../types/User";
 import { UserService } from "../services/UserService";
+import { SecurityService } from "../services/SecurityService";
 
 export type UserState = {
 	users: User[];
 	currentUser: User | null;
+	authUser: User | null
 	findAll: () => void;
 	add: (data: User) => void;
 	findById: (userId: string) => void;
+	findAuthUser: (userId: string) => void;
 	updateById: (userId: string, data: User) => void;
 	deleteById: (userId: string) => void;
 }
@@ -18,11 +21,13 @@ export const UserStore = create<UserState>(
 	(set) => ({
 		users: [],
 		currentUser: {
-			id: "1",
-			username: "john",
-			email: "john",
+			id: "",
+			username: "",
+			email: "",
 			role: ""
 		},
+		authUser: null,
+		
 		findAll: () => {
 			userService.getAll()
 				.then((users) => {
@@ -41,7 +46,15 @@ export const UserStore = create<UserState>(
 					console.error(err.message);
 				});
 		},
-
+		findAuthUser: (userId: string) => {
+			userService.getById(userId)
+				.then((user) => {
+					set({ authUser: { ...user, token: SecurityService.getToken() } });
+				})
+				.catch((err) => {
+					console.error(err.message);
+				});
+		},
 		add: (data: User) => {
 			userService.add(data)
 				.then((user) => {
@@ -53,6 +66,7 @@ export const UserStore = create<UserState>(
 				})
 				.catch((err) => console.error(err.message))
 		},
+		
 		updateById: (userId: string, data: User) => {
 			userService.updateById(userId, data)
 				.then((newUserData) => {

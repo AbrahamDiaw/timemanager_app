@@ -1,3 +1,5 @@
+import { SecurityService } from "../services/SecurityService";
+
 export enum HTTP_STATUS_CODE {
 	OK = 200,
 	CREATED = 201,
@@ -53,7 +55,14 @@ export class UHttp {
 	public static defaultHeaders(): { Accept: string; "Content-Type": string } {
 		return {
 			'Accept': 'application/json, text/plain, */*',
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+		}
+	}
+	
+	public static authHeaders(): { Authorization: string; Accept: string; "Content-Type": string } {
+		return {
+			...this.defaultHeaders(),
+			'Authorization': "Bearer " + SecurityService.getToken() as string
 		}
 	}
 
