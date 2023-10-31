@@ -34,6 +34,14 @@ export class UHttp {
 			headers
 		});
 	}
+
+	public static put(url: string, data: any, headers: any = {}): Promise<Response> {
+		return fetch(url, {
+			method: "PUT",
+			body: JSON.stringify(data),
+			headers
+		});
+	}
 	
 	public static delete(url: string, headers: any = {}): Promise<Response> {
 		return fetch(url, {

@@ -9,9 +9,9 @@ export type WorkingTimeState = {
     workingTimes: WorkingTime[];
     currentWorkingTime: WorkingTime | null;
     getWorkingTimeByUserId: (workingTime: WorkingTime) => void;
-    findById: (workingTimeId: string) => void;
-    updateById: (workingTimeId: string) => void;
-    deleteById: (workingTimeId: string) => void;
+    findById: (workingTimeId: number) => void;
+    updateById: (workingTimeId: number, data: WorkingTime) => void;
+    deleteById: (workingTimeId: number) => void;
 }
 
 const workingTimeService = new WorkingTimeService()
@@ -33,7 +33,7 @@ export const WorkingTimeStore = create<WorkingTimeState>(
                 console.error(err.message)
             })
     },
-    findById(workingTimeId: string) {
+    findById(workingTimeId: number) {
         set((state: any): any => {
             const _currentWorkingTime = state.workingTimes.find((workingtime: any) => workingtime.id === workingTimeId)
             if(_currentWorkingTime) {
@@ -42,17 +42,28 @@ export const WorkingTimeStore = create<WorkingTimeState>(
 
         })
     },
-    updateById: (workingTimeId: string, data: WorkingTime) => {
+    updateById: (workingTimeId: number, data: WorkingTime) => {
+        console.log(workingTimeId)
         workingTimeService.updateById(workingTimeId, data)
-            .then((newWorkingTime) => {
-
+            .then((newWorkingTime): any => {
+                set((state: any) => {
+                    let _workingTimes = [...state.workingTimes];
+                    const _updateWonkingTime = _workingTimes.map((workingTime) => {
+                        if(workingTime.id === newWorkingTime.id) {
+                            return newWorkingTime
+                        } else {
+                            return workingTime
+                        }
+                    })
+                    return {workingTimes: _updateWonkingTime}
+                })
             })
             .catch((err) => {
                 console.log(err.message)
             })
 
     },
-    deleteById: (workingTimeId: string) => {
+    deleteById: (workingTimeId: number) => {
         workingTimeService.deleteById(workingTimeId)
             .then((res) => {
                 set((state: any): any => {

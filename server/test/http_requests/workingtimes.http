@@ -38,13 +38,13 @@ Content-Type: application/json
 
 
 ### update Workingtimes
-PUT http://localhost:4000/api/workingtimes/1
+PUT http://localhost:4000/api/workingtimes/10
 Content-Type: application/json
 
 {
   "workingtime": {
-    "start": "2024-10-25 16:30:45",
-    "end": "2029-01-01 16:00:45"
+    "start": "2023-11-25 16:30",
+    "end": "2023-12-01 16:00"
   }
 }
 

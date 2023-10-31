@@ -37,8 +37,8 @@ export class WorkingTimeService {
 		return response.data
 	}
 	
-	public async updateById(workingTimeId: string, data: WorkingTime): Promise<WorkingTime> {
-		let user = await UHttp.patch(
+	public async updateById(workingTimeId: number, data: WorkingTime): Promise<WorkingTime> {
+		let user = await UHttp.put(
 			`${ GlobalVars.BASE_URL_API }workingtimes/${ workingTimeId }`,
 			{ workingtime: data },
 			UHttp.defaultHeaders()
@@ -49,7 +49,7 @@ export class WorkingTimeService {
 		return response.data
 	}
 	
-	public async deleteById(workingTimeId: string): Promise<boolean> {
+	public async deleteById(workingTimeId: number): Promise<boolean> {
 		let response = await UHttp.delete(
 			`${ GlobalVars.BASE_URL_API }workingtimes/${workingTimeId}`,
 			UHttp.defaultHeaders()
