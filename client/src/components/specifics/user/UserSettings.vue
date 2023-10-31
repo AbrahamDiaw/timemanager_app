@@ -3,7 +3,7 @@
 </script>
 
 <template>
-User settings
+  User settings
 </template>
 
 <style scoped>

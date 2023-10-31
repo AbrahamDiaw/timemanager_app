@@ -18,6 +18,7 @@ services:
   server:
     image: elixir:latest
     container_name: timemanager_server
+    entrypoint: /bin/sh
     ports:
       - "4000:4000"
     volumes:
@@ -26,8 +27,8 @@ services:
       MIX_ENV: dev
     depends_on:
       - db
+    working_dir: /app
     command:
-      - /bin/sh
       - -c
       - |
         mix local.hex --force
