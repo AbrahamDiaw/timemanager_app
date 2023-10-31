@@ -1,8 +1,11 @@
 <script>
 import {WorkingTimeStore} from "../../stores/WorkingTimeStore";
-
+import WorkingTime from "./WorkingTime.vue";
 export default {
   name: "WorkingTimes",
+  components: {
+    WorkingTime
+  },
   data() {
       return {
         workingTimes: WorkingTimeStore(state => state.workingTimes),
@@ -50,28 +53,19 @@ export default {
       <label for="end">end:</label>
       <input type="datetime-local" id="end" v-model="dataSend.end" @change="onChange('end', $event)">
     </div>
-
     <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Start</th>
-            <th>End</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(workingtime) in workingTimes">
-            <td>{{workingtime.start}}</td>
-            <td>{{workingtime.end}}</td> 
-          </tr>
-        </tbody>
-
-      </table>
+      <div class="head-workingtimes">
+      </div>
+      <div class="content-workingtimes" v-for="(workingtime) in workingTimes">
+        <WorkingTime :workingTime="workingtime" />
+      </div>
     </div>
-
   </div>
 </template>
 
 <style scoped>
+.head-workingtimes {
+  display: flex;
 
+}
 </style>

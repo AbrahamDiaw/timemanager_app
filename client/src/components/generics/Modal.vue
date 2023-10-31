@@ -4,6 +4,7 @@ import {ModalStore} from "../../stores/ModalStore";
 import {Components} from "../_components/Components";
 import AddUser from "../specifics/user/AddUser.vue";
 import EditUser from "../specifics/user/EditUser.vue";
+import EditWorkingTime from "../specifics/workingtime/EditWorkingTime.vue"
 import {Icons} from "./Icon/Icons";
 import Icon from "./Icon/Icon.vue";
 import UserSettings from "../specifics/user/UserSettings.vue";
@@ -42,6 +43,9 @@ export default {
         case Components.UserSettings:
             comp = UserSettings;
             break;
+        case Components.EditWorkingTime:
+          comp = EditWorkingTime;
+          break;
       }
 
       return comp;
