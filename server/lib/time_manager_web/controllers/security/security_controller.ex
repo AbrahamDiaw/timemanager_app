@@ -11,7 +11,7 @@ defmodule TIME_MANAGERWeb.SecurityController do
   def sign_in(conn, %{"email" => email, "password" => password}) do
     case token_sign_in(email, password) do
       {:ok, token, _claims} ->
-        conn |> render(:show_json_web_token, jwt: token)
+        conn |> render(:show_json_web_token, jwt: token, _claims: _claims)
       _ ->
         {:error, :unauthorized}
     end

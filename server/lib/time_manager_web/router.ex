@@ -12,11 +12,9 @@ defmodule TIME_MANAGERWeb.Router do
   end
 
   scope "/api", TIME_MANAGERWeb do
-    pipe_through :api
+    pipe_through [:api, :jwt_authenticated]
 
     resources "/users", UserController, except: [:new, :edit]
-
-    post "/sign_in", SecurityController, :sign_in
 
     get "/clocks/:userID", ClockController, :show
     post "/clocks/:userID", ClockController, :create
@@ -29,10 +27,10 @@ defmodule TIME_MANAGERWeb.Router do
 
   end
 
-  scope "/api/v1", TIME_MANAGERWeb do
-    pipe_through [:api, :jwt_authenticated]
+  scope "/api", TIME_MANAGERWeb do
+    pipe_through :api
 
-    resources "/users", UserController, except: [:new, :edit]
+    post "/sign_in", SecurityController, :sign_in
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
