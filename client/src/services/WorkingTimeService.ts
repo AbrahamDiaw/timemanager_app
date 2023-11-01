@@ -42,7 +42,7 @@ export class WorkingTimeService {
 		return response.data
 	}
 	
-	public async deleteById(workingTimeId: number): Promise<boolean> {
+	public async deleteById(workingTimeId: string): Promise<boolean> {
 		let response = await UHttp.delete(
 			`${ GlobalVars.BASE_URL_API }workingtimes/${workingTimeId}`,
 			UHttp.authHeaders()

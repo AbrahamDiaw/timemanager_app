@@ -10,7 +10,7 @@ export type WorkingTimeState = {
     add: (workingTime: WorkingTime) => void;
     findById: (workingTimeId: number) => void;
     updateById: (workingTimeId: number, data: WorkingTime) => void;
-    deleteById: (workingTimeId: number) => void;
+    deleteById: (workingTimeId: string) => void;
 }
 
 const workingTimeService = new WorkingTimeService()
@@ -72,7 +72,7 @@ export const WorkingTimeStore = create<WorkingTimeState>(
             })
 
     },
-    deleteById: (workingTimeId: number) => {
+    deleteById: (workingTimeId: string) => {
         workingTimeService.deleteById(workingTimeId)
             .then((res) => {
                 set((state: any): any => {

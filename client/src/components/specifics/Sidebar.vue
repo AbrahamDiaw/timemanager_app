@@ -5,6 +5,7 @@ import Icon from "../generics/Icon/Icon.vue";
 import {Icons} from "../generics/Icon/Icons";
 import {ModalStore} from "../../stores/ModalStore";
 import {Components} from "../_components/Components";
+import {UserState} from "../../stores/UserStore";
 
 import {AuthTokenData, SecurityService} from "../../services/SecurityService";
 import {UserStore} from "../../stores/UserStore";
@@ -24,7 +25,6 @@ export default {
   data() {
     return {
       isOpen: true,
-      testUserCurrent: {id: 1, username: "john doe", email: 'john@dmail.com'},
       Routes: Routes,
       Icons: Icons,
       authUser: UserStore((state) => state.authUser)
@@ -43,7 +43,6 @@ export default {
   },
 
   mounted() {
-    console.log(`Component User(Sidebar).`)
     UserStore(state => state.findAll())
   }
 
@@ -60,7 +59,7 @@ export default {
     <div class="sidebar-content-container" v-if="authUser">
       <div class="sidebar-header">
         <Icon :name="Icons.IconAccountCircle"/>
-        <p v-if="isOpen"> Hi {{ testUserCurrent.username }} !</p>
+        <p v-if="isOpen"> Hi {{ authUser?.username as string }} !</p>
       </div>
 
       <div class="sidebar-content-wrapper">

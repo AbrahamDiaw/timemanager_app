@@ -8,7 +8,18 @@ name: "WorkingTime",
   props: {
     workingTime: Object,
   },
+  data(){
+    return {
+      editAndDelete: null,
+    }
+  },
   methods: {
+    handleEnterButtonEditandDelete(id) {
+        this.editAndDelete = id
+    },
+    handleLeaveButtonEditandDelete() {
+      this.editAndDelete = null
+    },
     formatDate(date) {
       return UDate.formatDate(date)
     },
@@ -24,12 +35,14 @@ name: "WorkingTime",
 </script>
 
 <template>
-<div class="workingtime-container">
+<div class="workingtime-container" @mouseenter="handleEnterButtonEditandDelete(workingTime.id)" @mouseleave="handleLeaveButtonEditandDelete()">
   <div class="workingtime-content">
     <p>{{formatDate(workingTime.start)}}</p>
     <p>{{formatDate(workingTime.end)}}</p>
-    <button type="button" class="edit-button" @click="editWorkingTime(workingTime.id)">Edit</button>
-    <button type="button" class="delete-button" @click="deleteWorkingTime(workingTime.id)">Delete</button>
+    <div v-show="workingTime.id === editAndDelete" >
+      <button type="button" class="edit-button" @click="editWorkingTime(workingTime.id)">Edit</button>
+      <button type="button" class="delete-button" @click="deleteWorkingTime(workingTime.id)">Delete</button>
+    </div>
   </div>
 </div>
 </template>
