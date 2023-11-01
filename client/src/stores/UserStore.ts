@@ -6,7 +6,7 @@ import { SecurityService } from "../services/SecurityService";
 export type UserState = {
 	users: User[];
 	currentUser: User | null;
-	authUser: User | null
+	authUser: AuthUser | null
 	findAll: () => void;
 	add: (data: User) => void;
 	findById: (userId: string) => void;
