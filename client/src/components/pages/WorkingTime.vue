@@ -36,7 +36,15 @@ name: "WorkingTime",
 
 <style scoped>
 .workingtime-container {
-
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 65px;
+  cursor: pointer;
+  border: #000 solid 2px;
+  margin: 10px 0;
+  padding: 0 3rem;
 }
 .workingtime-content {
   display: flex;

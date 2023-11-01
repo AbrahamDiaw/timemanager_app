@@ -10,6 +10,7 @@ export type UserState = {
 	findAll: () => void;
 	add: (data: User) => void;
 	findById: (userId: string) => void;
+	resetCurrentUser: () => void;
 	findAuthUser: (userId: string) => void;
 	updateById: (userId: string, data: User) => void;
 	deleteById: (userId: string) => void;
@@ -20,12 +21,7 @@ const userService = new UserService();
 export const UserStore = create<UserState>(
 	(set) => ({
 		users: [],
-		currentUser: {
-			id: "",
-			username: "",
-			email: "",
-			role: ""
-		},
+		currentUser: null,
 		authUser: null,
 		
 		findAll: () => {
@@ -45,6 +41,9 @@ export const UserStore = create<UserState>(
 				.catch((err) => {
 					console.error(err.message);
 				});
+		},
+		resetCurrentUser: () => {
+			set({ currentUser: null });
 		},
 		findAuthUser: (userId: string) => {
 			userService.getById(userId)

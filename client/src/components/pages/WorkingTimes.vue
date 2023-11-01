@@ -36,13 +36,18 @@ export default {
   mounted() {
     const today = new Date();
     today.setHours(2, 0, 0, 0)
-    const isoDateToday = today.toISOString().split('.')[0];
-    let firstDayOfCurrentMonth = new Date(today.getFullYear(), today.getMonth(), 1, 2,0,0);
+    const isoDateToday = new Date(today.getFullYear(), today.getMonth() + 1, 1, 1).toISOString().split('.')[0];
+    let firstDayOfCurrentMonth = new Date(today.getFullYear(), today.getMonth(), 1, 1,0,0);
     let isoDateFirstDay = firstDayOfCurrentMonth.toISOString().split('.')[0];
     this.dataSend.id = this.$route.params.id
     this.dataSend.start = isoDateFirstDay.replace("T", " ");
     this.dataSend.end= isoDateToday.replace("T", " ");
     WorkingTimeStore(state => state.getWorkingTimeByUserId(this.dataSend))
+
+    this.$watch(() => this.$route.params.id, () => {
+      this.dataSend.id = this.$route.params.id
+      WorkingTimeStore(state => state.getWorkingTimeByUserId(this.dataSend))
+    })
   },
 }
 </script>
@@ -53,17 +58,21 @@ export default {
     <div class="header-button">
       <div class="header-content">
         <button type="button" class="add-button" @click="addWorkingTime()">Add</button>
+        <div class="filter">
+          <div>
+            <label for="start">start:</label>
+            <input type="datetime-local" id="start" v-model="dataSend.start" @change="onChange('start', $event)">
+          </div>
+          <div>
+            <label for="end">end:</label>
+            <input type="datetime-local" id="end" v-model="dataSend.end" @change="onChange('end', $event)">
+          </div>
+        </div>
+
       </div>
     </div>
-    <div>
-      <label for="start">start:</label>
-      <input type="datetime-local" id="start" v-model="dataSend.start" @change="onChange('start', $event)">
-    </div>
-    <div>
-      <label for="end">end:</label>
-      <input type="datetime-local" id="end" v-model="dataSend.end" @change="onChange('end', $event)">
-    </div>
-    <div>
+
+    <div class="workingtimes-content">
       <div class="head-workingtimes">
       </div>
       <div class="content-workingtimes" v-for="(workingtime) in workingTimes">
@@ -74,8 +83,22 @@ export default {
 </template>
 
 <style scoped>
+
+.header-content{
+  display: flex;
+  position: fixed;
+}
+
 .head-workingtimes {
   display: flex;
-
+}
+.filter{
+  padding-left: 2rem;
+}
+.workingtimes-content{
+  padding-top: 5rem;
+  width: 100%;
+  overflow: scroll;
+  height: 100vh;
 }
 </style>

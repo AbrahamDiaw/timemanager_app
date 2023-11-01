@@ -1,6 +1,7 @@
 export enum Routes {
 	
 	HOME = '/',
+	HOME_ID = '/:id',
 	USERS = "",
 	WORKINGTIMES = "/workingtimes",
 	WORKINGTIMES_ID = "/workingtimes/:id",

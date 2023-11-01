@@ -27,7 +27,7 @@ export default {
       testUserCurrent: {id: 1, username: "john doe", email: 'john@dmail.com'},
       Routes: Routes,
       Icons: Icons,
-      authUser: UserStore(state => state.authUser),
+      authUser: UserStore((state) => state.authUser)
     }
   },
 
@@ -57,7 +57,7 @@ export default {
       <Icon :name="isOpen ? Icons.IconArrowLeft : Icons.IconArrowRight"/>
     </div>
 
-    <div class="sidebar-content-container">
+    <div class="sidebar-content-container" v-if="authUser">
       <div class="sidebar-header">
         <Icon :name="Icons.IconAccountCircle"/>
         <p v-if="isOpen"> Hi {{ testUserCurrent.username }} !</p>
@@ -69,7 +69,7 @@ export default {
             <Icon :name="Icons.IconUsers"/>
             <span v-if="isOpen">Users</span>
           </router-link>
-          <router-link :to="{ path: Routes.WORKINGTIMES + '/' + testUserCurrent.id}">
+          <router-link :to="{ path: Routes.WORKINGTIMES + '/' + authUser.id}">
             <Icon :name="Icons.IconAlarms"/>
             <span v-if="isOpen">Working times</span>
           </router-link>
