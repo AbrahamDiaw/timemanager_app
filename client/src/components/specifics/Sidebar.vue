@@ -1,154 +1,158 @@
-<script lang="ts">
+<script>
 
 import {Routes} from "../../../vars/Routes";
 import Icon from "../generics/Icon/Icon.vue";
 import {Icons} from "../generics/Icon/Icons";
 import {ModalStore} from "../../stores/ModalStore";
 import {Components} from "../_components/Components";
-import {UserState} from "../../stores/UserStore";
-
-import {AuthTokenData, SecurityService} from "../../services/SecurityService";
 import {UserStore} from "../../stores/UserStore";
+import {SecurityService} from "../../services/SecurityService";
 
 const securityService = new SecurityService()
-
 export default {
 
-  name: "Sidebar",
-  computed: {
-    Icon() {
-      return Icon
-    }
-  },
-  components: {Icon},
+    name: "Sidebar",
 
-  data() {
-    return {
-      isOpen: true,
-      Routes: Routes,
-      Icons: Icons,
-      authUser: UserStore((state) => state.authUser)
-    }
-  },
-
-  methods: {
-    setIsOpen(isOpen: boolean) {
-      this.isOpen = isOpen;
+    computed: {
+        Components() {
+            return Components
+        },
+        Icon() {
+            return Icon
+        }
     },
 
-    handleSignOut() {
-      securityService.signOut()
+    components: {Icon},
+
+    data() {
+        return {
+            isOpen: true,
+            Routes: Routes,
+            Icons: Icons,
+            authUser: UserStore((state) => state.authUser)
+        }
+    },
+
+    methods: {
+        ModalStore,
+        setIsOpen(isOpen) {
+            this.isOpen = isOpen;
+        },
+        handleSignOut(){
+            securityService.signOut()
+        }
+    },
+
+    mounted() {
+        UserStore((state) => state.findAll())
     }
-
-  },
-
-  mounted() {
-    UserStore(state => state.findAll())
-  }
 
 }
 
 </script>
 
 <template>
-  <div :class="'sidebar-container' + (!isOpen ? ' sidebar-close' : '')">
-    <div class="close-icon" @click="() => setIsOpen(!isOpen)">
-      <Icon :name="isOpen ? Icons.IconArrowLeft : Icons.IconArrowRight"/>
-    </div>
-
-    <div class="sidebar-content-container" v-if="authUser">
-      <div class="sidebar-header">
-        <Icon :name="Icons.IconAccountCircle"/>
-        <p v-if="isOpen"> Hi {{ authUser?.username as string }} !</p>
-      </div>
-
-      <div class="sidebar-content-wrapper">
-        <div class="sidebar-content">
-          <router-link :to="{ path: Routes.HOME }">
-            <Icon :name="Icons.IconUsers"/>
-            <span v-if="isOpen">Users</span>
-          </router-link>
-          <router-link :to="{ path: Routes.WORKINGTIMES + '/' + authUser.id}">
-            <Icon :name="Icons.IconAlarms"/>
-            <span v-if="isOpen">Working times</span>
-          </router-link>
+    <div :class="'sidebar-container' + (!isOpen ? ' sidebar-close' : '')">
+        <div class="close-icon" @click="() => setIsOpen(!isOpen)">
+            <Icon :name="isOpen ? Icons.IconArrowLeft : Icons.IconArrowRight"/>
         </div>
-      </div>
 
-      <div class="sidebar-footer">
-        <button @click="handleSignOut">
-          <Icon :name="Icons.IconLogoutCircle"/>
-          <span v-if="isOpen">Log out</span>
-        </button>
-      </div>
+        <div class="sidebar-content-container">
+            <div class="sidebar-header">
+                <div class="sidebar-header-icons">
+                    <Icon :name="Icons.IconAccountCircle"/>
+                    <Icon v-if="isOpen" :name="Icons.IconSettings" @click="() => ModalStore(state => state.openModal(Components.UserSettings))" />
+                </div>
+                <p v-if="isOpen"> Hi {{ authUser?.username }} !</p>
+            </div>
+
+            <div class="sidebar-content-wrapper">
+                <div class="sidebar-content">
+                    <router-link :to="{ path: Routes.HOME }">
+                        <Icon :name="Icons.IconUsers"/>
+                        <span v-if="isOpen">Users</span>
+                    </router-link>
+                    <router-link :to="{ path: Routes.WORKINGTIMES + '/' + testUserCurrent.id}">
+                        <Icon :name="Icons.IconAlarms"/>
+                        <span v-if="isOpen">My Working times</span>
+                    </router-link>
+                    <router-link :to="{ path: Routes.CLOCK_MANAGER + '/' + testUserCurrent.username}">
+                        <Icon :name="Icons.IconAlarms"/>
+                        <span v-if="isOpen">My Clock</span>
+                    </router-link>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <button @click="handleSignOut">
+                    <Icon :name="Icons.IconLogoutCircle"/>
+                    <span v-if="isOpen">Log out</span>
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <style scoped>
 
 .sidebar-container {
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: var(--sidebar-width);
-  height: 100vh;
-  background: #F8F9FD;
-  transition: width 300ms ease;
-  z-index: 10;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: #F8F9FD;
+    transition: width 300ms ease;
+    z-index: 10;
 }
 
 .sidebar-close {
-  width: 60px !important;
+    width: 60px !important;
 }
 
 .close-icon {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  border-radius: 50%;
-  top: 22px;
-  right: -12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #222222;
-  color: #FAFAFA;
-  font-size: .65rem;
-  cursor: pointer;
-  z-index: 30;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    border-radius: 50%;
+    top: 22px;
+    right: -12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #222222;
+    color: #FAFAFA;
+    font-size: .65rem;
+    cursor: pointer;
+    z-index: 30;
 }
 
 .close-icon:hover {
-  background: #000000;
+    background: #000000;
 }
 
 .sidebar-content-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 .sidebar-header {
-  width: 100%;
-  height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.sidebar-header i {
-  font-size: 1.8rem;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .sidebar-header p {
-  margin-top: 15px;
-  font-size: 1rem;
+    margin-top: 15px;
+    font-size: 1rem;
 }
 
 .sidebar-header-icons {
@@ -172,45 +176,45 @@ export default {
 }
 
 .sidebar-content-wrapper {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  margin: 15px auto;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    margin: 15px auto;
 }
 
 .sidebar-content-wrapper a {
-  color: #222222;
-  text-decoration: none;
-  font-size: .95rem;
-  width: 60%;
-  margin: 25px auto;
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  flex-wrap: nowrap;
+    color: #222222;
+    text-decoration: none;
+    font-size: .95rem;
+    width: 60%;
+    margin: 25px auto;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    flex-wrap: nowrap;
 }
 
 .sidebar-close .sidebar-content-wrapper a {
-  justify-content: center;
+    justify-content: center;
 }
 
 .sidebar-content i, .sidebar-footer i {
-  font-size: 1.4rem;
+    font-size: 1.4rem;
 }
 
 .sidebar-content span, .sidebar-footer span {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .sidebar-footer {
-  padding: 25px 0;
+    padding: 25px 0;
 }
 
 .sidebar-footer a {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
 </style>
