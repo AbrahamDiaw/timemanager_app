@@ -3,6 +3,7 @@ defmodule TIME_MANAGERWeb.UserController do
 
   alias TIME_MANAGER.UserRepo
   alias TIME_MANAGER.Models.User
+  alias TIME_MANAGER.Guardian
 
   action_fallback TIME_MANAGERWeb.FallbackController
 
@@ -29,7 +30,8 @@ defmodule TIME_MANAGERWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    with {:ok, %User{} = user} <- UserRepo.create_user(user_params) do
+    default_password = "default_password"
+    with {:ok, %User{} = user} <- UserRepo.create_user(Map.put(user_params, "password_hash", default_password)) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/api/users/#{user}")

@@ -5,6 +5,7 @@ import {Components} from "../_components/Components";
 import AddUser from "../specifics/user/AddUser.vue";
 import EditUser from "../specifics/user/EditUser.vue";
 import EditWorkingTime from "../specifics/workingtime/EditWorkingTime.vue"
+import AddWorkingTime from "../specifics/workingtime/AddWorkingTime.vue";
 import {Icons} from "./Icon/Icons";
 import Icon from "./Icon/Icon.vue";
 import UserSettings from "../specifics/user/UserSettings.vue";
@@ -45,6 +46,9 @@ export default {
             break;
         case Components.EditWorkingTime:
           comp = EditWorkingTime;
+          break;
+        case Components.AddWorkingTime:
+          comp = AddWorkingTime;
           break;
       }
 

@@ -1,6 +1,8 @@
 ### Add Workingtimes (Check required)
 POST http://localhost:4000/api/workingtimes/1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDExNjk5MzEsImlhdCI6MTY5ODc1MDczMSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiYmEwZGQxZGEtZDg4NC00MDYyLWFjYWUtYTA2MmUyYTg4MWEyIiwibmJmIjoxNjk4NzUwNzMwLCJzdWIiOiIyMSIsInR5cCI6ImFjY2VzcyJ9.pQxCZlhfm735SblAzwob1kQXqMNKL234BxBE0cu5_Fajd3YbNLo77MK5IOOS3I2CmHgVXwMj5JU2FwQmn3Tm1w
+
 
 {
   "workingtime": {
@@ -10,6 +12,8 @@ Content-Type: application/json
 ### Add Workingtimes (Check formart)
 POST http://localhost:4000/api/workingtimes/1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDExNjk5MzEsImlhdCI6MTY5ODc1MDczMSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiYmEwZGQxZGEtZDg4NC00MDYyLWFjYWUtYTA2MmUyYTg4MWEyIiwibmJmIjoxNjk4NzUwNzMwLCJzdWIiOiIyMSIsInR5cCI6ImFjY2VzcyJ9.pQxCZlhfm735SblAzwob1kQXqMNKL234BxBE0cu5_Fajd3YbNLo77MK5IOOS3I2CmHgVXwMj5JU2FwQmn3Tm1w
+
 
 {
   "workingtime": {
@@ -22,6 +26,8 @@ Content-Type: application/json
 ### Add Workingtimes
 POST http://localhost:4000/api/workingtimes/1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDExNjk5MzEsImlhdCI6MTY5ODc1MDczMSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiYmEwZGQxZGEtZDg4NC00MDYyLWFjYWUtYTA2MmUyYTg4MWEyIiwibmJmIjoxNjk4NzUwNzMwLCJzdWIiOiIyMSIsInR5cCI6ImFjY2VzcyJ9.pQxCZlhfm735SblAzwob1kQXqMNKL234BxBE0cu5_Fajd3YbNLo77MK5IOOS3I2CmHgVXwMj5JU2FwQmn3Tm1w
+
 
 {
 "workingtime": {
@@ -34,16 +40,20 @@ Content-Type: application/json
 ### delete Workingtimes
 DELETE http://localhost:4000/api/workingtimes/2
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDExNjk5MzEsImlhdCI6MTY5ODc1MDczMSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiYmEwZGQxZGEtZDg4NC00MDYyLWFjYWUtYTA2MmUyYTg4MWEyIiwibmJmIjoxNjk4NzUwNzMwLCJzdWIiOiIyMSIsInR5cCI6ImFjY2VzcyJ9.pQxCZlhfm735SblAzwob1kQXqMNKL234BxBE0cu5_Fajd3YbNLo77MK5IOOS3I2CmHgVXwMj5JU2FwQmn3Tm1w
+
 
 
 ### update Workingtimes
-PUT http://localhost:4000/api/workingtimes/1
+PUT http://localhost:4000/api/workingtimes/10
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDExNjk5MzEsImlhdCI6MTY5ODc1MDczMSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiYmEwZGQxZGEtZDg4NC00MDYyLWFjYWUtYTA2MmUyYTg4MWEyIiwibmJmIjoxNjk4NzUwNzMwLCJzdWIiOiIyMSIsInR5cCI6ImFjY2VzcyJ9.pQxCZlhfm735SblAzwob1kQXqMNKL234BxBE0cu5_Fajd3YbNLo77MK5IOOS3I2CmHgVXwMj5JU2FwQmn3Tm1w
+
 
 {
   "workingtime": {
-    "start": "2024-10-25 16:30:45",
-    "end": "2029-01-01 16:00:45"
+    "start": "2023-11-25 16:30",
+    "end": "2023-12-01 16:00"
   }
 }
 
@@ -52,3 +62,4 @@ GET http://localhost:4000/api/workingtimes/1/1
 
 ### show all Workingtimes
 GET http://localhost:4000/api/workingtimes/1?start=2021-10-25 00:30:45Z&end=2026-01-01 00:00:45Z
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDExNjk5MzEsImlhdCI6MTY5ODc1MDczMSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiYmEwZGQxZGEtZDg4NC00MDYyLWFjYWUtYTA2MmUyYTg4MWEyIiwibmJmIjoxNjk4NzUwNzMwLCJzdWIiOiIyMSIsInR5cCI6ImFjY2VzcyJ9.pQxCZlhfm735SblAzwob1kQXqMNKL234BxBE0cu5_Fajd3YbNLo77MK5IOOS3I2CmHgVXwMj5JU2FwQmn3Tm1w

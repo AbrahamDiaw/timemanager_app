@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
 
-import { UserStore } from "../../../stores/UserStore";
+import {UserStore} from "../../../stores/UserStore";
 import {ModalStore} from "../../../stores/ModalStore";
 import {Components} from "../../_components/Components";
+import {Routes} from "../../../../vars/Routes";
 
 export default {
 
@@ -10,32 +11,27 @@ export default {
 
   data() {
     return {
-      users: UserStore(state => state.users)
+      users: UserStore(state => state.users),
     }
   },
 
   methods: {
-    navigateToUser(userId) {
-      this.$router.push(`/users/${userId}`);
+    setAndNavigateToCurrentUser(userId: string) {
+      UserStore(state => state.findById(userId))
+      this.$router.push(`/${userId}`);
     },
-
     addUser() {
-     ModalStore((state) => state.openModal(Components.AddUser));
+      ModalStore((state) => state.openModal(Components.AddUser));
     },
-
-    editUser(userId) {
+    editUser(userId: string) {
       UserStore(state => state.findById(userId));
       ModalStore((state) => state.openModal(Components.EditUser));
     },
 
-    deleteUser(userId) {
+    deleteUser(userId: string) {
       UserStore(state => state.deleteById(userId));
     }
   },
-
-  mounted() {
-      UserStore(state => state.findAll());
-  }
 
 }
 
@@ -59,12 +55,12 @@ export default {
         </thead>
         <tbody class="table-body-content">
         <tr v-for="user in users" :key="user.email">
-          <td @click="navigateToUser(user.id)">{{ user.id }}</td>
-          <td @click="navigateToUser(user.id)">{{ user.email }}</td>
+          <td @click="setAndNavigateToCurrentUser(user.id as string)">{{ user.id }}</td>
+          <td @click="setAndNavigateToCurrentUser(user.id as string)">{{ user.email }}</td>
           <td>{{ user.username }}</td>
           <td>{{ user.role }}</td>
-          <button type="button" class="edit-button" @click="editUser(user.id)">Edit</button>
-          <button type="button" class="delete-button" @click="deleteUser(user.id)">Delete</button>
+          <button type="button" class="edit-button" @click="editUser(user.id as string)">Edit</button>
+          <button type="button" class="delete-button" @click="deleteUser(user.id as string)">Delete</button>
         </tr>
         </tbody>
       </table>
@@ -75,8 +71,31 @@ export default {
 
 <style scoped>
 
+.table-container {
+  padding-top: 5rem;
+}
+
+table {
+  width: 100%;
+}
+
+tr {
+  width: 100%;
+}
+
 .table-body-content {
   cursor: pointer;
+}
+
+.users-container {
+  height: 100vh;
+  width: 55%;
+  overflow: scroll;
+}
+
+.header-content {
+  margin: 20px 0;
+  position: fixed;
 }
 
 </style>

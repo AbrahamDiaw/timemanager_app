@@ -1,21 +1,38 @@
 <script lang="ts">
 import Users from "../specifics/user/Users.vue";
-
+import WorkingTimes from "../pages/WorkingTimes.vue"
+import {UserStore} from "../../stores/UserStore";
 export default {
   name: "Home",
   components: {
-    Users
-  }
+    Users,
+    WorkingTimes
+  },
+
+  data() {
+    return {
+      currentUser: UserStore(state => state.currentUser),
+    }
+  },
 }
 </script>
 
 
 <template>
-  <div>
+  <div class="home-container">
     <Users />
+    <div class="workingtimes-container">
+      <WorkingTimes v-if="currentUser"/>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.home-container {
+  display: flex;
+}
+.workingtimes-container{
+  width: 45%;
+}
 
 </style>
