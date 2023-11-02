@@ -1,9 +1,9 @@
 <script lang="ts">
 
-import {UserStore} from "../../../stores/UserStore";
-import {ModalStore} from "../../../stores/ModalStore";
-import {Components} from "../../_components/Components";
-import {Routes} from "../../../../vars/Routes";
+import { UserStore } from "../../../stores/UserStore";
+import { ModalStore } from "../../../stores/ModalStore";
+import { Components } from "../../_components/Components";
+import { Routes } from "../../../../vars/Routes";
 
 export default {
 
@@ -12,13 +12,14 @@ export default {
   data() {
     return {
       users: UserStore(state => state.users),
+      authUser: UserStore(state => state.authUser),
     }
   },
 
   methods: {
     setAndNavigateToCurrentUser(userId: string) {
       UserStore(state => state.findById(userId))
-      this.$router.push(`/${userId}`);
+      this.$router.push(`${ Routes.WORKINGTIMES }/${ userId }`);
     },
     addUser() {
       ModalStore((state) => state.openModal(Components.AddUser));
@@ -38,7 +39,7 @@ export default {
 </script>
 
 <template>
-  <div class="users-container">
+  <div>
     <div class="header-button">
       <div class="header-content">
         <button type="button" class="add-button" @click="addUser()">Add</button>
@@ -85,12 +86,6 @@ tr {
 
 .table-body-content {
   cursor: pointer;
-}
-
-.users-container {
-  height: 100vh;
-  width: 55%;
-  overflow: scroll;
 }
 
 .header-content {

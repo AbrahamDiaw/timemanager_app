@@ -53,6 +53,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hb
 ### Add User general manager
 POST http://localhost:4000/api/users
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDEzNTA0NTEsImlhdCI6MTY5ODkzMTI1MSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiZjAzYTk5ZWUtMDJkMi00ZjUxLWI3OTctNGZiOTYwMDU2MjUzIiwibmJmIjoxNjk4OTMxMjUwLCJzdWIiOiIxOCIsInR5cCI6ImFjY2VzcyJ9.F303dMUq4fkWXv4k7wD2wJitDTPN5vkXGrSpHGBAf0CHeye8_gtywygFbraYnzNdjJkaHZmyI0fNp7RObqBNTg
 
 {
   "user": {
