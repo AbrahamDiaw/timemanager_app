@@ -12,6 +12,12 @@ defmodule TIME_MANAGERWeb.Router do
   end
 
   scope "/api", TIME_MANAGERWeb do
+    pipe_through :api
+
+    post "/sign_in", SecurityController, :sign_in
+  end
+
+  scope "/api", TIME_MANAGERWeb do
     pipe_through [:api, :jwt_authenticated]
 
     resources "/users", UserController, except: [:new, :edit]
@@ -25,12 +31,6 @@ defmodule TIME_MANAGERWeb.Router do
     get "workingtimes/:userID", WorkingtimeController, :all
     delete "/workingtimes/:id", WorkingtimeController, :delete
 
-  end
-
-  scope "/api", TIME_MANAGERWeb do
-    pipe_through :api
-
-    post "/sign_in", SecurityController, :sign_in
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
