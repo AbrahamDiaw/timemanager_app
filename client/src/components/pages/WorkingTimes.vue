@@ -1,5 +1,5 @@
 <script>
-import {WorkingTimeStore} from "../../stores/WorkingTimeStore";
+import { WorkingTimeStore } from "../../stores/WorkingTimeStore";
 import WorkingTime from "./WorkingTime.vue";
 export default {
   name: "WorkingTimes",

@@ -1,6 +1,4 @@
 <script lang="ts">
-import { mapGetters, mapActions } from "vuex";
-
 import Home from "./pages/Home.vue"
 import User from "./specifics/Sidebar.vue";
 import Header from "./specifics/Header.vue";
@@ -21,11 +19,9 @@ export default {
   },
 
   methods: {
-    ...mapActions(["addByUserId"]),
   },
 
   computed: {
-    ...mapGetters(["getByUserId"]),
   },
 
   mounted() {

@@ -12,7 +12,7 @@ export enum HTTP_STATUS_CODE {
 }
 
 export class UHttp {
-	public static post(url: string, data: any, headers: any = {}): Promise<Response> {
+	public static post(url: string, data: any = {}, headers: any = {}): Promise<Response> {
 		return fetch(url, {
 			method: "POST",
 			body: JSON.stringify(data),

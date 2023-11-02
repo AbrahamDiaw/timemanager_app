@@ -3,6 +3,8 @@ defmodule TIME_MANAGERWeb.ClockController do
 
   alias TIME_MANAGER.ClockRepo
   alias TIME_MANAGER.UserRepo
+  alias TIME_MANAGER.WorkingtimeRepo
+
   alias TIME_MANAGER.Models.Clock
 
   action_fallback TIME_MANAGERWeb.FallbackController
@@ -16,22 +18,33 @@ defmodule TIME_MANAGERWeb.ClockController do
     user = UserRepo.get_user!(user_id)
 
     if not is_nil(user) do
-      clock = ClockRepo.get_today_clock_by_user_id(user_id)
+      last_clock = ClockRepo.get_last_clock_by_user_id(user_id)
 
-      status =
-        case clock do
-          nil -> false
-          _ -> true
-        end
+      new_time = DateTime.utc_now()
+      new_status = if not is_nil(last_clock)
+                      and last_clock.status == true do
+                        false
+                      else
+                        true
+                      end
 
       clock_params =
         %{
-          "time" => DateTime.utc_now(),
-          "status" => status,
-          "user" => user.id
+          "time" => new_time,
+          "status" => new_status,
+          "user" => user_id
         }
 
       with {:ok, %Clock{} = clock} <- ClockRepo.create_clock(clock_params) do
+        if new_status == false do
+          # Create working time
+          worktime = WorkingtimeRepo.create_workingtime(%{
+            start: last_clock.time,
+            end: new_time,
+            user: user_id
+          })
+        end
+
         conn
         |> put_status(:created)
         |> put_resp_header("location", ~p"/api/clocks/#{clock}")
@@ -53,7 +66,6 @@ defmodule TIME_MANAGERWeb.ClockController do
       |> put_status(:not_found)
       |> render("error.json", message: "User not found")
     end
-
   end
 
   def update(conn, %{"id" => id, "clock" => clock_params}) do

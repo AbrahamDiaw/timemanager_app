@@ -155,7 +155,7 @@ export default {
 
 .sidebar-header-icons i:first-child {
     cursor: auto;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #000;
 }
 

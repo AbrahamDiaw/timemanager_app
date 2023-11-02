@@ -1,36 +1,53 @@
 import { create } from "zustand-vue";
 import { ClockService } from "../services/ClockService";
+import { Clock } from "../types/Clock";
+import { state } from "vue-tsc/out/shared";
 
 const clockService = new ClockService();
 
 export type ClockState = {
-	startDatetime: any;
+	data: Clock[]
 	clockIn: boolean;
+	autoSetData(userId: string): void;
 	clock(userId: string): void;
-	refresh(): void;
 }
 
 export const ClockStore = create<ClockState>(
 	(set) => ({
-		startDatetime: undefined,
+		data: [],
 		clockIn: false,
 
-		clock: (userId: string) => {
-			console.log("koko", userId);
-			/*
-			clockService.addByUserId(userId,  {
-				time: new Date("now"),
-				status: true
-			}).then((jsonData) => {
-				console.log(jsonData);
-			});
+		autoSetData: (userId: string) => {
+			clockService.get(userId).then(async (response) => {
+				if (!response.ok) {
+					return;
+				}
 
-			 */
+				const jsonResponse = await response.json();
+				const data = jsonResponse.data;
+
+				set({ data: data, clockIn: data.at(-1).status });
+			}).catch((error) => {
+				console.log(error);
+			});
 		},
 
-		refresh: () => {
-			console.log("----------okokokoko")
+		clock: (userId: string) => {
+			clockService.add(userId).then(async (response) => {
+				if (!response.ok) {
+					return;
+				}
 
+				const jsonResponse = await response.json();
+				const data = jsonResponse.data;
+
+				set((state) => {
+					const _data = [...state.data, data];
+					return { data: _data, clockIn: _data.at(-1).status };
+				});
+			}).catch((error) => {
+				console.log(error);
+			});
 		}
 	})
 )

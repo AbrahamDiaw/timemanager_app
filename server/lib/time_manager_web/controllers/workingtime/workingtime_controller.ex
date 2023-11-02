@@ -42,7 +42,7 @@ defmodule TIME_MANAGERWeb.WorkingtimeController do
   end
 
   def all(conn, %{"userID" => id, "start" => start_param, "end" => end_param}) do
-    workingtimes= WorkingtimeRepo.get_user_workingtime!(String.to_integer(id), start_param, end_param)
+    workingtimes = WorkingtimeRepo.get_user_workingtime!(String.to_integer(id), start_param, end_param)
     render(conn,:index, workingtimes: workingtimes)
   end
 

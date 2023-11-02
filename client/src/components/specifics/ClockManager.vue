@@ -8,14 +8,13 @@ export default {
 
     data() {
 		  return {
-
-        startDatetime: undefined,
-        clockIn: false
+        data: ClockStore(state => state.data),
+        clockIn: ClockStore(state => state.clockIn),
       }
     },
 
     methods: {
-      clock() {
+      toggleClock() {
 		    ClockStore(state => {
             UserStore(store => {
                 if (store.currentUser) {
@@ -23,17 +22,16 @@ export default {
                 }
             });
         });
-      },
-
-      refresh() {
-		    ClockStore(state => state.refresh());
       }
     },
 
     mounted() {
 		  ClockStore(state =>  {
-			  this.startDatetime = state.startDatetime;
-			  this.clockIn = state.clockIn;
+          UserStore(userStore => {
+              if (userStore.currentUser) {
+                  state.autoSetData(userStore.currentUser.id);
+              }
+          });
       });
 	  }
 }
@@ -41,9 +39,17 @@ export default {
 </script>
 
 <template>
-    <p>{{ startDatetime }}</p>
-    <button class="clock-button" @click="clockIn ? refresh() : clock()">
-        {{ clockIn ? "Refresh" : "ClockIn" }}
+    <div v-for="clock in data">
+        <p>
+            <span v-if="clock.status">Start</span>
+            <span v-if="!clock.status">End</span>
+            : {{ clock.time }}
+        </p>
+    </div>
+
+
+    <button class="clock-button" @click="toggleClock()">
+        {{ clockIn ? "Clock out" : "Clock in" }}
     </button>
 </template>
 

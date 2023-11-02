@@ -1,2 +1,7 @@
+.dockerignore
+docker-compose.yml
+
+server/deps
 server/_build
+
 client/node_modules

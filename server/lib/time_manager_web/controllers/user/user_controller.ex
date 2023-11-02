@@ -7,14 +7,24 @@ defmodule TIME_MANAGERWeb.UserController do
   action_fallback TIME_MANAGERWeb.FallbackController
 
   def index(conn, _params) do
-    users = UserRepo.list_users()
-    render(conn, :index, users: users)
-  end
+    email = if _params["email"] do
+      _params["email"]
+    else
+      nil
+    end
 
-  def index(conn, %{ "email" => email, "username" => username }) do
+    username = if _params["username"] do
+      _params["username"]
+    else
+      nil
+    end
+
     if not is_nil(email) and not is_nil(username) do
       user = UserRepo.get_by_email_and_username!(email, username)
       render(conn, :show, user: user)
+    else
+      users = UserRepo.list_users()
+      render(conn, :index, users: users)
     end
   end
 
