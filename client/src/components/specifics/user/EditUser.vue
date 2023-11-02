@@ -1,11 +1,18 @@
 <script lang="ts">
 
-import { ROLES, User } from "../../../types/User";
+import { AuthUser, ROLES, User } from "../../../types/User";
 import { UserStore } from "../../../stores/UserStore";
+
+type EditDataType = {
+  newUser: User | AuthUser
+}
 
 export default {
   name: "EditUser",
-
+  props: {
+    user: null,
+    auth: Boolean
+  },
 
   setup() {
     const roles = Object.values(ROLES)
@@ -15,23 +22,25 @@ export default {
     }
   },
 
-
-  data(): any {
-    let currentUser: any;
-
-    return {
-      currentUser
-    }
+  data(): EditDataType {
+      return {
+        newUser : {
+          id: this.user.id,
+          role: this.user.role,
+          username: this.user.username,
+          email: this.user.email
+        }
+      }
   },
 
   methods: {
     editUser() {
-		  UserStore((state) => state.updateById(this.currentUser.id, this.currentUser))
+		  UserStore((state) => state.updateById(this.user.id, this.newUser, this.auth))
     },
   },
 
   mounted() {
-    UserStore((state) => this.currentUser = state.currentUser)
+    console.log("user:", this.user, this.auth)
   }
 
 }
@@ -39,11 +48,10 @@ export default {
 </script>
 
 <template>
-  <form @submit.prevent="editUser" class="form-container" v-if="currentUser">
-    <h1>Edit User <span>{{ currentUser.username }}</span></h1>
-    <input v-model="currentUser.username" type="text" placeholder="username">
-    <input v-model="currentUser.email" type="email" placeholder="email">
-    <select v-model="currentUser.role">
+  <form @submit.prevent="editUser" class="form-container" v-if="user">
+    <input v-model="newUser.username" type="text" placeholder="username">
+    <input v-model="newUser.email" type="email" placeholder="email">
+    <select v-model="newUser.role">
       <option disabled value="">Choisir un rôle</option>
       <option v-for="role in roles" :key="role">{{ role }}</option>
     </select>
