@@ -16,14 +16,13 @@ defmodule TIME_MANAGER.Models.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:username, :email, :role, :password_hash])
-    |> unique_constraint(:email)
     |> validate_required([:username, :email, :role], message: "Required - can't be null")
+    |> unique_constraint(:email)
     |> validate_length(:password_hash, min: 8, max: 20, message: "The password must contain between 8 and 20 characters.")
     |> validate_format(:email, ~r/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, message: "X@X.X")
     |> validate_type(:username, :string, "Username must be a string")
     |> validate_type(:email, :string, "Email must be a string")
     |> put_password_hash
-
   end
 
   defp validate_type(changeset, field, expected_type, message) do

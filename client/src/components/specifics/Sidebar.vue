@@ -9,6 +9,7 @@ import {UserStore} from "../../stores/UserStore";
 import {SecurityService} from "../../services/SecurityService";
 
 const securityService = new SecurityService()
+
 export default {
 
     name: "Sidebar",
