@@ -13,6 +13,7 @@ export default {
     return {
       users: UserStore(state => state.users),
       authUser: UserStore(state => state.authUser),
+      currentUser: UserStore(state => state.currentUser)
     }
   },
 
@@ -25,8 +26,11 @@ export default {
       ModalStore((state) => state.openModal(Components.AddUser));
     },
     editUser(userId: string) {
-      UserStore(state => state.findById(userId));
-      ModalStore((state) => state.openModal(Components.EditUser));
+      UserStore(UserState => {
+        UserState.findById(userId).then((user) => {
+          ModalStore((state) => state.openModal(Components.EditUser, { user }));
+        }).catch((err) => console.error(err.message))
+      });
     },
 
     deleteUser(userId: string) {

@@ -17,8 +17,8 @@ export default {
       toggleClock() {
 		    ClockStore(state => {
             UserStore(store => {
-                if (store.currentUser) {
-                    state.clock(store.currentUser.id);
+                if (store.authUser?.id) {
+                    state.clock(store.authUser.id);
                 }
             });
         });
@@ -28,8 +28,8 @@ export default {
     mounted() {
 		  ClockStore(state =>  {
           UserStore(userStore => {
-              if (userStore.currentUser) {
-                  state.autoSetData(userStore.currentUser.id);
+              if (userStore.authUser?.id) {
+                  state.autoSetData(userStore.authUser.id);
               }
           });
       });

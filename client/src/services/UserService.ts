@@ -1,4 +1,4 @@
-import { User } from "../types/User";
+import { AuthUser, User } from "../types/User";
 import { UHttp } from "../utils/UHttp";
 import { GlobalVars } from "../../vars/Urls";
 
@@ -52,7 +52,7 @@ export class UserService {
 		
 	}
 	
-	public async updateById(userId: string, data: User): Promise<User> {
+	public async updateById(userId: string, data: AuthUser | User): Promise<User> {
 		let response = await UHttp.patch(
 			`${ GlobalVars.BASE_URL_API }users/${ userId }`,
 			{ user: data },
