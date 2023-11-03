@@ -12,7 +12,7 @@ export type UserState = {
 	findById: (userId: string) => Promise<any>;
 	resetCurrentUser: () => void;
 	findAuthUser: (userId: string) => void;
-	updateById: (userId: string, data: AuthUser | User, auth?: boolean) => void;
+	updateById: (userId: string, data: AuthUser | User, auth?: boolean) => Promise<any>;
 	deleteById: (userId: string) => void;
 }
 
@@ -71,33 +71,37 @@ export const UserStore = create<UserState>(
 				.catch((err) => console.error(err.message))
 		},
 		
-		updateById: (userId: string, data: AuthUser | User, auth) => {
-			userService.updateById(userId, data)
-				.then((newUserData) => {
-					set((state: any) => {
-						let _users: any = [...state.users];
-						
-						const _updateUserInUsers = _users.map((user: any) => {
-							if (user.id === newUserData.id) {
-								return newUserData;
-							} else {
-								return user;
-							}
+		updateById: (userId: string, data: AuthUser | User, auth): Promise<any> => {
+			return new Promise((resolve, reject) => {
+				userService.updateById(userId, data)
+					.then((newUserData) => {
+						set((state: any) => {
+							let _users: any = [...state.users];
+							
+							const _updateUserInUsers = _users.map((user: any) => {
+								if (user.id === newUserData.id) {
+									return newUserData;
+								} else {
+									return user;
+								}
+							});
+							
+							return { users: _updateUserInUsers };
 						});
 						
-						return { users: _updateUserInUsers };
+						if (auth) {
+							set({ authUser: newUserData });
+						} else {
+							set({ currentUser: newUserData });
+						}
+						
+						resolve(newUserData)
+					})
+					.catch((err) => {
+						console.error(err.message);
+						reject(err.message)
 					});
-					if(auth) {
-						console.log(auth, newUserData)
-						set({ authUser: newUserData });
-					}
-					else {
-						set({ currentUser: newUserData });
-					}
-				})
-				.catch((err) => {
-					console.error(err.message);
-				});
+			});
 		},
 		deleteById: (userId: string) => {
 			userService.deleteById(userId)

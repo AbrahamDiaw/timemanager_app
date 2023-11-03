@@ -23,25 +23,28 @@ export default {
   },
 
   data(): EditDataType {
-      return {
-        newUser : {
-          id: this.user.id,
-          role: this.user.role,
-          username: this.user.username,
-          email: this.user.email
-        }
+    return {
+      newUser: {
+        id: this.user.id,
+        role: this.user.role,
+        username: this.user.username,
+        email: this.user.email
       }
+    }
   },
 
   methods: {
     editUser() {
-		  UserStore((state) => state.updateById(this.user.id, this.newUser, this.auth))
+      UserStore((state) => state.updateById(this.user.id, this.newUser, this.auth)
+        .then((newUserData) => {
+          if (newUserData) {
+            window.location.reload()
+          }
+        })
+        .catch((err) => console.error(err.message))
+      )
     },
   },
-
-  mounted() {
-    console.log("user:", this.user, this.auth)
-  }
 
 }
 

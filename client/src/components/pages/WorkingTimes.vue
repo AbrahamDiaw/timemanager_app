@@ -6,6 +6,7 @@ import {Components} from "../_components/Components";
 import Users from "../specifics/user/Users.vue";
 import {ROLES} from "../../types/User";
 import {UserStore} from "../../stores/UserStore";
+import addUser from "../specifics/user/AddUser.vue";
 
 export default {
   name: "WorkingTimes",
