@@ -24,7 +24,6 @@ export default {
     AddUser,
     EditUser
   },
-
   data() {
     return {
       isAuth: SecurityService.isAuth(),
@@ -52,7 +51,7 @@ export default {
   <main class="main" v-if="isAuth">
     <Sidebar/>
     <div class="main-content">
-<!--      <Header/>-->
+      <!--      <Header/>-->
       <router-view/>
     </div>
     <Modal/>

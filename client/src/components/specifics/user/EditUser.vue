@@ -2,6 +2,7 @@
 
 import { AuthUser, ROLES, User } from "../../../types/User";
 import { UserStore } from "../../../stores/UserStore";
+import { ModalStore } from "../../../stores/ModalStore";
 
 type EditDataType = {
   newUser: User | AuthUser
@@ -35,14 +36,14 @@ export default {
 
   methods: {
     editUser() {
-      UserStore((state) => state.updateById(this.user.id, this.newUser, this.auth)
-        .then((newUserData) => {
-          if (newUserData) {
-            window.location.reload()
-          }
-        })
-        .catch((err) => console.error(err.message))
-      )
+      UserStore((state) => {
+        if (this.auth) {
+          state.updateAuthUser(this.user.id, this.newUser as AuthUser)
+        } else {
+          state.updateById(this.user.id, this.newUser as User)
+        }
+      })
+      ModalStore((state) => state.closeModal())
     },
   },
 

@@ -1,12 +1,13 @@
-<script>
+<script lang="ts">
 import { WorkingTimeStore } from "../../stores/WorkingTimeStore";
 import WorkingTime from "./WorkingTime.vue";
-import {ModalStore} from "../../stores/ModalStore";
-import {Components} from "../_components/Components";
+import { ModalStore } from "../../stores/ModalStore";
+import { Components } from "../_components/Components";
 import Users from "../specifics/user/Users.vue";
-import {ROLES} from "../../types/User";
-import {UserStore} from "../../stores/UserStore";
+import { ROLES } from "../../types/User";
+import { UserStore } from "../../stores/UserStore";
 import addUser from "../specifics/user/AddUser.vue";
+import workingTime from "./WorkingTime.vue";
 
 export default {
   name: "WorkingTimes",
@@ -23,16 +24,15 @@ export default {
     return {
       workingTimes: WorkingTimeStore(state => state.workingTimes),
       dataSend: {
-        id: null,
-        start: null,
-        end: null
+        id: "",
+        start: "",
+        end: ""
       },
-      authUser: UserStore((state) => state.authUser)
-
+      authUser: {}
     }
   },
   methods: {
-    onChange(field, event) {
+    onChange(field: string, event: any) {
       if (field === 'start') {
         this.dataSend.start = event.target.value.replace("T", " ") + ":00";
         WorkingTimeStore(state => state.getWorkingTimeByUserId(this.dataSend))
@@ -51,14 +51,19 @@ export default {
     const isoDateToday = new Date(today.getFullYear(), today.getMonth() + 1, 1, 1).toISOString().split('.')[0];
     let firstDayOfCurrentMonth = new Date(today.getFullYear(), today.getMonth(), 1, 1, 0, 0);
     let isoDateFirstDay = firstDayOfCurrentMonth.toISOString().split('.')[0];
-    this.dataSend.id = this.$route.params.id
+    this.dataSend.id = this.$route.params.id as string
     this.dataSend.start = isoDateFirstDay.replace("T", " ");
     this.dataSend.end = isoDateToday.replace("T", " ");
     WorkingTimeStore(state => state.getWorkingTimeByUserId(this.dataSend))
 
+    UserStore(state => {
+      // @ts-ignore
+      this.authUser = state.authUser
+    })
+
+
     this.$watch(() => this.$route.params.id, () => {
-      console.log(this.$route.params.id)
-      this.dataSend.id = this.$route.params.id
+      this.dataSend.id = this.$route.params.id as string
       WorkingTimeStore(state => state.getWorkingTimeByUserId(this.dataSend))
     })
   },
@@ -68,10 +73,12 @@ export default {
 
 <template>
   <div class="global-content">
+    <p>{{ authUser?.username }}</p>
     <div class="users-container" v-if="authUser && authUser.role !== ROLES.EMPLOYEE">
       <Users/>
     </div>
-    <div :class="authUser && authUser.role === ROLES.EMPLOYEE ? ' workingtimes-container-full' : ' workingtimes-container'">
+    <div
+      :class="authUser && authUser.role === ROLES.EMPLOYEE ? ' workingtimes-container-full' : ' workingtimes-container'">
       <div class="header-button">
         <div class="header-content">
           <button type="button" class="add-button" @click="addWorkingTime()">Add</button>
@@ -85,7 +92,10 @@ export default {
               <input type="datetime-local" id="end" v-model="dataSend.end" @change="onChange('end', $event)">
             </div>
           </div>
-
+          <div class="number-of-workingtimes">
+            <p>Nombre de working time</p>
+            <span>{{ workingTimes.length }}</span>
+          </div>
         </div>
       </div>
 
@@ -114,6 +124,7 @@ export default {
 .workingtimes-container {
   width: 45%;
 }
+
 .workingtimes-container-full {
   width: 100% !important;
   padding: 10px;
@@ -137,5 +148,14 @@ export default {
   width: 100%;
   overflow: scroll;
   height: 100vh;
+}
+
+.number-of-workingtimes {
+  display: flex;
+}
+
+.number-of-workingtimes p {
+  padding: 0 15px;
+  margin-right: 10px;
 }
 </style>
