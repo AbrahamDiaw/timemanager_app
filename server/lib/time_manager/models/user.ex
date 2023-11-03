@@ -6,8 +6,9 @@ defmodule TIME_MANAGER.Models.User do
   schema "users" do
     field :username, :string
     field :email, :string
-    field :role, Ecto.Enum, values: [:employee, :manager, :general_manager]
+    field :role, Ecto.Enum, values: [:administrator, :employee, :manager, :general_manager]
     field :password_hash, :string
+    many_to_many :teams, TIME_MANAGER.Models.Team, join_through: "team_users"
 
     timestamps(type: :utc_datetime)
   end

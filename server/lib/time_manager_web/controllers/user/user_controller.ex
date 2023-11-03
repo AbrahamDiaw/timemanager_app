@@ -29,7 +29,7 @@ defmodule TIME_MANAGERWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    default_password = "default_password"
+    default_password = "password"
     with {:ok, %User{} = user} <- UserRepo.create_user(Map.put(user_params, "password_hash", default_password)) do
       conn
       |> put_status(:created)

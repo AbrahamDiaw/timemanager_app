@@ -2,6 +2,7 @@ defmodule TIME_MANAGERWeb.TeamController do
   use TIME_MANAGERWeb, :controller
 
   alias TIME_MANAGER.TeamRepo
+  alias TIME_MANAGER.UserRepo
   alias TIME_MANAGER.Models.Team
 
   action_fallback TIME_MANAGERWeb.FallbackController
@@ -39,5 +40,17 @@ defmodule TIME_MANAGERWeb.TeamController do
     with {:ok, %Team{}} <- TeamRepo.delete_team(team) do
       send_resp(conn, :no_content, "")
     end
+  end
+
+  def add_member(conn, %{ "teamID" => team_id, "userID" => user_id }) do
+    team = TeamRepo.get_team!(team_id)
+    user = UserRepo.get_user!(user_id)
+
+    IO.inspect("------------------")
+    IO.inspect(team)
+    IO.inspect(user)
+    IO.inspect("------------------")
+
+
   end
 end

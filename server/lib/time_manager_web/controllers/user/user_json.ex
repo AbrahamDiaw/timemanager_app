@@ -1,6 +1,7 @@
 defmodule TIME_MANAGERWeb.UserJSON do
-  alias TIME_MANAGER.Models.User
+  alias TIME_MANAGER.Models.{User, Team}
 
+  alias TIME_MANAGERWeb.TeamJSON
   alias TIME_MANAGER.Repo
 
   @doc """
@@ -17,28 +18,19 @@ defmodule TIME_MANAGERWeb.UserJSON do
     %{data: data(user)}
   end
 
-
   defp data(%User{} = user) do
-    teams = Repo.preload(user, :teams)
+    teams = Repo.preload(user, :teams).teams
+
+    IO.inspect("------------------")
+    IO.inspect(teams)
+    IO.inspect("------------------")
 
     %{
       id: user.id,
       username: user.username,
       email: user.email,
       role: user.role,
-      teams: format_teams(teams)
-    }
-  end
-
-  defp format_teams(nil), do: []
-  defp format_teams(teams) do
-    Enum.map(teams, &team_name/1)
-  end
-
-  defp team_name(team) do
-    %{
-      id: team.id,
-      name: team.name
+      teams: Enum.map(teams, &TeamJSON.data/1)
     }
   end
 end
