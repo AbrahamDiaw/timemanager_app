@@ -20,6 +20,6 @@ export const ModalStore = create<ModalState>((set) => ({
 	},
 
 	closeModal: () => {
-		set({ isOpen: false, componentName: undefined });
+		set({ isOpen: false, componentName: undefined, componentProps: undefined });
 	}
 }));
