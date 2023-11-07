@@ -1,0 +1,9 @@
+{
+  "appId": "com.timemanager.app",
+  "appName": "timemanager",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "http",
+    "url": "http://localhost:3030"
+  }
+}

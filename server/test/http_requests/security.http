@@ -3,10 +3,6 @@ POST http://localhost:4000/api/sign_in
 Content-Type: application/json
 
 {
-<<<<<<< Updated upstream
-  "email": "john22@gmail.com",
-=======
   "email": "ben.doe@gmail.com",
->>>>>>> Stashed changes
   "password": "password"
 }

@@ -1,0 +1,55 @@
+### Add Team 1
+POST http://localhost:4000/api/teams
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDE0MjQzMzksImlhdCI6MTY5OTAwNTEzOSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiM2Y2NjFiYzAtNzBkYS00MTdhLWIwYTQtNjA5MzZjMzMyNDgyIiwibmJmIjoxNjk5MDA1MTM4LCJzdWIiOiIxIiwidHlwIjoiYWNjZXNzIn0.BroOOSmMPkgxn32Frs0xps07MOLAg3bJZcy-Dg1yb8Wp1MZaU9O-9WIM_4ETGy5njPfMHExJID0p1NilHj_Eqg
+
+{
+  "team": {
+	"name": "Team 1"
+  }
+}
+
+### Add Team 2
+POST http://localhost:4000/api/teams
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDE0MjQzMzksImlhdCI6MTY5OTAwNTEzOSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiM2Y2NjFiYzAtNzBkYS00MTdhLWIwYTQtNjA5MzZjMzMyNDgyIiwibmJmIjoxNjk5MDA1MTM4LCJzdWIiOiIxIiwidHlwIjoiYWNjZXNzIn0.BroOOSmMPkgxn32Frs0xps07MOLAg3bJZcy-Dg1yb8Wp1MZaU9O-9WIM_4ETGy5njPfMHExJID0p1NilHj_Eqg
+
+{
+  "team": {
+	"name": "Team 2"
+  }
+}
+
+### Add Team 3
+POST http://localhost:4000/api/teams
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDE0MjQzMzksImlhdCI6MTY5OTAwNTEzOSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiM2Y2NjFiYzAtNzBkYS00MTdhLWIwYTQtNjA5MzZjMzMyNDgyIiwibmJmIjoxNjk5MDA1MTM4LCJzdWIiOiIxIiwidHlwIjoiYWNjZXNzIn0.BroOOSmMPkgxn32Frs0xps07MOLAg3bJZcy-Dg1yb8Wp1MZaU9O-9WIM_4ETGy5njPfMHExJID0p1NilHj_Eqg
+
+{
+  "team": {
+	"name": "Team 3"
+  }
+}
+
+### Update Team
+PUT http://localhost:4000/api/teams/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDE0MjQzMzksImlhdCI6MTY5OTAwNTEzOSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiM2Y2NjFiYzAtNzBkYS00MTdhLWIwYTQtNjA5MzZjMzMyNDgyIiwibmJmIjoxNjk5MDA1MTM4LCJzdWIiOiIxIiwidHlwIjoiYWNjZXNzIn0.BroOOSmMPkgxn32Frs0xps07MOLAg3bJZcy-Dg1yb8Wp1MZaU9O-9WIM_4ETGy5njPfMHExJID0p1NilHj_Eqg
+
+{
+  "team": {
+	"name": "Team 1 updated"
+  }
+}
+
+### Get teams
+GET http://localhost:4000/api/teams
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDE0MjQzMzksImlhdCI6MTY5OTAwNTEzOSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiM2Y2NjFiYzAtNzBkYS00MTdhLWIwYTQtNjA5MzZjMzMyNDgyIiwibmJmIjoxNjk5MDA1MTM4LCJzdWIiOiIxIiwidHlwIjoiYWNjZXNzIn0.BroOOSmMPkgxn32Frs0xps07MOLAg3bJZcy-Dg1yb8Wp1MZaU9O-9WIM_4ETGy5njPfMHExJID0p1NilHj_Eqg
+
+### Get team by id
+GET http://localhost:4000/api/teams/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDE0MjQzMzksImlhdCI6MTY5OTAwNTEzOSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiM2Y2NjFiYzAtNzBkYS00MTdhLWIwYTQtNjA5MzZjMzMyNDgyIiwibmJmIjoxNjk5MDA1MTM4LCJzdWIiOiIxIiwidHlwIjoiYWNjZXNzIn0.BroOOSmMPkgxn32Frs0xps07MOLAg3bJZcy-Dg1yb8Wp1MZaU9O-9WIM_4ETGy5njPfMHExJID0p1NilHj_Eqg
+
+### Delete team
+DELETE http://localhost:4000/api/teams/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDE0MjQzMzksImlhdCI6MTY5OTAwNTEzOSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiM2Y2NjFiYzAtNzBkYS00MTdhLWIwYTQtNjA5MzZjMzMyNDgyIiwibmJmIjoxNjk5MDA1MTM4LCJzdWIiOiIxIiwidHlwIjoiYWNjZXNzIn0.BroOOSmMPkgxn32Frs0xps07MOLAg3bJZcy-Dg1yb8Wp1MZaU9O-9WIM_4ETGy5njPfMHExJID0p1NilHj_Eqg

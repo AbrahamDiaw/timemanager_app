@@ -3,19 +3,18 @@ defmodule TIME_MANAGERWeb.UserController do
 
   alias TIME_MANAGER.UserRepo
   alias TIME_MANAGER.Models.User
-  alias TIME_MANAGER.Guardian
 
   action_fallback TIME_MANAGERWeb.FallbackController
 
-  def index(conn, _params) do
-    email = if _params["email"] do
-      _params["email"]
+  def index(conn, params) do
+    email = if params["email"] do
+      params["email"]
     else
       nil
     end
 
-    username = if _params["username"] do
-      _params["username"]
+    username = if params["username"] do
+      params["username"]
     else
       nil
     end
@@ -30,7 +29,7 @@ defmodule TIME_MANAGERWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    default_password = "default_password"
+    default_password = "password"
     with {:ok, %User{} = user} <- UserRepo.create_user(Map.put(user_params, "password_hash", default_password)) do
       conn
       |> put_status(:created)
