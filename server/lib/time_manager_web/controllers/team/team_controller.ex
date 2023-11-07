@@ -3,6 +3,7 @@ defmodule TIME_MANAGERWeb.TeamController do
 
   alias TIME_MANAGER.TeamRepo
   alias TIME_MANAGER.UserRepo
+
   alias TIME_MANAGER.Models.Team
 
   action_fallback TIME_MANAGERWeb.FallbackController
@@ -43,14 +44,35 @@ defmodule TIME_MANAGERWeb.TeamController do
   end
 
   def add_member(conn, %{ "teamID" => team_id, "userID" => user_id }) do
+    if can_process_team_management(conn, team_id, user_id) do
+      TeamRepo.add_team_member(team_id, user_id)
+      send_resp(conn, :no_content, "")
+    end
+  end
+
+  def delete_member(conn, %{ "team_id" => team_id, "user_id" => user_id }) do
+    if can_process_team_management(conn, team_id, user_id) do
+      team_user = TeamRepo.get_team_member(team_id, user_id)
+
+      IO.inspect("**************")
+      IO.inspect(team_user)
+
+      with {:ok, %Team{}} <- TeamRepo.delete_team_member(team_user) do
+        send_resp(conn, :no_content, "")
+      end
+    end
+  end
+
+  defp can_process_team_management(conn, team_id, user_id) do
+    logged_user =  Guardian.Plug.current_resource(conn)
+
     team = TeamRepo.get_team!(team_id)
     user = UserRepo.get_user!(user_id)
 
-    IO.inspect("------------------")
-    IO.inspect(team)
-    IO.inspect(user)
-    IO.inspect("------------------")
-
-
+    not is_nil(logged_user) and
+    not is_nil(team) and
+    not is_nil(user) and
+    Enum.member?([:administrator, :general_manager, :manager], logged_user.role)
   end
+
 end

@@ -20,7 +20,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hb
   }
 }
 
-### Add User employee
+### Add User administrator
 POST http://localhost:4000/api/users
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDExNjk5MzEsImlhdCI6MTY5ODc1MDczMSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiYmEwZGQxZGEtZDg4NC00MDYyLWFjYWUtYTA2MmUyYTg4MWEyIiwibmJmIjoxNjk4NzUwNzMwLCJzdWIiOiIyMSIsInR5cCI6ImFjY2VzcyJ9.pQxCZlhfm735SblAzwob1kQXqMNKL234BxBE0cu5_Fajd3YbNLo77MK5IOOS3I2CmHgVXwMj5JU2FwQmn3Tm1w
@@ -28,8 +28,8 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hb
 {
   "user": {
     "username": "john",
-    "email": "john25@gmail.com",
-    "role": "employee"
+    "email": "john@gmail.com",
+    "role": "administrator"
   }
 }
 
@@ -59,6 +59,19 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hb
   }
 }
 
+### Add User employee
+POST http://localhost:4000/api/users
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDEzNTA0NTEsImlhdCI6MTY5ODkzMTI1MSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiZjAzYTk5ZWUtMDJkMi00ZjUxLWI3OTctNGZiOTYwMDU2MjUzIiwibmJmIjoxNjk4OTMxMjUwLCJzdWIiOiIxOCIsInR5cCI6ImFjY2VzcyJ9.F303dMUq4fkWXv4k7wD2wJitDTPN5vkXGrSpHGBAf0CHeye8_gtywygFbraYnzNdjJkaHZmyI0fNp7RObqBNTg
+
+{
+  "user": {
+    "username": "ken",
+    "email": "ken.doe@gmail.com",
+    "role": "employee"
+  }
+}
+
 ### Update user
 PUT http://localhost:4000/api/users/1
 Content-Type: application/json
@@ -78,7 +91,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hb
 
 ### Get by id
 GET http://localhost:4000/api/users/1
-Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDEzNTk2NjAsImlhdCI6MTY5ODk0MDQ2MCwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiZTQzNTM1MmQtNGM1OC00NmIzLWE4ZTQtYjBjODRiMGNkYzM4IiwibmJmIjoxNjk4OTQwNDU5LCJzdWIiOiIxIiwidHlwIjoiYWNjZXNzIn0.0wMlfB-F9IssBUse6TO15Ju0Vh8cKqC0jH4xNWa8O66u51t-Exwiujs_52yPVZhwPvpFpO_Rq7xYyfz7A71GEg
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0aW1lX21hbmFnZXIiLCJleHAiOjE3MDE0MjQzMzksImlhdCI6MTY5OTAwNTEzOSwiaXNzIjoidGltZV9tYW5hZ2VyIiwianRpIjoiM2Y2NjFiYzAtNzBkYS00MTdhLWIwYTQtNjA5MzZjMzMyNDgyIiwibmJmIjoxNjk5MDA1MTM4LCJzdWIiOiIxIiwidHlwIjoiYWNjZXNzIn0.BroOOSmMPkgxn32Frs0xps07MOLAg3bJZcy-Dg1yb8Wp1MZaU9O-9WIM_4ETGy5njPfMHExJID0p1NilHj_Eqg
 
 ### Get by email and username
 GET  http://localhost:4000/api/users?email=john.doe2@gmail.com&username=john

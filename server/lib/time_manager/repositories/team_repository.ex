@@ -6,7 +6,9 @@ defmodule TIME_MANAGER.TeamRepo do
   import Ecto.Query, warn: false
 
   alias TIME_MANAGER.Repo
+
   alias TIME_MANAGER.Models.Team
+  alias TIME_MANAGER.Models.TeamUser
 
   @doc """
   Returns the list of teams.
@@ -100,5 +102,31 @@ defmodule TIME_MANAGER.TeamRepo do
   """
   def change_team(%Team{} = team, attrs \\ %{}) do
     Team.changeset(team, attrs)
+  end
+
+  @doc """
+  """
+  def add_team_member(team_id, user_id) do
+    attrs = %{ team_id: user_id, user_id: user_id }
+
+    %TeamUser{}
+    |> TeamUser.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  """
+  def get_team_member(team_id, user_id) do
+    query = from tu in TeamUser,
+                 where: tu.team_id == ^team_id
+                 and tu.user_id == ^user_id
+
+    Repo.one!(query)
+  end
+
+  @doc """
+  """
+  def delete_team_member(%TeamUser{} = team_user) do
+    Repo.delete(team_user)
   end
 end

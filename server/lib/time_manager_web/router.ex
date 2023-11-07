@@ -21,7 +21,10 @@ defmodule TIME_MANAGERWeb.Router do
     pipe_through [:api, :jwt_authenticated]
 
     resources "/users", UserController, except: [:new, :edit]
+
     resources "/teams", TeamController, except: [:new, :edit]
+    post "/teams/:teamID/:userID", TeamController, :add_member
+    delete "/teams/:team_id/:user_id", TeamController, :delete_member
 
     get "/clocks/:userID", ClockController, :show
     post "/clocks/:userID", ClockController, :create

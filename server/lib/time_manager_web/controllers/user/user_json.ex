@@ -21,16 +21,12 @@ defmodule TIME_MANAGERWeb.UserJSON do
   defp data(%User{} = user) do
     teams = Repo.preload(user, :teams).teams
 
-    IO.inspect("------------------")
-    IO.inspect(teams)
-    IO.inspect("------------------")
-
     %{
       id: user.id,
       username: user.username,
       email: user.email,
       role: user.role,
-      teams: Enum.map(teams, &TeamJSON.data/1)
+      teams: TeamJSON.index(%{teams: teams})
     }
   end
 end

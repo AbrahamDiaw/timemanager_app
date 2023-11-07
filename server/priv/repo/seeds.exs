@@ -20,7 +20,7 @@ hashed_password = "$2b$12$hIFbngtcUwQQ4ARJgVKVWeVkEi7Uv3se6yieXrQg2O6V5s26uq37e"
 Repo.insert! %User{
   username: "john",
   email: "john.doe@gmail.com",
-  role: :administator,
+  role: :administrator,
   password_hash: hashed_password
 }
 
