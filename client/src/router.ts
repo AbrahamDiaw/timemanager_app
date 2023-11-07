@@ -3,6 +3,7 @@ import { Routes } from "../vars/Routes";
 import Home from "./components/pages/Home.vue";
 import WorkingTimes from "./components/pages/WorkingTimes.vue";
 import ClockManager from "./components/specifics/ClockManager.vue";
+import Teams from "./components/specifics/team/teams.vue";
 
 const routes = [
     {
@@ -29,6 +30,11 @@ const routes = [
         path: Routes.CLOCK_MANAGER_USERNAME,
         name: "clockManagerUsername",
         component: ClockManager,
+    },
+    {
+        path: Routes.TEAMS,
+        name: "Teams",
+        component: Teams,
     }
 ];
 
