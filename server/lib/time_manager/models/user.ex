@@ -6,8 +6,9 @@ defmodule TIME_MANAGER.Models.User do
   schema "users" do
     field :username, :string
     field :email, :string
-    field :role, Ecto.Enum, values: [:employee, :manager, :general_manager]
+    field :role, Ecto.Enum, values: [:administrator, :employee, :manager, :general_manager]
     field :password_hash, :string
+    many_to_many :teams, TIME_MANAGER.Models.Team, join_through: "team_users"
 
     timestamps(type: :utc_datetime)
   end
@@ -16,14 +17,13 @@ defmodule TIME_MANAGER.Models.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:username, :email, :role, :password_hash])
-    |> unique_constraint(:email)
     |> validate_required([:username, :email, :role], message: "Required - can't be null")
+    |> unique_constraint(:email)
     |> validate_length(:password_hash, min: 8, max: 20, message: "The password must contain between 8 and 20 characters.")
     |> validate_format(:email, ~r/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, message: "X@X.X")
     |> validate_type(:username, :string, "Username must be a string")
     |> validate_type(:email, :string, "Email must be a string")
     |> put_password_hash
-
   end
 
   defp validate_type(changeset, field, expected_type, message) do

@@ -11,6 +11,7 @@ export type WorkingTimeState = {
     findById: (workingTimeId: number) => void;
     updateById: (workingTimeId: number, data: WorkingTime) => void;
     deleteById: (workingTimeId: string) => void;
+    error: string | null;
 }
 
 const workingTimeService = new WorkingTimeService()
@@ -23,10 +24,16 @@ export const WorkingTimeStore = create<WorkingTimeState>(
         start: "",
         end: "",
     },
+    error: "",
     getWorkingTimeByUserId: (workingTime: WorkingTime) => {
         workingTimeService.getByUserId(workingTime)
-            .then((workingTimes) => {
-                set({workingTimes})
+            .then(async (response: any) => {
+                if(!response.ok) {
+                    return
+                }
+                const jsonResponse = await response.json();
+                const data = jsonResponse.data;
+                set({workingTimes: data})
             })
             .catch((err) => {
                 console.error(err.message)
@@ -34,11 +41,19 @@ export const WorkingTimeStore = create<WorkingTimeState>(
     },
     add: (data: WorkingTime) => {
         workingTimeService.addByUserId(data)
-            .then((workingTime)=> {
+            .then(async (response: any):Promise<void>=> {
+                if(!response.ok) {
+                    const jsonResponse = await response.json();
+                    set(()  => {
+                        return {error: jsonResponse.error }
+                    })
+                }
+                const jsonResponse = await response.json();
+                const data = jsonResponse.data;
                 set((state: any) => {
                     let _workingTimes: any = [...state.workingTimes]
-                    _workingTimes.push(workingTime)
-                    return {workingTimes: _workingTimes}
+                    _workingTimes.push(data)
+                    return {workingTimes: _workingTimes, error: ""}
                 })
             })
     },
@@ -52,19 +67,26 @@ export const WorkingTimeStore = create<WorkingTimeState>(
         })
     },
     updateById: (workingTimeId: number, data: WorkingTime) => {
-        console.log(workingTimeId)
         workingTimeService.updateById(workingTimeId , data)
-            .then((newWorkingTime): any => {
+            .then(async (response: any) => {
+                if(!response.ok) {
+                    const jsonResponse = await response.json();
+                    set(()  => {
+                        return {error: jsonResponse.error }
+                    })
+                }
+                const jsonResponse = await response.json();
+                const data = jsonResponse.data;
                 set((state: any) => {
                     let _workingTimes = [...state.workingTimes];
                     const _updateWonkingTime = _workingTimes.map((workingTime) => {
-                        if(workingTime.id === newWorkingTime.id) {
-                            return newWorkingTime
+                        if(workingTime.id === data.id) {
+                            return data
                         } else {
                             return workingTime
                         }
                     })
-                    return {workingTimes: _updateWonkingTime}
+                    return {workingTimes: _updateWonkingTime, error: ""}
                 })
             })
             .catch((err) => {

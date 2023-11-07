@@ -1,28 +1,45 @@
 <script lang="ts">
 
-import { UserStore } from "../../stores/UserStore";
-import { AuthTokenData, SecurityService } from "../../services/SecurityService";
+import "../../styles/forms.css";
+import { SecurityService } from "../../services/SecurityService";
+import Icon from "../generics/Icon/Icon.vue";
+import { Icons } from "../generics/Icon/Icons";
 
 const securityService = new SecurityService();
 
 export default {
   name: "SignIn",
 
+	components: { Icon },
 
   data() {
     return {
-      email: "",
-      password: ""
+      email: '',
+      password: '',
+      error: false
     }
   },
-  methods: {
+
+    computed: {
+        Icons() {
+            return Icons
+        }
+    },
+
+    methods: {
     handleSignIn(event: any) {
       event.preventDefault();
 
-      securityService.signIn({ email: this.email, password: this.password })
+      const email = this.email.trim();
+      const password = this.password.trim();
+
+        this.error = email.length > 0 && email.length > 0;
+
+        securityService.signIn({ email, password })
         .then(async (res) => {
           if (!res.ok) {
-            return
+              this.error = true;
+              return;
           }
 
           const jsonResponse = await res.json();
@@ -32,41 +49,52 @@ export default {
             window.location.reload()
           }
         }).catch(error => {
-        console.error(error);
-      });
+            console.error(error);
+        }
+      );
     },
   },
 }
 </script>
 
 <template>
-  <form @submit.prevent="handleSignIn" class="form-container sign_in">
-    <h1>Se connecter</h1>
-    <input v-model="email" type="email" placeholder="example@epitech.eu">
-    <input v-model="password" type="password" placeholder="password">
+    <div class="sign-in-container">
+        <form @submit="handleSignIn" class="form sign-in-form">
+            <h1 class="form-title">Se connecter</h1>
 
-    <input type="submit" value="Submit">
-  </form>
+            <div class="form-field-container">
+                <div class="form-field">
+                    <input class="form-input" v-model="email" type="email" placeholder="Email">
+                </div>
+
+                <div class="form-field">
+                    <input class="form-input" v-model="password" type="password" placeholder="Password">
+                </div>
+            </div>
+
+            <div class="form-error-container" v-if="error">
+                <p class="form-error"><Icon :name="Icons.IconDangerTriangle" />&nbsp;Invalid credentials !</p>
+            </div>
+
+            <button class="form-button">Submit</button>
+        </form>
+    </div>
 </template>
 
 <style scoped>
-form h1 {
-  padding-bottom: 5px;
-  text-align: center;
+
+.sign-in-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -30px;
 }
 
-.sign_in {
-  width: 40%;
-}
-
-.sign_in input {
-  height: 50px;
-  padding: 5px;
-  font-size: 16px;
-}
-
-.sign_in input[type="submit"] {
-  cursor: pointer;
+.sign-in-form {
+    max-width: 400px;
+    padding: 42px;
 }
 
 </style>

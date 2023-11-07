@@ -1,5 +1,8 @@
 defmodule TIME_MANAGERWeb.UserJSON do
-  alias TIME_MANAGER.Models.User
+  alias TIME_MANAGER.Models.{User, Team}
+
+  alias TIME_MANAGERWeb.TeamJSON
+  alias TIME_MANAGER.Repo
 
   @doc """
   Renders a list of users.
@@ -16,11 +19,14 @@ defmodule TIME_MANAGERWeb.UserJSON do
   end
 
   defp data(%User{} = user) do
+    teams = Repo.preload(user, :teams).teams
+
     %{
       id: user.id,
       username: user.username,
       email: user.email,
       role: user.role,
+      teams: TeamJSON.index(%{teams: teams})
     }
   end
 end

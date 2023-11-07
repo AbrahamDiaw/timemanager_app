@@ -3,7 +3,7 @@ import { Routes } from "../vars/Routes";
 import Home from "./components/pages/Home.vue";
 import WorkingTimes from "./components/pages/WorkingTimes.vue";
 import ClockManager from "./components/specifics/ClockManager.vue";
-import Dashboard from "./components/pages/Dashboard.vue";
+
 const routes = [
     {
         path: Routes.HOME,
@@ -34,6 +34,11 @@ const routes = [
         path: Routes.CHART_MANAGER_ID,
         name: "ChartManagerId",
         component: Dashboard,
+    },
+    {
+        path: Routes.TEAMS,
+        name: "Teams",
+        component: Teams,
     }
 ];
 

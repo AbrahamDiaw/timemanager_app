@@ -78,4 +78,18 @@ defmodule TIME_MANAGER.ModelsFixtures do
 
     clock
   end
+
+  @doc """
+  Generate a team.
+  """
+  def team_fixture(attrs \\ %{}) do
+    {:ok, team} =
+      attrs
+      |> Enum.into(%{
+        name: "some name"
+      })
+      |> TIME_MANAGER.Models.create_team()
+
+    team
+  end
 end
