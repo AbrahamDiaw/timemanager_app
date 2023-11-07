@@ -53,13 +53,8 @@ defmodule TIME_MANAGERWeb.TeamController do
   def delete_member(conn, %{ "team_id" => team_id, "user_id" => user_id }) do
     if can_process_team_management(conn, team_id, user_id) do
       team_user = TeamRepo.get_team_member(team_id, user_id)
-
-      IO.inspect("**************")
-      IO.inspect(team_user)
-
-      with {:ok, %Team{}} <- TeamRepo.delete_team_member(team_user) do
-        send_resp(conn, :no_content, "")
-      end
+      TeamRepo.delete_team_member(team_user)
+      send_resp(conn, :no_content, "")
     end
   end
 

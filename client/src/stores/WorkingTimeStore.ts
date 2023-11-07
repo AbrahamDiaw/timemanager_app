@@ -9,7 +9,7 @@ export type WorkingTimeState = {
     getWorkingTimeByUserId: (workingTime: WorkingTime) => void;
     add: (workingTime: WorkingTime) => void;
     findById: (workingTimeId: number) => void;
-    updateById: (workingTimeId: number, data: WorkingTime) => void;
+    updateById: (workingTimeId: string, data: WorkingTime) => void;
     deleteById: (workingTimeId: string) => void;
 }
 
@@ -51,7 +51,7 @@ export const WorkingTimeStore = create<WorkingTimeState>(
 
         })
     },
-    updateById: (workingTimeId: number, data: WorkingTime) => {
+    updateById: (workingTimeId: string, data: WorkingTime) => {
         console.log(workingTimeId)
         workingTimeService.updateById(workingTimeId , data)
             .then((newWorkingTime): any => {

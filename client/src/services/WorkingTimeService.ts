@@ -11,7 +11,7 @@ export class WorkingTimeService {
 		let response = await user.json();
 		return response.data
 	}
-	
+
 	public async getByUserIdAndId(userId: string, workingTimeId: string): Promise<WorkingTime> {
 		let user = await UHttp.get(
 			`${ GlobalVars.BASE_URL_API }workingtimes/${ userId }/${ workingTimeId }`,
@@ -21,7 +21,7 @@ export class WorkingTimeService {
 
 		return response.data
 	}
-	
+
 	public async addByUserId( data: WorkingTime): Promise<WorkingTime> {
 		let user = await UHttp.post(
 			`${ GlobalVars.BASE_URL_API }workingtimes/${ data.id }`,
@@ -31,8 +31,8 @@ export class WorkingTimeService {
 		let response = await user.json();
 		return response.data
 	}
-	
-	public async updateById(workingTimeId: number, data: WorkingTime): Promise<WorkingTime> {
+
+	public async updateById(workingTimeId: string, data: WorkingTime): Promise<WorkingTime> {
 		let user = await UHttp.put(
 			`${ GlobalVars.BASE_URL_API }workingtimes/${ workingTimeId }`,
 			{ workingtime: data },
@@ -41,7 +41,7 @@ export class WorkingTimeService {
 		let response = await user.json();
 		return response.data
 	}
-	
+
 	public async deleteById(workingTimeId: string): Promise<boolean> {
 		let response = await UHttp.delete(
 			`${ GlobalVars.BASE_URL_API }workingtimes/${workingTimeId}`,
