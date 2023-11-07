@@ -94,6 +94,7 @@ export default {
 
 .sign-in-form {
     max-width: 400px;
+    padding: 42px;
 }
 
 </style>
