@@ -21,6 +21,7 @@ export default {
   data() {
     return {
       isOpen: ModalStore((state) => state.isOpen),
+      props: undefined
     };
   },
 
@@ -31,7 +32,12 @@ export default {
       let comp;
 
       let composantName;
-      ModalStore((state) => composantName = state.componentName)
+
+
+      ModalStore((state) => {
+        composantName = state.componentName
+        this.props = state.componentProps
+      })
 
 
       switch (composantName) {
@@ -78,7 +84,7 @@ export default {
       </div>
 
       <div class="content">
-        <component :is="create()"/>
+        <component :is="create()" v-bind="props" />
       </div>
 
       <div class="footer">

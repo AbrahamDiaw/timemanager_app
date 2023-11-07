@@ -1,11 +1,19 @@
 <script lang="ts">
 
-import { ROLES, User } from "../../../types/User";
+import { AuthUser, ROLES, User } from "../../../types/User";
 import { UserStore } from "../../../stores/UserStore";
+import { ModalStore } from "../../../stores/ModalStore";
+
+type EditDataType = {
+  newUser: User | AuthUser
+}
 
 export default {
   name: "EditUser",
-
+  props: {
+    user: null,
+    auth: Boolean
+  },
 
   setup() {
     const roles = Object.values(ROLES)
@@ -15,35 +23,39 @@ export default {
     }
   },
 
-
-  data(): any {
-    let currentUser: any;
-
+  data(): EditDataType {
     return {
-      currentUser
+      newUser: {
+        id: this.user.id,
+        role: this.user.role,
+        username: this.user.username,
+        email: this.user.email
+      }
     }
   },
 
   methods: {
     editUser() {
-		  UserStore((state) => state.updateById(this.currentUser.id, this.currentUser))
+      UserStore((state) => {
+        if (this.auth) {
+          state.updateAuthUser(this.user.id, this.newUser as AuthUser)
+        } else {
+          state.updateById(this.user.id, this.newUser as User)
+        }
+      })
+      ModalStore((state) => state.closeModal())
     },
   },
-
-  mounted() {
-    UserStore((state) => this.currentUser = state.currentUser)
-  }
 
 }
 
 </script>
 
 <template>
-  <form @submit.prevent="editUser" class="form-container" v-if="currentUser">
-    <h1>Edit User <span>{{ currentUser.username }}</span></h1>
-    <input v-model="currentUser.username" type="text" placeholder="username">
-    <input v-model="currentUser.email" type="email" placeholder="email">
-    <select v-model="currentUser.role">
+  <form @submit.prevent="editUser" class="form-container" v-if="user">
+    <input v-model="newUser.username" type="text" placeholder="username">
+    <input v-model="newUser.email" type="email" placeholder="email">
+    <select v-model="newUser.role">
       <option disabled value="">Choisir un rôle</option>
       <option v-for="role in roles" :key="role">{{ role }}</option>
     </select>

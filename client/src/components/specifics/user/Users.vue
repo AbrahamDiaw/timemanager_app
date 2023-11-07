@@ -4,6 +4,7 @@ import { UserStore } from "../../../stores/UserStore";
 import { ModalStore } from "../../../stores/ModalStore";
 import { Components } from "../../_components/Components";
 import { Routes } from "../../../../vars/Routes";
+import { User } from "../../../types/User";
 
 export default {
 
@@ -13,20 +14,19 @@ export default {
     return {
       users: UserStore(state => state.users),
       authUser: UserStore(state => state.authUser),
+      currentUser: UserStore(state => state.currentUser)
     }
   },
 
   methods: {
-    setAndNavigateToCurrentUser(userId: string) {
-      UserStore(state => state.findById(userId))
+    navigateToCurrentUser(userId: string) {
       this.$router.push(`${ Routes.WORKINGTIMES }/${ userId }`);
     },
     addUser() {
       ModalStore((state) => state.openModal(Components.AddUser));
     },
-    editUser(userId: string) {
-      UserStore(state => state.findById(userId));
-      ModalStore((state) => state.openModal(Components.EditUser));
+    editUser(user: User) {
+      ModalStore((state) => state.openModal(Components.EditUser, { user }));
     },
 
     deleteUser(userId: string) {
@@ -56,12 +56,12 @@ export default {
         </thead>
         <tbody class="table-body-content">
         <tr v-for="user in users" :key="user.email">
-          <td @click="setAndNavigateToCurrentUser(user.id as string)">{{ user.id }}</td>
-          <td @click="setAndNavigateToCurrentUser(user.id as string)">{{ user.email }}</td>
+          <td @click="navigateToCurrentUser(user.id as string)">{{ user.id }}</td>
+          <td @click="navigateToCurrentUser(user.id as string)">{{ user.email }}</td>
           <td>{{ user.username }}</td>
           <td>{{ user.role }}</td>
-          <button type="button" class="edit-button" @click="editUser(user.id as string)">Edit</button>
-          <button type="button" class="delete-button" @click="deleteUser(user.id as string)">Delete</button>
+          <button type="button" class="edit-button" @click="editUser(user)">Edit</button>
+          <button type="button" class="delete-button" @click="deleteUser(user.id)">Delete</button>
         </tr>
         </tbody>
       </table>
