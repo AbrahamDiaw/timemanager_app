@@ -12,7 +12,8 @@ export default {
     return {
       id,
       start,
-      end
+      end,
+      error: WorkingTimeStore((state) => state.error)
     }
   },
   methods:{
@@ -40,6 +41,7 @@ export default {
     <input type="datetime-local" id="start" v-model="start" >
     <label for="end">end:</label>
     <input type="datetime-local" id="end" v-model="end" >
+    <p style="color: red;" v-if="error">{{error}}</p>
     <input type="submit" value="Submit">
   </form>
 </template>
