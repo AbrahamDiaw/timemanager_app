@@ -49,7 +49,7 @@ export default {
 
 <template>
   <main class="main" v-if="isAuth">
-    <Sidebar/>
+<!--    <Sidebar/>-->
     <div class="main-content">
       <!--      <Header/>-->
       <router-view/>
