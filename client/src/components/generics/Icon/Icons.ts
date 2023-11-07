@@ -6,6 +6,7 @@ export enum Icons {
   IconClose = "icon-close",
   IconDangerTriangle = "icon-danger-triangle",
   IconEdit = "icon-edit",
+  IconEyeSharp = "icon-eye-sharp",
   IconLogoutCircle = "icon-logout-circle",
   IconSettings = "icon-settings",
   IconUsers = "icon-users",
