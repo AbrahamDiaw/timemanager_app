@@ -62,7 +62,7 @@ defmodule TIME_MANAGERWeb.ClockController do
       |> put_status(:ok)
       |> render(:index, clocks: clocks)
     else
-      conn
+        conn
       |> put_status(:not_found)
       |> render("error.json", message: "User not found")
     end

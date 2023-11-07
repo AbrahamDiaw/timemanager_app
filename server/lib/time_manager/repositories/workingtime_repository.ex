@@ -22,6 +22,25 @@ defmodule TIME_MANAGER.WorkingtimeRepo do
     Repo.all(Workingtime)
   end
 
+
+  @doc """
+  check date exist user.
+
+  ## Examples
+
+      iex> list_workingtimes()
+      [%Workingtime{}, ...]
+
+  """
+  def check_existing_date_for_user!(user_id, start_param, end_param) do
+    {:ok, start_date_time, _} = DateTime.from_iso8601(start_param)
+    {:ok, end_date_time, _} = DateTime.from_iso8601(end_param)
+    existing_date = from w in Workingtime,
+                 where: w.user == ^user_id and (w.start == ^start_date_time or w.end == ^end_date_time)
+
+    TIME_MANAGER.Repo.all(existing_date)
+  end
+
   @doc """
   Gets a single workingtime.
 
