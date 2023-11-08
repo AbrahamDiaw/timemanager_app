@@ -2,7 +2,7 @@ export type User = {
 	id: string;
 	username: string;
 	email: string;
-	role: string;
+	role: ROLES;
 	password?: string;
 }
 
@@ -11,7 +11,8 @@ export type AuthUser = User & {
 }
 
 export enum ROLES {
-	EMPLOYEE= "employee",
-	MANAGER= "manager",
-	GENERAL_MANAGER= "general_manager",
+	ADMIN = "administrator",
+	EMPLOYEE = "employee",
+	MANAGER = "manager",
+	GENERAL_MANAGER = "general_manager",
 }

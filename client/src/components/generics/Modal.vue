@@ -36,9 +36,7 @@ export default {
 
         create() {
             let comp;
-
             let composantName;
-
 
             ModalStore((state) => {
                 composantName = state.componentName

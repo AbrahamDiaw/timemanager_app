@@ -12,7 +12,7 @@ export type UserState = {
 	findById: (userId: string) => Promise<any>;
 	resetCurrentUser: () => void;
 	findAuthUser: (userId: string) => Promise<void>;
-	update: (userId: string, data: User | AuthUser, isAuth: boolean) => Promise<void>;
+	update: (data: User | AuthUser, isAuth: boolean) => Promise<any>;
 	deleteById: (userId: string) => void;
 }
 
@@ -80,10 +80,19 @@ export const UserStore = create<UserState>(
 				.catch((err) => console.error(err.message))
 		},
 
-		update: (userId: string, data: User, isAuth: boolean = false): Promise<void> => {
+		update: (data: User, isAuth: boolean = false): Promise<any> => {
 			return new Promise((resolve, reject) => {
-				userService.updateById(userId, data)
-					.then((newUserData) => {
+				userService.update(data)
+					.then(async (response: Response) => {
+						const jsonResponse = await response.json();
+
+						if (!response.ok) {
+							reject(jsonResponse.errors);
+							return;
+						}
+
+						const newUserData = jsonResponse.data;
+
 						set((state: any) => {
 							let _users: any = [...state.users];
 
@@ -104,7 +113,7 @@ export const UserStore = create<UserState>(
 							set({ authUser: newUserData });
 						}
 
-						resolve();
+						resolve(newUserData);
 					})
 					.catch((err) => {
 						console.error(err.message);

@@ -30,7 +30,7 @@ defmodule TIME_MANAGERWeb.UserController do
 
   def create(conn, %{"user" => user_params}) do
     default_password = "password"
-    with {:ok, %User{} = user} <- UserRepo.create_user(Map.put(user_params, "password_hash", default_password)) do
+    with {:ok, %User{} = user} <- UserRepo.create_user(Map.put(user_params, "password", default_password)) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/api/users/#{user}")

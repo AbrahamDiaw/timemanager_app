@@ -16,7 +16,7 @@ const securityService = new SecurityService()
 export default {
 
 	components: {
-      LoadingScreen,
+		LoadingScreen,
 		SignIn,
 		Modal,
 		Headers,
@@ -29,10 +29,10 @@ export default {
 
 	data() {
 		return {
-        isAuth: SecurityService.isAuth(),
-        payload: securityService.getAuthTokenData() as AuthTokenData,
-        authUser: UserStore(state => state.authUser),
-        loading: false
+			isAuth: SecurityService.isAuth(),
+			payload: securityService.getAuthTokenData() as AuthTokenData,
+			authUser: UserStore(state => state.authUser),
+			loading: false
 		}
 	},
 
@@ -42,14 +42,15 @@ export default {
 
 	mounted() {
 		if (this.payload) {
-        this.loading = true;
-        UserStore(state => { state.findAuthUser(this.payload.sub).then(() => {
-            // Nothing to do
+			this.loading = true;
+			UserStore(state => {
+				state.findAuthUser(this.payload.sub).then(() => {
+					// Nothing to do
 				}).catch(() => {
 					securityService.removeToken();
-          window.location.reload();
+					window.location.reload();
 				}).finally(() => {
-            this.loading = false;
+					this.loading = false;
 				});
 			})
 		}
@@ -67,12 +68,12 @@ export default {
     <main class="main auth-container" v-if="isAuth">
         <Sidebar/>
         <div class="main-content">
-            <!--      <Header/>-->
+            <!-- <Header/> -->
             <router-view/>
         </div>
         <Modal/>
 
-        <LoadingScreen v-if="loading" />
+        <LoadingScreen v-if="loading"/>
     </main>
 </template>
 
@@ -95,5 +96,6 @@ export default {
     width: 100%;
     height: 100%;
     top: 0;
+    overflow-y: auto;
 }
 </style>

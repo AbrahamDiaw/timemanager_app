@@ -7,6 +7,7 @@ import { ModalStore } from "../../stores/ModalStore";
 import { Components } from "../_components/Components";
 import { UserStore } from "../../stores/UserStore";
 import { SecurityService } from "../../services/SecurityService";
+import { AuthUser } from "../../types/User";
 
 const securityService = new SecurityService()
 
@@ -30,7 +31,7 @@ export default {
 			isOpen: true,
 			Routes: Routes,
 			Icons: Icons,
-			authUser: UserStore((state) => state.authUser)
+			authUser: UserStore((state) => state.authUser) as AuthUser
 		}
 	},
 
@@ -72,11 +73,11 @@ export default {
 
             <div class="sidebar-content-wrapper">
                 <div class="sidebar-content">
-                    <router-link :to="{ path: Routes.HOME }">
+                    <router-link :to="{ path: Routes.DASHBOARD }">
                         <Icon :name="Icons.IconDashboard"/>
                         <span v-if="isOpen">Dashboard</span>
                     </router-link>
-                    <router-link :to="{ path: Routes.HOME }">
+                    <router-link :to="{ path: Routes.USERS }">
                         <Icon :name="Icons.IconUsers"/>
                         <span v-if="isOpen">Users</span>
                     </router-link>

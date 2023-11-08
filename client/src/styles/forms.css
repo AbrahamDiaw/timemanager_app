@@ -54,12 +54,16 @@
 
 .form-error-container {
     width: 100%;
-    text-align: center;
+    text-align: start;
     margin: 5px 0;
 }
 
 .form-error {
     color: var(--error-text-color);
+}
+
+.form-error p {
+    margin: 10px 0;
 }
 
 .form-button {

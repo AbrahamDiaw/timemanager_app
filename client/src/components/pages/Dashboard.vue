@@ -13,7 +13,6 @@ export default {
 <template>
   <div class="dashboard-container">
     <div class="banner-1">
-      <!--Card for Hello if it's user log or Welcome on username board if general manager and it's not is dashboard  -->
       <p>Banner 1</p>
     </div>
     <div class="banner-2">Banner 2</div>
@@ -62,7 +61,6 @@ export default {
   grid-column: span 12 / span 12
 }
 
-/* Media query for medium devices */
 @media screen and (min-width: 769px) and (max-width: 899px) {
   .dashboard-container {
     padding-left: 24px;
@@ -78,7 +76,6 @@ export default {
   }
 }
 
-/* Media query for large devices */
 @media screen and (min-width: 900px) {
   .dashboard-container {
     padding-left: 54px;
@@ -94,4 +91,5 @@ export default {
   }
 
 }
+
 </style>
