@@ -11,6 +11,7 @@ export enum Routes {
 	SIGN_IN = "/sign_in",
 	
 	CLOCK_MANAGER = "/clock",
-	CLOCK_MANAGER_USERNAME = "/clock/:username"
+	CLOCK_MANAGER_USERNAME = "/clock/:username",
+	CHART_MANAGER_ID  = "/chartManager/:id"
 
 }

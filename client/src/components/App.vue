@@ -53,7 +53,7 @@ export default {
   </main>
 
   <main class="main" v-if="isAuth">
-    <Sidebar/>
+<!--    <Sidebar/>-->
     <div class="main-content">
       <!--      <Header/>-->
       <router-view/>
