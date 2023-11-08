@@ -12,214 +12,234 @@ const securityService = new SecurityService()
 
 export default {
 
-  name: "Sidebar",
+	name: "Sidebar",
 
-  computed: {
-    Components() {
-      return Components
-    },
-    Icon() {
-      return Icon
-    }
-  },
+	computed: {
+		Components() {
+			return Components
+		},
+		Icon() {
+			return Icon
+		}
+	},
 
-  components: { Icon },
+	components: { Icon },
 
-  data() {
-    return {
-      isOpen: true,
-      Routes: Routes,
-      Icons: Icons,
-      authUser: UserStore((state) => state.authUser)
-    }
-  },
+	data() {
+		return {
+			isOpen: true,
+			Routes: Routes,
+			Icons: Icons,
+			authUser: UserStore((state) => state.authUser)
+		}
+	},
 
-  methods: {
-    ModalStore,
-    setIsOpen(isOpen: boolean) {
-      this.isOpen = isOpen;
-    },
-    handleSignOut() {
-      securityService.signOut()
-    }
-  },
+	methods: {
+		ModalStore,
+		setIsOpen(isOpen: boolean) {
+			this.isOpen = isOpen;
+		},
+		handleSignOut() {
+			securityService.signOut()
+		}
+	},
 
-  mounted() {
-    UserStore((state) => state.findAll())
-  }
+	mounted() {
+		UserStore((state) => state.findAll())
+	}
 
 }
 
 </script>
 
 <template>
-  <div :class="'sidebar-container' + (!isOpen ? ' sidebar-close' : '')">
-    <div class="close-icon" @click="() => setIsOpen(!isOpen)">
-      <Icon :name="isOpen ? Icons.IconArrowLeft : Icons.IconArrowRight"/>
-    </div>
-
-    <div class="sidebar-content-container" v-if="authUser">
-      <div class="sidebar-header">
-        <div class="sidebar-header-icons">
-          <Icon :name="Icons.IconAccountCircle"/>
-          <Icon v-if="isOpen" :name="Icons.IconSettings" @click="() => ModalStore(state => state.openModal(Components.UserSettings))"/>
+    <div :class="'sidebar-container' + (!isOpen ? ' sidebar-close' : '')">
+        <div class="close-icon" @click="() => setIsOpen(!isOpen)">
+            <Icon :name="isOpen ? Icons.IconArrowLeft : Icons.IconArrowRight"/>
         </div>
-        <p v-if="isOpen"> Hi {{ authUser?.username }} !</p>
-      </div>
 
-      <div class="sidebar-content-wrapper" >
-        <div class="sidebar-content">
-          <router-link :to="{ path: Routes.HOME }">
-            <Icon :name="Icons.IconUsers"/>
-            <span v-if="isOpen">Users</span>
-          </router-link>
-          <router-link :to="{ path: Routes.WORKINGTIMES + '/' + authUser.id}">
-            <Icon :name="Icons.IconAlarms"/>
-            <span v-if="isOpen">My Working times</span>
-          </router-link>
-          <router-link :to="{ path: Routes.CLOCK_MANAGER + '/' + authUser.username}">
-            <Icon :name="Icons.IconAlarms"/>
-            <span v-if="isOpen">My Clock</span>
-          </router-link>
-          <router-link :to="{ path: Routes.TEAMS}">
-            <Icon :name="Icons.IconAlarms"/>
-            <span v-if="isOpen">Teams</span>
-          </router-link>
+        <div class="sidebar-content-container" v-if="authUser">
+            <div class="sidebar-header">
+                <div>
+                    <Icon :name="Icons.IconAccountCircle" class-name="sidebar-header-account"/>
+                    <Icon class-name="sidebar-header-settings" v-if="isOpen" :name="Icons.IconSettings"
+                          @click="() => ModalStore(state => state.openModal(Components.UserSettings))"/>
+                </div>
+                <div class="sidebar-header-username">
+                    <p v-if="isOpen"> Hi {{ authUser?.username }} !</p>
+                </div>
+            </div>
+
+            <div class="sidebar-content-wrapper">
+                <div class="sidebar-content">
+                    <router-link :to="{ path: Routes.HOME }">
+                        <Icon :name="Icons.IconDashboard"/>
+                        <span v-if="isOpen">Dashboard</span>
+                    </router-link>
+                    <router-link :to="{ path: Routes.HOME }">
+                        <Icon :name="Icons.IconUsers"/>
+                        <span v-if="isOpen">Users</span>
+                    </router-link>
+                    <router-link :to="{ path: Routes.WORKINGTIMES + '/' + authUser.id}">
+                        <Icon :name="Icons.IconAlarms"/>
+                        <span v-if="isOpen">My Working times</span>
+                    </router-link>
+                    <router-link :to="{ path: Routes.CLOCK_MANAGER + '/' + authUser.username}">
+                        <Icon :name="Icons.IconAlarms"/>
+                        <span v-if="isOpen">My Clock</span>
+                    </router-link>
+                    <router-link :to="{ path: Routes.TEAMS}">
+                        <Icon :name="Icons.IconAlarms"/>
+                        <span v-if="isOpen">Teams</span>
+                    </router-link>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <Icon @click="handleSignOut" class-name="logout-btn" :name="Icons.IconPowerOff"/>
+            </div>
         </div>
-      </div>
-
-      <div class="sidebar-footer">
-        <button @click="handleSignOut">
-          <Icon :name="Icons.IconLogoutCircle"/>
-          <span v-if="isOpen">Log out</span>
-        </button>
-      </div>
     </div>
-  </div>
 </template>
 
 <style scoped>
 
 .sidebar-container {
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: var(--sidebar-width);
-  height: 100vh;
-  background: #F8F9FD;
-  transition: width 300ms ease;
-  z-index: 10;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+    height: 100vh;
+    transition: width 300ms ease;
+    z-index: 10;
+    color: #FFFFFF;
+    border-right: 1px solid var(--grey);
 }
 
 .sidebar-close {
-  width: 60px !important;
+    width: 60px !important;
+    min-width: 60px !important;
 }
 
 .close-icon {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  border-radius: 50%;
-  top: 22px;
-  right: -12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #222222;
-  color: #FAFAFA;
-  font-size: .65rem;
-  cursor: pointer;
-  z-index: 30;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    border-radius: 50%;
+    top: 22px;
+    right: -16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-dark-color);
+    font-size: .65rem;
+    cursor: pointer;
+    border: 1px solid var(--grey);
+    z-index: 30;
 }
 
 .close-icon:hover {
-  background: #000000;
+    background: #FFFFFF;
+    color: #000000;
 }
 
 .sidebar-content-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 .sidebar-header {
-  width: 100%;
-  height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
-.sidebar-header p {
-  margin-top: 15px;
-  font-size: 1rem;
+.sidebar-header-account {
+    cursor: auto;
+    font-size: 3rem;
+    color: var(--white);
 }
 
-.sidebar-header-icons {
-
+.sidebar-close .sidebar-header-account {
+    font-size: 2rem;
 }
 
-.sidebar-header-icons i:first-child {
-  cursor: auto;
-  font-size: 2rem;
-  color: #000;
+.sidebar-header-settings {
+    font-size: .9rem;
+    cursor: pointer;
+    color: var(--light-grey);
 }
 
-.sidebar-header-icons i {
-  font-size: .9rem;
-  cursor: pointer;
-  color: grey;
+.sidebar-header-settings:hover {
+    color: #FFFFFF;
 }
 
-.sidebar-header-icons i:hover {
-  color: #000000;
+.sidebar-header-username {
+    width: 80%;
+    margin-top: 15px;
+    font-size: 1rem;
+    word-break: break-all;
+    text-align: center;
 }
 
 .sidebar-content-wrapper {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  margin: 15px auto;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    margin: 15px auto;
 }
 
 .sidebar-content-wrapper a {
-  color: #222222;
-  text-decoration: none;
-  font-size: .95rem;
-  width: 60%;
-  margin: 25px auto;
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  flex-wrap: nowrap;
+    color: var(--white);
+    text-decoration: none;
+    font-size: .95rem;
+    width: 60%;
+    margin: 25px auto;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    flex-wrap: nowrap;
 }
 
 .sidebar-close .sidebar-content-wrapper a {
-  justify-content: center;
+    justify-content: center;
 }
 
 .sidebar-content i, .sidebar-footer i {
-  font-size: 1.4rem;
+    font-size: 1.4rem;
 }
 
 .sidebar-content span, .sidebar-footer span {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .sidebar-footer {
-  padding: 25px 0;
+    padding: 30px 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.sidebar-footer a {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+.logout-btn {
+    cursor: pointer;
+    font-size: 1.8rem;
+    color: var(--light-grey);
+}
+
+
+.logout-btn:hover {
+    color: var(--white);
 }
 
 </style>

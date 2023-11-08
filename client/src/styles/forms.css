@@ -1,17 +1,10 @@
 .form {
-    width: 80%;
     height: auto;
     padding: 30px;
     overflow: hidden;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    background: radial-gradient(60% 17% at 50% -2%, hsl(191, 71%, 76%) 0%, transparent 100%) no-repeat, 0 0 / 75% 100%,
-    radial-gradient(60% 17% at 50% 102%, hsl(191, 71%, 76%) 0%, transparent 100%) no-repeat, 0 0 / 75% 100%,
-    linear-gradient(rgba(94, 100, 111, 0.25) 3px, transparent 3px) 8px 4px /16px 16px,
-    linear-gradient(to right, rgba(94, 100, 111, 0.25) 3px, transparent 3px) 8px 4px / 16px 16px, rgba(43, 44, 43, 0.75);
-    border-bottom: 2px solid rgb(176, 229, 251);
-    border-top: 2px solid rgb(176, 229, 251);
 }
 
 .form-title {
@@ -20,7 +13,6 @@
 }
 
 .form-field-container {
-    margin-top: 15px;
     text-align: start;
 }
 
@@ -41,7 +33,7 @@
 }
 
 .form-input {
-    margin: 12px 0;
+    margin: 10px 0;
     padding: 12px 10px;
     width: 100%;
     outline: none;

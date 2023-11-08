@@ -9,57 +9,71 @@ import EditUser from "./specifics/user/EditUser.vue"
 import { AuthTokenData, SecurityService } from "../services/SecurityService";
 import SignIn from "./pages/SignIn.vue";
 import { UserStore } from "../stores/UserStore";
+import LoadingScreen from "./generics/LoadingScreen.vue";
 
 const securityService = new SecurityService()
 
 export default {
 
-  components: {
-    SignIn,
-    Modal,
-    Headers,
-    Header,
-    Sidebar,
-    Home,
-    AddUser,
-    EditUser
-  },
-  data() {
-    return {
-      isAuth: SecurityService.isAuth(),
-      payload: securityService.getAuthTokenData() as AuthTokenData,
-      authUser: UserStore(state => state.authUser),
+	components: {
+      LoadingScreen,
+		SignIn,
+		Modal,
+		Headers,
+		Header,
+		Sidebar,
+		Home,
+		AddUser,
+		EditUser
+	},
 
-    }
-  },
+	data() {
+		return {
+        isAuth: SecurityService.isAuth(),
+        payload: securityService.getAuthTokenData() as AuthTokenData,
+        authUser: UserStore(state => state.authUser),
+        loading: false
+		}
+	},
 
-  methods: {},
+	methods: {},
 
-  computed: {},
+	computed: {},
 
-  mounted() {
-    if (this.payload) {
-      UserStore(state => state.findAuthUser(this.payload.sub))
-    }
-  }
+	mounted() {
+		if (this.payload) {
+        this.loading = true;
+        UserStore(state => { state.findAuthUser(this.payload.sub).then(() => {
+            // Nothing to do
+				}).catch(() => {
+					securityService.removeToken();
+          window.location.reload();
+				}).finally(() => {
+            this.loading = false;
+				});
+			})
+		}
+	}
+
 }
-
 
 </script>
 
 <template>
-  <main v-if="!isAuth">
-      <SignIn/>
-  </main>
+    <main v-if="!isAuth">
+        <SignIn/>
+    </main>
 
-  <main class="main" v-if="isAuth">
-    <Sidebar/>
-    <div class="main-content">
-      <!--      <Header/>-->
-      <router-view/>
-    </div>
-    <Modal/>
-  </main>
+    <main class="main auth-container" v-if="isAuth">
+        <Sidebar/>
+        <div class="main-content">
+            <!--      <Header/>-->
+            <router-view/>
+        </div>
+        <Modal/>
+
+        <LoadingScreen v-if="loading" />
+    </main>
 </template>
 
 <style scoped>
@@ -71,10 +85,15 @@ export default {
     flex-direction: row;
 }
 
+.auth-container {
+    background: url("/assets/images/bg3.jpg") hsl(208, 33%, 21%) no-repeat center center fixed;
+    background-size: cover;
+}
+
 .main-content {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  top: 0;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 0;
 }
 </style>

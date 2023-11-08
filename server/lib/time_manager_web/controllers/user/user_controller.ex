@@ -45,8 +45,6 @@ defmodule TIME_MANAGERWeb.UserController do
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = UserRepo.get_user!(id)
-    # TODO : manage error when user not found
-
     with {:ok, %User{} = user} <- UserRepo.update_user(user, user_params) do
       render(conn, :show, user: user)
     end

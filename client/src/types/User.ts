@@ -3,14 +3,11 @@ export type User = {
 	username: string;
 	email: string;
 	role: string;
+	password?: string;
 }
 
-export type AuthUser = {
-	token?: string,
-	id?: string;
-	username: string;
-	email: string;
-	role: string;
+export type AuthUser = User & {
+	token?: string
 }
 
 export enum ROLES {

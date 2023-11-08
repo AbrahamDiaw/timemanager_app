@@ -11,9 +11,8 @@ export type UserState = {
 	add: (data: User) => void;
 	findById: (userId: string) => Promise<any>;
 	resetCurrentUser: () => void;
-	findAuthUser: (userId: string) => void;
-	updateById: (userId: string, data: User) => void;
-	updateAuthUser: (userId: string, data: AuthUser) => void;
+	findAuthUser: (userId: string) => Promise<void>;
+	update: (userId: string, data: User | AuthUser, isAuth: boolean) => Promise<void>;
 	deleteById: (userId: string) => void;
 }
 
@@ -24,7 +23,7 @@ export const UserStore = create<UserState>(
 		users: [],
 		currentUser: null,
 		authUser: null,
-		
+
 		findAll: () => {
 			userService.getAll()
 				.then((users) => {
@@ -34,6 +33,7 @@ export const UserStore = create<UserState>(
 					console.error(err.message);
 				});
 		},
+
 		findById: async (userId: string): Promise<any> => {
 			return new Promise((resolve, reject) => {
 				userService.getById(userId)
@@ -46,20 +46,28 @@ export const UserStore = create<UserState>(
 						reject()
 					});
 			})
-			
+
 		},
+
 		resetCurrentUser: () => {
 			set({ currentUser: null });
 		},
+
 		findAuthUser: (userId: string) => {
-			userService.getById(userId)
-				.then((user) => {
-					set({ authUser: { ...user, token: SecurityService.getToken() } });
-				})
-				.catch((err) => {
-					console.error(err.message);
-				});
+			return new Promise((resolve, reject) => {
+				userService.getById(userId)
+					.then((user) => {
+						set({ authUser: { ...user, token: SecurityService.getToken() } });
+						resolve();
+					})
+					.catch((err) => {
+						console.error(err.message);
+						set({ authUser: null });
+						reject();
+					});
+			})
 		},
+
 		add: (data: User) => {
 			userService.add(data)
 				.then((user) => {
@@ -71,53 +79,40 @@ export const UserStore = create<UserState>(
 				})
 				.catch((err) => console.error(err.message))
 		},
-		
-		updateById: (userId: string, data: User) => {
-			userService.updateById(userId, data)
-				.then((newUserData) => {
-					set((state: any) => {
-						let _users: any = [...state.users];
-						
-						const _updateUserInUsers = _users.map((user: any) => {
-							if (user.id === newUserData.id) {
-								return newUserData;
-							} else {
-								return user;
-							}
+
+		update: (userId: string, data: User, isAuth: boolean = false): Promise<void> => {
+			return new Promise((resolve, reject) => {
+				userService.updateById(userId, data)
+					.then((newUserData) => {
+						set((state: any) => {
+							let _users: any = [...state.users];
+
+							const _updateUserInUsers = _users.map((user: any) => {
+								if (user.id === newUserData.id) {
+									return newUserData;
+								} else {
+									return user;
+								}
+							});
+
+							return { users: _updateUserInUsers };
 						});
-						
-						return { users: _updateUserInUsers };
+
+						if (isAuth) {
+							set({ currentUser: newUserData });
+						} else {
+							set({ authUser: newUserData });
+						}
+
+						resolve();
+					})
+					.catch((err) => {
+						console.error(err.message);
+						reject();
 					});
-						set({ currentUser: newUserData });
-					
-				})
-				.catch((err) => {
-					console.error(err.message);
-				});
+			});
 		},
-		updateAuthUser: (userId: string, data: AuthUser) => {
-			userService.updateById(userId, data)
-				.then((newUserData) => {
-					set((state: any) => {
-						let _users: any = [...state.users];
-						
-						const _updateUserInUsers = _users.map((user: any) => {
-							if (user.id === newUserData.id) {
-								return newUserData;
-							} else {
-								return user;
-							}
-						});
-						
-						return { users: _updateUserInUsers };
-					});
-					set({ authUser: newUserData });
-					
-				})
-				.catch((err) => {
-					console.error(err.message);
-				});
-		},
+
 		deleteById: (userId: string) => {
 			userService.deleteById(userId)
 				.then((res) => {
