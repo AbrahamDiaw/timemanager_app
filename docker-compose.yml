@@ -3,7 +3,7 @@ version: "3.8"
 services:
   client:
     image: node:latest
-    container_name: timemanager_client
+    container_name: timemanager_app_client
     entrypoint: /bin/sh
     ports:
       - "3030:3030"
@@ -16,7 +16,7 @@ services:
 
   server:
     image: elixir:latest
-    container_name: timemanager_server
+    container_name: timemanager_app_server
     entrypoint: /bin/sh
     ports:
       - "4000:4000"
@@ -39,7 +39,7 @@ services:
 
   db:
     image: postgres:latest
-    container_name: timemanager_db
+    container_name: timemanager_app_db
     ports:
       - "5432:5432"
     volumes:
