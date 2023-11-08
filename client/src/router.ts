@@ -3,8 +3,8 @@ import { Routes } from "../vars/Routes";
 import Home from "./components/pages/Home.vue";
 import WorkingTimes from "./components/pages/WorkingTimes.vue";
 import ClockManager from "./components/specifics/ClockManager.vue";
+import Dashboard from "./components/pages/Dashboard.vue";
 import Teams from "./components/specifics/team/teams.vue";
-
 const routes = [
     {
         path: Routes.HOME,
@@ -32,6 +32,11 @@ const routes = [
         component: ClockManager,
     },
     {
+        path: Routes.CHART_MANAGER_ID,
+        name: "ChartManagerId",
+        component: Dashboard,
+    },
+
         path: Routes.TEAMS,
         name: "Teams",
         component: Teams,
