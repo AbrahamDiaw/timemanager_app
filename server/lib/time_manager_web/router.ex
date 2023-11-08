@@ -22,13 +22,17 @@ defmodule TIME_MANAGERWeb.Router do
 
     resources "/users", UserController, except: [:new, :edit]
 
+    resources "/teams", TeamController, except: [:new, :edit]
+    post "/teams/:teamID/:userID", TeamController, :add_member
+    delete "/teams/:team_id/:user_id", TeamController, :delete_member
+
     get "/clocks/:userID", ClockController, :show
     post "/clocks/:userID", ClockController, :create
 
     post "/workingtimes/:userID", WorkingtimeController, :create
     put "/workingtimes/:id", WorkingtimeController, :update
-    get "workingtimes/:userID/:id", WorkingtimeController, :one
-    get "workingtimes/:userID", WorkingtimeController, :all
+    get "/workingtimes/:userID/:id", WorkingtimeController, :one
+    get "/workingtimes/:userID", WorkingtimeController, :all
     delete "/workingtimes/:id", WorkingtimeController, :delete
 
   end

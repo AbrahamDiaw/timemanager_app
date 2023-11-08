@@ -11,14 +11,15 @@ export default {
       id: this.$route.params.id,
       start: "",
       end: "",
+      error: WorkingTimeStore((state) => state.error)
     }
   },
   methods: {
     AddWorkingTimes() {
       const workingTime = {
         id: this.id,
-        start: UDate.formatDateForInput(this.start),
-        end: UDate.formatDateForInput(this.start)
+        start: UDate.formatDateForInput(this.start)+':00Z',
+        end: UDate.formatDateForInput(this.end)+':00Z'
       }
       WorkingTimeStore((state) => state.add(workingTime))
     }
@@ -37,6 +38,7 @@ export default {
       <input type="datetime-local" id="start" v-model="start">
       <label for="end">end:</label>
       <input type="datetime-local" id="end" v-model="end">
+      <p style="color: red;" v-if="error">{{error}}</p>
       <input type="submit" value="Submit">
     </form>
   </div>

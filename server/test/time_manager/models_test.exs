@@ -282,4 +282,58 @@ defmodule TIME_MANAGER.ModelsTest do
       assert %Ecto.Changeset{} = Models.change_clock(clock)
     end
   end
+
+  describe "teams" do
+    alias TIME_MANAGER.Models.Team
+
+    import TIME_MANAGER.ModelsFixtures
+
+    @invalid_attrs %{name: nil}
+
+    test "list_teams/0 returns all teams" do
+      team = team_fixture()
+      assert Models.list_teams() == [team]
+    end
+
+    test "get_team!/1 returns the team with given id" do
+      team = team_fixture()
+      assert Models.get_team!(team.id) == team
+    end
+
+    test "create_team/1 with valid data creates a team" do
+      valid_attrs = %{name: "some name"}
+
+      assert {:ok, %Team{} = team} = Models.create_team(valid_attrs)
+      assert team.name == "some name"
+    end
+
+    test "create_team/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Models.create_team(@invalid_attrs)
+    end
+
+    test "update_team/2 with valid data updates the team" do
+      team = team_fixture()
+      update_attrs = %{name: "some updated name"}
+
+      assert {:ok, %Team{} = team} = Models.update_team(team, update_attrs)
+      assert team.name == "some updated name"
+    end
+
+    test "update_team/2 with invalid data returns error changeset" do
+      team = team_fixture()
+      assert {:error, %Ecto.Changeset{}} = Models.update_team(team, @invalid_attrs)
+      assert team == Models.get_team!(team.id)
+    end
+
+    test "delete_team/1 deletes the team" do
+      team = team_fixture()
+      assert {:ok, %Team{}} = Models.delete_team(team)
+      assert_raise Ecto.NoResultsError, fn -> Models.get_team!(team.id) end
+    end
+
+    test "change_team/1 returns a team changeset" do
+      team = team_fixture()
+      assert %Ecto.Changeset{} = Models.change_team(team)
+    end
+  end
 end

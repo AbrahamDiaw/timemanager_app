@@ -48,6 +48,10 @@ export default {
 </script>
 
 <template>
+  <main v-if="!isAuth">
+      <SignIn/>
+  </main>
+
   <main class="main" v-if="isAuth">
 <!--    <Sidebar/>-->
     <div class="main-content">
@@ -56,20 +60,15 @@ export default {
     </div>
     <Modal/>
   </main>
-  <main v-if="!isAuth">
-    <div class="auth-content">
-      <SignIn/>
-    </div>
-  </main>
 </template>
 
 <style scoped>
 .main {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
 .main-content {
@@ -77,12 +76,5 @@ export default {
   width: 100%;
   height: 100%;
   top: 0;
-}
-
-.auth-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 </style>

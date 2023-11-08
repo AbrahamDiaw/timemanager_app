@@ -81,6 +81,10 @@ export default {
             <Icon :name="Icons.IconAlarms"/>
             <span v-if="isOpen">My Clock</span>
           </router-link>
+          <router-link :to="{ path: Routes.TEAMS}">
+            <Icon :name="Icons.IconAlarms"/>
+            <span v-if="isOpen">Teams</span>
+          </router-link>
         </div>
       </div>
 
