@@ -11,7 +11,7 @@ export default {
     const userState = reactive({
       username: "",
       email: "",
-      role: ""
+      role: ''
     })
 
     const roles = [

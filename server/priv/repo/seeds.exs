@@ -9,6 +9,7 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
 alias TIME_MANAGER.Repo
 alias TIME_MANAGER.Models.User
 alias TIME_MANAGER.Models.Team

@@ -65,15 +65,15 @@ export default {
         <SignIn/>
     </main>
 
-    <main class="main auth-container" v-if="isAuth">
+    <LoadingScreen v-if="loading"/>
+
+    <main class="main auth-container" v-if="isAuth && authUser">
         <Sidebar/>
         <div class="main-content">
             <!-- <Header/> -->
             <router-view/>
         </div>
         <Modal/>
-
-        <LoadingScreen v-if="loading"/>
     </main>
 </template>
 

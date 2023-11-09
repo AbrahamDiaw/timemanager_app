@@ -12,11 +12,11 @@ export class TeamService {
         return  await UHttp.post(`${ GlobalVars.BASE_URL_API }teams`, { team: data }, UHttp.authHeaders())
     }
 
-    public async updateById(teamId: number, data: Team): Promise<Response> {
+    public async update(teamId: number, data: Team): Promise<Response> {
         return  await UHttp.put(`${ GlobalVars.BASE_URL_API }teams/${ teamId }`, { team: data }, UHttp.authHeaders())
     }
 
-    public async deleteById(teamId: string): Promise<Response> {
+    public async delete(teamId: number): Promise<Response> {
         return  await UHttp.delete(`${ GlobalVars.BASE_URL_API }teams/${teamId}`, UHttp.authHeaders())
     }
 

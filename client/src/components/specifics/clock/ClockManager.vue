@@ -2,44 +2,54 @@
 
 import { ClockStore } from "../../../stores/ClockStore";
 import { UserStore } from "../../../stores/UserStore";
+import { AuthUser } from "../../../types/User";
+import Loader from "../../generics/Loader/Loader.vue";
+import { Clock } from "../../../types/Clock";
 
 export default {
 	  name: "ClockManager",
+    components: { Loader },
 
     data() {
 		  return {
-        data: ClockStore(state => state.data),
+          authUser:  UserStore(state => state.authUser) as AuthUser,
+        data: ClockStore(state => state.data) as Clock[],
         clockIn: ClockStore(state => state.clockIn),
+          disabled: false,
+          loading: false
       }
     },
 
     methods: {
       toggleClock() {
 		    ClockStore(state => {
-            UserStore(store => {
-                if (store.authUser?.id) {
-                    state.clock(store.authUser.id);
-                }
+            this.disabled = true;
+            state.clock(this.authUser.id).finally(() => {
+                this.disabled = false;
             });
         });
       }
     },
 
     mounted() {
-		  ClockStore(state =>  {
-          UserStore(userStore => {
-              if (userStore.authUser?.id) {
-                  state.autoSetData(userStore.authUser.id);
-              }
-          });
-      });
-	  }
+        ClockStore(state =>  {
+            this.loading = this.data?.length == 0;
+            state.autoSetData(this.authUser.id).finally(() => {
+                this.loading = false;
+            });
+        });
+    }
 }
 
 </script>
 
 <template>
-    <div v-for="clock in data">
+    <button class="clock-button" @click="toggleClock()" :disabled="disabled">
+        {{ clockIn ? "Clock out" : "Clock in" }}
+    </button>
+
+
+    <div class="clocks-container" v-for="clock in data">
         <p>
             <span v-if="clock.status">Start</span>
             <span v-if="!clock.status">End</span>
@@ -47,13 +57,14 @@ export default {
         </p>
     </div>
 
-
-    <button class="clock-button" @click="toggleClock()">
-        {{ clockIn ? "Clock out" : "Clock in" }}
-    </button>
+    <Loader v-if="loading" />
 </template>
 
 <style scoped>
+
+.clocks-container {
+    color: #FFFFFF;
+}
 
 .clock-button {
     background: #1b1e21;

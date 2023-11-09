@@ -5,7 +5,6 @@ import {Icons} from "../../generics/Icon/Icons";
 import Icon from "../../generics/Icon/Icon.vue";
 import {ModalStore} from "../../../stores/ModalStore";
 import {TeamService} from "../../../services/TeamService";
-import {state} from "vue-tsc/out/shared";
 import {TeamStore} from "../../../stores/TeamStore";
 
 const teamService = new TeamService();

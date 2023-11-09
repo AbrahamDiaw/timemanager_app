@@ -22,9 +22,11 @@ export default {
     navigateToCurrentUser(userId: string) {
       this.$router.push(`${ Routes.WORKINGTIMES }/${ userId }`);
     },
+
     addUser() {
       ModalStore((state) => state.openModal(Components.AddUser));
     },
+
     editUser(user: User) {
       ModalStore((state) => state.openModal(Components.EditUser, { user }));
     },
