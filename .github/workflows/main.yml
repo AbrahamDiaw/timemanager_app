@@ -18,19 +18,21 @@ jobs:
           DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-     # - name: Build the Docker image
-      #  run: docker build -t abrhmdiaw/time_manager_cicd .
+          # - name: Build the Docker image
+          #  run: docker build -t abrhmdiaw/time_manager_cicd .
 
-        #- name: Push to Dockerhub
-        #run: docker push abrhmdiaw/time_manager_cicd:latest
+          #- name: Push to Dockerhub
+          #run: docker push abrhmdiaw/time_manager_cicd:latest
 
-      #- name: Build and Push Docker images with Docker Compose
-       # run: docker-compose -f ${{ github.workspace }}/docker-compose.yml build
+          #- name: Build and Push Docker images with Docker Compose
+          # run: docker-compose -f ${{ github.workspace }}/docker-compose.yml build
 
-      #- name: Push to Dockerhub
-       # run: |
-        #  docker-compose -f ${{ github.workspace }}/docker-compose.yml push
-         # docker push abrhmdiaw/time_manager_cicd:tagname
-      - name: Push to Dockerhub
-        run: | 
+          #- name: Push to Dockerhub
+          # run: |
+          #  docker-compose -f ${{ github.workspace }}/docker-compose.yml push
+        # docker push abrhmdiaw/time_manager_cicd:tagname
+
+      - name: Build and Push Docker images with Docker Compose
+        run: |
+          docker-compose -f ${{ github.workspace }}/docker-compose.yml build
           docker-compose -f ${{ github.workspace }}/docker-compose.yml push
