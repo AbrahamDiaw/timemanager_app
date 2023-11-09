@@ -35,9 +35,13 @@ jobs:
           sudo pip3 install awsebcli --upgrade
           eb --version
 
+      - name: Initialize Elastic Beanstalk
+        run: |
+          eb init -p docker elixir_app
+
       - name: Configure AWS Elastic Beanstalk
         run: |
-          eb use Timemanagerapp-env
+          eb use elixir_app
           eb deploy
 
       - name: Deployed to Elastic Beanstalk
