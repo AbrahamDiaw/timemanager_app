@@ -26,7 +26,7 @@ jobs:
       - name: Deploy Docker Compose
         run: |
           docker-compose -f docker-compose.yml up -d
-        working-directory: /
+        working-directory: $GITHUB_WORKSPACE
 
       - name: Configure AWS Elastic Beanstalk
         run: |
