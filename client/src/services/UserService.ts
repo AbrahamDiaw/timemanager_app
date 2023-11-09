@@ -49,7 +49,6 @@ export class UserService {
 		let user = await response.json();
 
 		return user.data
-
 	}
 
 	public async update(data: AuthUser | User): Promise<Response> {

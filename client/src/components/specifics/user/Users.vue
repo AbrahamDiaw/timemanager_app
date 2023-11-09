@@ -72,25 +72,5 @@ export default {
 
 <style scoped>
 
-.table-container {
-  padding-top: 5rem;
-}
-
-table {
-  width: 100%;
-}
-
-tr {
-  width: 100%;
-}
-
-.table-body-content {
-  cursor: pointer;
-}
-
-.header-content {
-  margin: 20px 0;
-  position: fixed;
-}
 
 </style>

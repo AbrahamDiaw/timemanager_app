@@ -1,15 +1,15 @@
 <script lang="ts">
 
 import Home from "./pages/Home.vue"
-import Sidebar from "./specifics/Sidebar.vue";
-import Header from "./specifics/Header.vue";
-import Modal from "./generics/Modal.vue";
+import Sidebar from "./specifics/menu/Sidebar.vue";
+import Header from "./specifics/menu/Header.vue";
+import Modal from "./generics/Modal/Modal.vue";
 import AddUser from "./specifics/user/AddUser.vue";
 import EditUser from "./specifics/user/EditUser.vue"
 import { AuthTokenData, SecurityService } from "../services/SecurityService";
 import SignIn from "./pages/SignIn.vue";
 import { UserStore } from "../stores/UserStore";
-import LoadingScreen from "./generics/LoadingScreen.vue";
+import LoadingScreen from "./generics/LoadingScreen/LoadingScreen.vue";
 
 const securityService = new SecurityService()
 

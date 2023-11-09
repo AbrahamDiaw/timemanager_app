@@ -17,6 +17,7 @@
     --bg-grid: linear-gradient(rgba(94, 100, 111, 0.25) 3px, transparent 3px) 8px 4px /16px 16px,
     linear-gradient(to right, rgba(94, 100, 111, 0.25) 3px, transparent 3px) 8px 4px / 16px 16px, rgba(43, 44, 43, 0.75);
     --white: #d7e3e2;
+    --white-hover: #c5cecd;
     --yellow: rgba(241,172,48,1);
     --grey: rgba(62, 64, 66, 0.52);
     --light-grey: #9898a2;

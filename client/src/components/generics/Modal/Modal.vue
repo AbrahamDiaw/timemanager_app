@@ -1,14 +1,15 @@
 <script>
 
-import {ModalStore} from "../../stores/ModalStore";
-import {Components} from "../_components/Components";
-import AddUser from "../specifics/user/AddUser.vue";
-import EditUser from "../specifics/user/EditUser.vue";
-import EditWorkingTime from "../specifics/workingtime/EditWorkingTime.vue"
-import AddWorkingTime from "../specifics/workingtime/AddWorkingTime.vue";
-import {Icons} from "./Icon/Icons";
-import Icon from "./Icon/Icon.vue";
-import UserSettings from "../specifics/user/UserSettings.vue";
+import {ModalStore} from "../../../stores/ModalStore";
+import {Components} from "../../_components/Components";
+import AddUser from "../../specifics/user/AddUser.vue";
+import EditUser from "../../specifics/user/EditUser.vue";
+import EditWorkingTime from "../../specifics/workingtime/EditWorkingTime.vue"
+import AddWorkingTime from "../../specifics/workingtime/AddWorkingTime.vue";
+import {Icons} from "../Icon/Icons";
+import Icon from "../Icon/Icon.vue";
+import UserSettings from "../../specifics/user/UserSettings.vue";
+import AddTeam from "../../specifics/team/AddTeam.vue";
 
 export default {
     props: {
@@ -50,6 +51,7 @@ export default {
                     comp = AddUser;
                     break;
                 case Components.EditUser:
+                    this.title = "Edit user";
                     comp = EditUser;
                     break;
                 case Components.UserSettings:
@@ -61,6 +63,10 @@ export default {
                     break;
                 case Components.AddWorkingTime:
                     comp = AddWorkingTime;
+                    break;
+                case Components.AddTeam:
+                    this.title = "Add team";
+                    comp = AddTeam;
                     break;
             }
 

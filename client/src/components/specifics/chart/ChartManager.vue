@@ -1,8 +1,8 @@
 <script lang="ts">
-import LineChart from "../generics/Chart/LineChart.vue";
-import DoughnutChart from "../generics/Chart/DoughnutChart.vue"
-import lineChartData from "./chart/LineChartData";
-import doughnutChartData from "./chart/DoughnutChartData";
+import LineChart from "../../generics/Chart/LineChart.vue";
+import DoughnutChart from "../../generics/Chart/DoughnutChart.vue"
+import lineChartData from "./LineChartData";
+import doughnutChartData from "./DoughnutChartData";
 
 export default {
   name: "ChartManager",
@@ -30,7 +30,7 @@ export default {
     <DoughnutChart :doughnut-chart-data="doughnutChartData" :title="'Clocks & WorkingTimes'"/>
   </div>
   <div class="lines-chart">
-    <LineChart :line-chart-data="lineChartData" :title="'Time works username & teams'"/>
+    <LineChart :line-chart-data="lineChartData" :title="'Time works username & teams.svg'"/>
   </div>
 
 </template>

@@ -26,8 +26,5 @@ export default {
 </template>
 
 <style scoped>
-.home-container {
-  height: 100vh;
-  overflow: scroll;
-}
+
 </style>

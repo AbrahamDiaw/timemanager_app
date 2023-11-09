@@ -1,7 +1,7 @@
 <script lang="ts">
 
-import { ClockStore } from "../../stores/ClockStore";
-import { UserStore } from "../../stores/UserStore";
+import { ClockStore } from "../../../stores/ClockStore";
+import { UserStore } from "../../../stores/UserStore";
 
 export default {
 	  name: "ClockManager",

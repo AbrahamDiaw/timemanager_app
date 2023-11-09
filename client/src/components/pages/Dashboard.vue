@@ -1,6 +1,6 @@
 <script lang="ts">
 
-import ChartManager from "../specifics/ChartManager.vue";
+import ChartManager from "../specifics/chart/ChartManager.vue";
 
 export default {
   name: "Dashboard",

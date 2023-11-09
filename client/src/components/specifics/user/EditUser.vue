@@ -96,9 +96,9 @@ export default {
                 <input class="form-input" v-model="newUser.email" type="email" placeholder="Email">
             </div>
 
-            <select class="form-input" v-model="newUser.role" v-if="authUser.role == ROLES.ADMIN || authUser.role == ROLES.GENERAL_MANAGER">
+            <select class="form-input" v-model="newUser.role" v-if="authUser.role == ROLES.ADMIN || authUser.role == ROLES.GENERAL_MANAGER || authUser.role == ROLES.MANAGER">
                 <option disabled value="Role">Role</option>
-                <option v-for="role in roles.filter((r) => r != ROLES.ADMIN)" :key="role">{{ role }}</option>
+                <option v-for="role in roles.filter((r) => (authUser.role != ROLES.ADMIN) ? (authUser.role == ROLES.MANAGER) ? r != ROLES.GENERAL_MANAGER && r != ROLES.ADMIN : r != ROLES.ADMIN : true)" :key="role">{{ role }}</option>
             </select>
 
             <div class="form-field">

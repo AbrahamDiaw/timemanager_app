@@ -15,7 +15,6 @@ export const ModalStore = create<ModalState>((set) => ({
 	componentProps: undefined,
 
 	openModal: (componentName: Components, componentProps) => {
-		console.log("props:", componentProps)
 		set({ isOpen: true, componentName, componentProps });
 	},
 

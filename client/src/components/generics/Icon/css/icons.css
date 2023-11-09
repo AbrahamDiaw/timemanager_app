@@ -1,10 +1,10 @@
 @font-face {
 font-family: "icons";
-src: url("../fonts/icons.eot?f90e276af1c9b6751444938c1a633f0a#iefix") format("embedded-opentype"),
-url("../fonts/icons.svg?f90e276af1c9b6751444938c1a633f0a#icons") format("svg"),
-url("../fonts/icons.ttf?f90e276af1c9b6751444938c1a633f0a") format("truetype"),
-url("../fonts/icons.woff?f90e276af1c9b6751444938c1a633f0a") format("woff"),
-url("../fonts/icons.woff2?f90e276af1c9b6751444938c1a633f0a") format("woff2");
+src: url("../fonts/icons.eot?315f59151ddfd898e1bfc99829ace339#iefix") format("embedded-opentype"),
+url("../fonts/icons.svg?315f59151ddfd898e1bfc99829ace339#icons") format("svg"),
+url("../fonts/icons.ttf?315f59151ddfd898e1bfc99829ace339") format("truetype"),
+url("../fonts/icons.woff?315f59151ddfd898e1bfc99829ace339") format("woff"),
+url("../fonts/icons.woff2?315f59151ddfd898e1bfc99829ace339") format("woff2");
 }
 
   i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -39,21 +39,33 @@ line-height: 1;
     .icon-dashboard:before {
   content: "\f107";
   }
-    .icon-edit:before {
+    .icon-delete:before {
   content: "\f108";
   }
-    .icon-eye-sharp:before {
+    .icon-edit:before {
   content: "\f109";
   }
-    .icon-logout-circle:before {
+    .icon-eye-sharp:before {
   content: "\f10a";
   }
-    .icon-power-off:before {
+    .icon-loader:before {
   content: "\f10b";
   }
-    .icon-settings:before {
+    .icon-logout-circle:before {
   content: "\f10c";
   }
-    .icon-users:before {
+    .icon-power-off:before {
   content: "\f10d";
+  }
+    .icon-settings:before {
+  content: "\f10e";
+  }
+    .icon-teams:before {
+  content: "\f10f";
+  }
+    .icon-users:before {
+  content: "\f110";
+  }
+    .icon-workingtimes:before {
+  content: "\f111";
   }

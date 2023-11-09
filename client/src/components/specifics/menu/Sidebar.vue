@@ -1,13 +1,13 @@
 <script lang="ts">
 
-import { Routes } from "../../../vars/Routes";
-import Icon from "../generics/Icon/Icon.vue";
-import { Icons } from "../generics/Icon/Icons";
-import { ModalStore } from "../../stores/ModalStore";
-import { Components } from "../_components/Components";
-import { UserStore } from "../../stores/UserStore";
-import { SecurityService } from "../../services/SecurityService";
-import { AuthUser } from "../../types/User";
+import { Routes } from "../../../../vars/Routes";
+import Icon from "../../generics/Icon/Icon.vue";
+import { Icons } from "../../generics/Icon/Icons";
+import { ModalStore } from "../../../stores/ModalStore";
+import { Components } from "../../_components/Components";
+import { UserStore } from "../../../stores/UserStore";
+import { SecurityService } from "../../../services/SecurityService";
+import { AuthUser, ROLES } from "../../../types/User";
 
 const securityService = new SecurityService()
 
@@ -16,6 +16,9 @@ export default {
 	name: "Sidebar",
 
 	computed: {
+      ROLES() {
+          return ROLES
+      },
 		Components() {
 			return Components
 		},
@@ -77,22 +80,25 @@ export default {
                         <Icon :name="Icons.IconDashboard"/>
                         <span v-if="isOpen">Dashboard</span>
                     </router-link>
-                    <router-link :to="{ path: Routes.USERS }">
-                        <Icon :name="Icons.IconUsers"/>
-                        <span v-if="isOpen">Users</span>
-                    </router-link>
-                    <router-link :to="{ path: Routes.WORKINGTIMES + '/' + authUser.id}">
-                        <Icon :name="Icons.IconAlarms"/>
-                        <span v-if="isOpen">My Working times</span>
-                    </router-link>
                     <router-link :to="{ path: Routes.CLOCK_MANAGER + '/' + authUser.username}">
                         <Icon :name="Icons.IconAlarms"/>
-                        <span v-if="isOpen">My Clock</span>
+                        <span v-if="isOpen">Clocks</span>
                     </router-link>
-                    <router-link :to="{ path: Routes.TEAMS}">
-                        <Icon :name="Icons.IconAlarms"/>
-                        <span v-if="isOpen">Teams</span>
+                    <router-link :to="{ path: Routes.WORKINGTIMES + '/' + authUser.id}">
+                        <Icon :name="Icons.IconWorkingtimes"/>
+                        <span v-if="isOpen">Working times</span>
                     </router-link>
+                   <div v-if="[ROLES.ADMIN, ROLES.GENERAL_MANAGER, ROLES.MANAGER].includes(authUser.role as any)">
+                       <span class="sidebar-separator"></span>
+                       <router-link :to="{ path: Routes.USERS }">
+                           <Icon :name="Icons.IconUsers"/>
+                           <span v-if="isOpen">Users</span>
+                       </router-link>
+                       <router-link :to="{ path: Routes.TEAMS}">
+                           <Icon :name="Icons.IconTeams"/>
+                           <span v-if="isOpen">Teams</span>
+                       </router-link>
+                   </div>
                 </div>
             </div>
 
@@ -222,6 +228,13 @@ export default {
 
 .sidebar-content span, .sidebar-footer span {
     margin-left: 10px;
+}
+
+.sidebar-separator {
+    display: block;
+    height: 1px;
+    width: 100%;
+    background: var(--grey);
 }
 
 .sidebar-footer {

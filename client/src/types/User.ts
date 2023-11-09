@@ -1,9 +1,12 @@
+import { Team } from "./Team";
+
 export type User = {
 	id: string;
 	username: string;
 	email: string;
 	role: ROLES;
 	password?: string;
+	teams: Team[]
 }
 
 export type AuthUser = User & {

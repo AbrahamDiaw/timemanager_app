@@ -108,9 +108,9 @@ export const UserStore = create<UserState>(
 						});
 
 						if (isAuth) {
-							set({ currentUser: newUserData });
-						} else {
 							set({ authUser: newUserData });
+						} else {
+							set({ currentUser: newUserData });
 						}
 
 						resolve(newUserData);
