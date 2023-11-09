@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Copy Docker Compose
+        run: cp ${{ github.workspace }}/docker-compose.yml .
+
       - name: Login Dockerhub
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
@@ -23,11 +26,12 @@ jobs:
         #- name: Push to Dockerhub
         #run: docker push abrhmdiaw/time_manager_cicd:latest
 
-      - name: Build and Push Docker images with Docker Compose
-        run: docker-compose -f ${{ github.workspace }}/docker-compose.yml build
+      #- name: Build and Push Docker images with Docker Compose
+       # run: docker-compose -f ${{ github.workspace }}/docker-compose.yml build
 
+      #- name: Push to Dockerhub
+       # run: |
+        #  docker-compose -f ${{ github.workspace }}/docker-compose.yml push
+         # docker push abrhmdiaw/time_manager_cicd:tagname
       - name: Push to Dockerhub
-        run: | 
-          docker-compose -f ${{ github.workspace }}/docker-compose.yml push
-          docker push abrhmdiaw/time_manager_cicd:tagname
-
+        run: docker-compose -f docker-compose.yml push
