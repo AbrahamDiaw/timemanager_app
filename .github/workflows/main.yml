@@ -6,42 +6,46 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    jobs:
+      deploy:
+        runs-on: ubuntu-latest
 
-      - name: Set up AWS CLI
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-north-1
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v2
 
-      - name: Login to AWS ECR
-        run: aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 412477988425.dkr.ecr.eu-north-1.amazonaws.com
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          - name: Set up AWS CLI
+            uses: aws-actions/configure-aws-credentials@v1
+            with:
+              aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+              aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+              aws-region: eu-north-1
 
-      - name: Déployer Docker Compose
-        run: |
-          docker-compose -f docker-compose.yml up -d
-          echo ${{ github.workspace }}
-        working-directory: ${{ github.workspace }}
+          - name: Login to AWS ECR
+            run: aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 412477988425.dkr.ecr.eu-north-1.amazonaws.com
+            env:
+              AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+              AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      - name: Install Elastic Beanstalk cli
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y python3-pip
-          sudo pip3 install awsebcli --upgrade
-          eb --version
+          - name: Build and Push Docker image
+            run: |
+              docker-compose -f docker-compose.yml up -d
+              docker build -t timemanager-app:latest .
+              docker tag timemanager-app:latest 412477988425.dkr.ecr.eu-north-1.amazonaws.com/timemanager-app:latest
+              docker push 412477988425.dkr.ecr.eu-north-1.amazonaws.com/timemanager-app:latest
 
-      - name: Configure AWS Elastic Beanstalk
-        run: |
-          eb init -p docker timemanagerapp-env
-          eb use timemanagerapp-env
-          eb deploy
+          - name: Install Elastic Beanstalk CLI
+            run: |
+              sudo apt-get update
+              sudo apt-get install -y python3-pip
+              sudo pip3 install awsebcli --upgrade
+              eb --version
 
-      - name: Deployed to Elastic Beanstalk
-        run: |
-          echo "Déploiement terminé avec succès !"
+          - name: Configure AWS Elastic Beanstalk
+            run: |
+              eb use Timemanagerapp-env
+              eb deploy
+
+          - name: Deployed to Elastic Beanstalk
+            run: |
+              echo "Déploiement terminé avec succès !"
