@@ -38,8 +38,8 @@ jobs:
 
       - name: Configure AWS Elastic Beanstalk
         run: |
-          eb init -p docker Timemanagerapp-env
-          eb use Timemanagerapp-env
+          eb init -p docker timemanagerapp-env
+          eb use timemanagerapp-env
           eb deploy
 
       - name: Deployed to Elastic Beanstalk
