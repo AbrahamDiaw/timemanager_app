@@ -36,7 +36,7 @@ jobs:
           region: eu-north-1
           application_name: timemanager_app
           environment_name: Timemanagerapp-env
-          version_label: ${{ github.sha }}
+          version_label:
           version_description: 'Deploy from GitHub Actions'
 
       - name: Deployed to Elastic Beanstalk
