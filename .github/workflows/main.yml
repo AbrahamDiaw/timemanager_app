@@ -36,3 +36,5 @@ jobs:
         run: |
           docker-compose -f ${{ github.workspace }}/docker-compose.yml build
           docker-compose -f ${{ github.workspace }}/docker-compose.yml push
+          docker tag abrhmdiaw/time_manager_cicd:latest abrhmdiaw/time_manager_cicd:tagname
+          docker push abrhmdiaw/time_manager_cicd:tagname
