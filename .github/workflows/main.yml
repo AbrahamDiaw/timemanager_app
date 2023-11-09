@@ -28,21 +28,16 @@ jobs:
           docker-compose -f docker-compose.yml build
           docker-compose -f docker-compose.yml push
 
-      - name: Install Elastic Beanstalk CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y python3-pip
-          sudo pip3 install awsebcli --upgrade
-          eb --version
-
-      - name: Initialize Elastic Beanstalk
-        run: |
-          eb init -p docker elixir_app
-
-      - name: Configure AWS Elastic Beanstalk
-        run: |
-          eb use elixir_app
-          eb deploy
+      - name: Deploy to Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: eu-north-1
+          application: timemanager_app
+          environment: Timemanagerapp-env
+          version_label: 1
+          description: 'Deploy from GitHub Actions'
 
       - name: Deployed to Elastic Beanstalk
         run: |
