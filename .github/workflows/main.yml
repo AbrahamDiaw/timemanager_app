@@ -25,9 +25,16 @@ jobs:
 
       - name: Déployer Docker Compose
         run: |
-          docker-compose -f ${{ github.workspace }}/docker-compose.yml up -d
+          docker-compose -f docker-compose.yml up -d
           echo ${{ github.workspace }}
         working-directory: ${{ github.workspace }}
+
+      - name: Install Elastic Beanstalk cli
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          sudo pip3 install awsebcli --upgrade
+          eb --version
 
       - name: Configure AWS Elastic Beanstalk
         run: |
