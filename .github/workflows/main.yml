@@ -27,4 +27,7 @@ jobs:
         run: docker-compose -f ${{ github.workspace }}/docker-compose.yml build
 
       - name: Push to Dockerhub
-        run: docker-compose -f ${{ github.workspace }}/docker-compose.yml push
+        run: | 
+          docker-compose -f ${{ github.workspace }}/docker-compose.yml push
+          docker push abrhmdiaw/time_manager_cicd:tagname
+
