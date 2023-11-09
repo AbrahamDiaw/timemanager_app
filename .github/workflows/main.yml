@@ -20,6 +20,6 @@ jobs:
       - name: Build and Push Docker images with Docker Compose
         run: |
           docker-compose -f ${{ github.workspace }}/docker-compose.yml build
-          docker-compose -f ${{ github.workspace }}/docker-compose.yml push client:latest
-          docker-compose -f ${{ github.workspace }}/docker-compose.yml push server:latest
-          docker-compose -f ${{ github.workspace }}/docker-compose.yml push db:latest
+          docker-compose -f ${{ github.workspace }}/docker-compose.yml push client
+          docker-compose -f ${{ github.workspace }}/docker-compose.yml push server
+          docker-compose -f ${{ github.workspace }}/docker-compose.yml push db
