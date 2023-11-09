@@ -1,6 +1,6 @@
 name: Time manager deploy to Elastic Beanstalk
 
-on: [push]
+on: [ push ]
 
 jobs:
   deploy:
@@ -23,9 +23,9 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      - name: Deploy Docker Compose
+      - name: Déployer Docker Compose
         run: |
-          docker-compose -f docker-compose.yml up -d
+          docker-compose -f $GITHUB_WORKSPACE/docker-compose.yml up -d
         working-directory: $GITHUB_WORKSPACE
 
       - name: Configure AWS Elastic Beanstalk
