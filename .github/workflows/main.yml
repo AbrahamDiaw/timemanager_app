@@ -17,17 +17,15 @@ jobs:
         run: git clone https://github.com/AbrahamDiaw/timemanager_app.git
 
       - name: SSH into AWS EC2
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_PRIVATE_KEY }}
-          port: ${{ secrets.EC2_SSH_PORT }}
-          script: |
-            sudo apt-get update
-            sudo apt-get install -y docker.io docker-compose
-            sudo docker compose -f timemanager_app/docker-compose.yml up -d
-            sudo docker compose -f timemanager_app/docker-compose.yml ps
+        run: |
+          ssh ubuntu@${{ secrets.EC2_HOST }} -i ${{ secrets.EC2_PRIVATE_KEY }}
+
+      - name: install docker
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker.io docker-compose
+          sudo docker compose -f timemanager_app/docker-compose.yml up -d
+          sudo docker compose -f timemanager_app/docker-compose.yml ps
 
       - name: Deployed to EC2 Succes
         run: |
