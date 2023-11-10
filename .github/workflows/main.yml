@@ -13,6 +13,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Create SSH Directory
+        run: |
+          mkdir -p ~/.ssh
+
       - name: Create SSH Key File
         run: |
           echo "${{secrets.EC2_PRIVATE_KEY}}" > ~/.ssh/ec2_private_key
@@ -20,10 +24,6 @@ jobs:
           ssh-keyscan -t rsa ${{secrets.EC2_HOST}} >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
           echo ~/.ssh/known_hosts
-
-      - name: Create SSH Directory
-        run: |
-          mkdir -p ~/.ssh
 
       - name: SSH into AWS EC2
         run: |
