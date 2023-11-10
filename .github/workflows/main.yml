@@ -1,25 +1,34 @@
-name: CI Pipeline
+name: Deploy to AWS EC2
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-      - name: Login Dockerhub
-        env:
-          DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
-          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - name: Clone Repository via HTTPS
+        run: git clone https://github.com/AbrahamDiaw/timemanager_app.git
 
-      - name: Build and Push Docker images with Docker Compose
+      - name: SSH into AWS EC2
+        uses: appleboy/ssh-action@v2
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          port: ${{ secrets.EC2_SSH_PORT }}
+          script: |
+            sudo apt-get update
+            sudo apt-get install -y docker.io docker-compose
+            sudo docker compose -f timemanager_app/docker-compose.yml up -d
+            sudo docker compose -f timemanager_app/docker-compose.yml ps
+
+      - name: Deployed to EC2 Succes
         run: |
-          docker-compose -f ${{ github.workspace }}/docker-compose.yml build
-          docker-compose -f ${{ github.workspace }}/docker-compose.yml push client
-          docker-compose -f ${{ github.workspace }}/docker-compose.yml push server
-          docker-compose -f ${{ github.workspace }}/docker-compose.yml push db
+          echo "Déploiement terminé avec succès !"
