@@ -16,7 +16,7 @@ services:
       - c
       - |
         npm install 
-        npm run build
+        npm run dev
 
   server:
     image: elixir:latest
