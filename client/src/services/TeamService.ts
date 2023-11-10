@@ -20,4 +20,12 @@ export class TeamService {
         return  await UHttp.delete(`${ GlobalVars.BASE_URL_API }teams/${teamId}`, UHttp.authHeaders())
     }
 
+    public async addMember(teamId: number, userId: number): Promise<Response> {
+        return  await UHttp.post(`${ GlobalVars.BASE_URL_API }teams/${teamId}/${userId}`, UHttp.authHeaders())
+    }
+
+    public async deleteMember(teamId: number, userId: number): Promise<Response> {
+        return  await UHttp.delete(`${ GlobalVars.BASE_URL_API }teams/${teamId}/${userId}`, UHttp.authHeaders())
+    }
+
 }

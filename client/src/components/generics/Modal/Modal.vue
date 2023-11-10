@@ -10,6 +10,7 @@ import {Icons} from "../Icon/Icons";
 import Icon from "../Icon/Icon.vue";
 import UserSettings from "../../specifics/user/UserSettings.vue";
 import AddTeam from "../../specifics/team/AddTeam.vue";
+import TeamUsers from "../../specifics/team/TeamUsers.vue";
 
 export default {
     props: {
@@ -68,6 +69,10 @@ export default {
                     this.title = "Add team";
                     comp = AddTeam;
                     break;
+                case Components.TeamUsers:
+                    this.title = "Users";
+                    comp = TeamUsers;
+                    break;
             }
 
             return comp;
@@ -100,7 +105,6 @@ export default {
             </div>
 
             <div class="footer">
-
             </div>
         </div>
     </div>

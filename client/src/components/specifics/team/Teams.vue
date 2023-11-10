@@ -7,7 +7,7 @@ import { ModalStore } from "../../../stores/ModalStore";
 import { Components } from "../../_components/Components";
 import Loader from "../../generics/Loader/Loader.vue";
 import { UserStore } from "../../../stores/UserStore";
-import { AuthUser, ROLES } from "../../../types/User";
+import { AuthUser, ROLES, User } from "../../../types/User";
 import { Team } from "../../../types/Team";
 import { TeamService } from "../../../services/TeamService";
 
@@ -60,7 +60,29 @@ export default {
 					}
 				});
 			}
-		}
+		},
+
+    getUsers(team: any, teamUsers: any): void {
+        const teamUserIds: number[] = [];
+        const users = [];
+
+        for (const user of teamUsers.data) {
+            teamUserIds.push(user.id);
+        }
+
+        UserStore(state => {
+            for (const user of state.users) {
+                if (teamUserIds.includes(Number(user.id))) {
+                    users.push(user);
+                }
+            }
+        });
+
+        TeamStore(state => {
+            state.setCurrentTeam(team);
+            state.setCurrentUsers(users);
+        });
+    }
 	},
 
 	mounted() {
@@ -90,7 +112,7 @@ export default {
             <div class="teams-content" v-for="(team) in teams">
                 <h2 class="teams-name">{{ team.name }}</h2>
                 <div class="teams-manage">
-                    <Icon :name="Icons.IconUsers"/>
+                    <Icon :name="Icons.IconUsers" @click="ModalStore(state => {state.openModal(Components.TeamUsers); getUsers(team, team.users)})" />
                     <span v-if="authUser.role == ROLES.ADMIN || isMyTeam(team)">
                   <Icon :name="Icons.IconEdit"/>
                   <Icon :name="Icons.IconDelete" @click="deleteTeam(team)"/>

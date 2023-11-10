@@ -4,7 +4,7 @@ import Home from "./components/pages/Home.vue";
 import WorkingTimes from "./components/pages/WorkingTimes.vue";
 import ClockManager from "./components/specifics/clock/ClockManager.vue";
 import Dashboard from "./components/pages/Dashboard.vue";
-import Teams from "./components/specifics/team/teams.vue";
+import Teams from "./components/specifics/team/Teams.vue";
 
 const routes = [
     {
