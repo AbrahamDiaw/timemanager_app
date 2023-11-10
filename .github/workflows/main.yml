@@ -16,10 +16,10 @@ jobs:
       - name: Create SSH Directory and Key File
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_PRIVATE_KEY }}" > ~/.ssh/ec2_private_key
-          chmod 600 ~/.ssh/ec2_private_key
-          ssh-keyscan -t rsa ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
+          sudo echo "${{ secrets.EC2_PRIVATE_KEY }}" > ~/.ssh/ec2_private_key
+          sudo chmod 600 ~/.ssh/ec2_private_key
+          sudo ssh-keyscan -t rsa ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+          sudo chmod 644 ~/.ssh/known_hosts
           cat ~/.ssh/known_hosts
 
       - name: SSH into AWS EC2
