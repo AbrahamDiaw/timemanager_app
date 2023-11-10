@@ -27,7 +27,7 @@ jobs:
 
       - name: SSH into AWS EC2
         run: |
-          ssh ubuntu@${{secrets.EC2_HOST}} -i ~/.ssh/ec2_private_key  
+          sudo ssh ubuntu@${{secrets.EC2_HOST}} -i ~/.ssh/ec2_private_key  
 
       - name: install docker
         run: |
