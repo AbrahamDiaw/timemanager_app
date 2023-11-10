@@ -13,9 +13,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Clone Repository via HTTPS
-        run: git clone https://github.com/AbrahamDiaw/timemanager_app.git
-
       - name: SSH into AWS EC2
         run: |
           ssh ubuntu@${{ secrets.EC2_HOST }} -i ${{ secrets.EC2_PRIVATE_KEY }}
