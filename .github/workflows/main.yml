@@ -3,7 +3,7 @@ name: Deploy to AWS EC2
 on:
   push:
     branches:
-      - main
+      - no
 
 jobs:
   deploy:
@@ -13,19 +13,20 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Create SSH Directory and Key File
-        run: |
-          mkdir -p ~/.ssh
-          sudo echo "${{ secrets.EC2_PRIVATE_KEY }}" > ~/.ssh/ec2_private_key
-          sudo chmod 600 ~/.ssh/ec2_private_key
-          sudo ssh-keyscan -t rsa ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
-          sudo chmod 644 ~/.ssh/known_hosts
-          cat ~/.ssh/known_hosts
 
-      - name: SSH into AWS EC2
-        run: |
-          echo "35.180.186.216"
-          sudo ssh ubuntu@35.180.186.216 -i ~/.ssh/ec2_private_key  
+          #- name: Create SSH Directory and Key File
+          # run: |
+          #  mkdir -p ~/.ssh
+          # sudo echo "${{ secrets.EC2_PRIVATE_KEY }}" > ~/.ssh/ec2_private_key
+          #sudo chmod 600 ~/.ssh/ec2_private_key
+          #sudo ssh-keyscan -t rsa ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+          #sudo chmod 644 ~/.ssh/known_hosts
+          #cat ~/.ssh/known_hosts
+
+          #- name: SSH into AWS EC2
+          # run: |
+          #  echo "35.180.186.216"
+        # sudo ssh ubuntu@35.180.186.216 -i ~/.ssh/ec2_private_key
 
       - name: Install Docker
         run: |
