@@ -15,12 +15,13 @@ jobs:
           chmod 600 ec2_private_key.pem
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
-          ssh -i ec2_private_key.pem -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "echo 'hello'"
+          ssh ubuntu@{{ secrets.EC2_HOST }} -i ec2_private_key.pem
+          "echo hello"
         env:
           EC2_PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
 
       - name: Clone repository
-        run: | 
+        run: |
           git clone https://github.com/AbrahamDiaw/timemanager_app.git
           ls -la
 
