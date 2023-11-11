@@ -36,8 +36,8 @@ jobs:
 
       - name: Build Docker container
         run: |
-          sudo docker-compose -f timemanager_app/docker-compose.yml up -d
-          sudo docker-compose -f timemanager_app/docker-compose.yml ps
+          sudo docker-compose -f ./docker-compose.yml up -d
+          sudo docker-compose -f ./docker-compose.yml ps
 
       - name: Deployed to EC2 Success
         run: |
