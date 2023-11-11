@@ -18,7 +18,8 @@ jobs:
           
           ssh -i ec2_private_key.pem ubuntu@${{ secrets.EC2_HOST }} '
             git clone https://github.com/AbrahamDiaw/timemanager_app.git
-            ls -la
+            cd timemanager_app && git pull origin main
+            cd
             sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
             docker-compose --version
