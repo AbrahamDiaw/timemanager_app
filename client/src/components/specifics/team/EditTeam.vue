@@ -61,7 +61,7 @@ export default {
 </script>
 
 <template>
-  <form @submit="addTeam" class="form">
+  <form @submit.prevent="addTeam" class="form">
       <div class="form-field-container">
           <div class="form-field">
             <input class="form-input" v-model="name" type="text" placeholder="Name">

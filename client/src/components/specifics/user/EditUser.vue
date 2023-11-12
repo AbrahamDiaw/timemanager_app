@@ -37,7 +37,12 @@ export default {
 		}
 	},
 
-	data(): EditDataType {
+	data(): {
+      newUser: User;
+      disabled: boolean;
+      authUser: User & { token?: string };
+      errors: Map<any, any>
+  } {
 		return {
       authUser: UserStore(state => state.authUser) as AuthUser,
 			newUser: {
@@ -46,7 +51,7 @@ export default {
 				username: this.user.username,
 				email: this.user.email,
 				password: undefined
-			},
+			} as User,
 			disabled: false,
         errors: new Map()
 		}
@@ -86,7 +91,7 @@ export default {
 </script>
 
 <template>
-    <form @submit="editUser" class="form" v-if="user">
+    <form @submit.prevent="editUser" class="form" v-if="user">
         <div class="form-field-container">
             <div class="form-field">
                 <input class="form-input" v-model="newUser.username" type="text" placeholder="Username">
