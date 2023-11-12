@@ -49,7 +49,11 @@ export const TeamStore = create<TeamState>(
         },
 
         update: (teamId: number, data: Team): void => {
-
+            set(state => {
+                const _teams = state.teams.filter(t => t.id != teamId);
+                _teams.push(data);
+                return { teams: _teams }
+            })
         },
 
         delete: (teamId: number): void => {

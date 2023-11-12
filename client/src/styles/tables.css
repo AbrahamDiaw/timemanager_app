@@ -1,0 +1,17 @@
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table td, .table th {
+    border: 1px solid var(--light-grey);
+    padding: 8px;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: rgba(242, 242, 242, 0.08);
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: rgba(242, 242, 242, 0.18);
+}

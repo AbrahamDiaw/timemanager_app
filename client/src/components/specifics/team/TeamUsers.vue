@@ -47,7 +47,6 @@ export default {
 
 <template>
   <div class="teams-users">
-      <p>{{ (users.value || '').length }}</p>
       <div class="teams-user" v-for="user of users">
           <p>{{ user.username }}</p>
           <Icon :name="Icons.IconDelete" class-name="delete-team-user" @click="deleteUser(user)" />

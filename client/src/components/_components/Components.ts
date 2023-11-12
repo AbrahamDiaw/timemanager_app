@@ -5,5 +5,6 @@ export enum Components {
 	EditWorkingTime = "EditWorkingTime",
 	AddWorkingTime = "AddWorkingTime",
 	AddTeam = "AddTeam",
+	EditTeam = "EditTeam",
 	TeamUsers = "TeamUsers"
 }

@@ -44,34 +44,52 @@ export default {
 </script>
 
 <template>
-    <button class="clock-button" @click="toggleClock()" :disabled="disabled">
-        {{ clockIn ? "Clock out" : "Clock in" }}
-    </button>
+    <div class="clock-manager">
+        <button class="clock-button" @click="toggleClock()" :disabled="disabled">
+            {{ clockIn ? "Clock out" : "Clock in" }}
+        </button>
 
 
-    <div class="clocks-container" v-for="clock in data">
-        <p>
-            <span v-if="clock.status">Start</span>
-            <span v-if="!clock.status">End</span>
-            : {{ clock.time }}
-        </p>
+        <div class="clocks-container">
+            <p v-for="clock in data">
+                <strong v-if="clock.status">Start</strong>
+                <strong v-if="!clock.status">End</strong>
+                : {{ clock.time }}
+            </p>
+        </div>
+
+        <Loader v-if="loading" />
     </div>
-
-    <Loader v-if="loading" />
 </template>
 
 <style scoped>
 
+.clock-manager {
+    padding: 30px;
+}
+
 .clocks-container {
-    color: #FFFFFF;
+    margin-top: 30px;
+    padding: 10px;
+    color: var(--white);
+}
+
+.clocks-container p {
+    padding: 10px 0;
 }
 
 .clock-button {
-    background: #1b1e21;
+    background: var(--dark-grey);
     color: #FFFFFF;
     padding: 15px 30px;
-    margin: 50px;
     border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.clock-button:hover {
+    background: var(--light-grey);
+    color: black;
 }
 
 </style>

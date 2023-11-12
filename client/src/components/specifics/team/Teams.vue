@@ -39,6 +39,7 @@ export default {
 	},
 
 	methods: {
+      TeamStore,
 		ModalStore,
 
 		isMyTeam(team: Team): boolean {
@@ -112,9 +113,12 @@ export default {
             <div class="teams-content" v-for="(team) in teams">
                 <h2 class="teams-name">{{ team.name }}</h2>
                 <div class="teams-manage">
-                    <Icon :name="Icons.IconUsers" @click="ModalStore(state => {state.openModal(Components.TeamUsers); getUsers(team, team.users)})" />
+                    <Icon v-if="team.users.data.length > 0" :name="Icons.IconUsers" @click="ModalStore(state => {state.openModal(Components.TeamUsers); getUsers(team, team.users)})" />
                     <span v-if="authUser.role == ROLES.ADMIN || isMyTeam(team)">
-                  <Icon :name="Icons.IconEdit"/>
+                  <Icon :name="Icons.IconEdit" @click="ModalStore(state => {
+                      TeamStore(state => state.setCurrentTeam(team));
+                      state.openModal(Components.EditTeam);
+                  })"/>
                   <Icon :name="Icons.IconDelete" @click="deleteTeam(team)"/>
               </span>
                 </div>

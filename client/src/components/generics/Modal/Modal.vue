@@ -11,6 +11,7 @@ import Icon from "../Icon/Icon.vue";
 import UserSettings from "../../specifics/user/UserSettings.vue";
 import AddTeam from "../../specifics/team/AddTeam.vue";
 import TeamUsers from "../../specifics/team/TeamUsers.vue";
+import EditTeam from "../../specifics/team/EditTeam.vue";
 
 export default {
     props: {
@@ -49,10 +50,11 @@ export default {
 
             switch (composantName) {
                 case Components.AddUser:
+                    this.title = "Add User";
                     comp = AddUser;
                     break;
                 case Components.EditUser:
-                    this.title = "Edit user";
+                    this.title = "Edit User";
                     comp = EditUser;
                     break;
                 case Components.UserSettings:
@@ -60,14 +62,20 @@ export default {
                     comp = UserSettings;
                     break;
                 case Components.EditWorkingTime:
+                    this.title = "Edit Working time";
                     comp = EditWorkingTime;
                     break;
                 case Components.AddWorkingTime:
+                    this.title = "Add Working time";
                     comp = AddWorkingTime;
                     break;
                 case Components.AddTeam:
-                    this.title = "Add team";
+                    this.title = "Add Team";
                     comp = AddTeam;
+                    break;
+                case Components.EditTeam:
+                    this.title = "Edit Team";
+                    comp = EditTeam;
                     break;
                 case Components.TeamUsers:
                     this.title = "Users";
