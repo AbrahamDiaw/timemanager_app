@@ -11,7 +11,7 @@ export default {
     const userState = reactive({
       username: "",
       email: "",
-      role: ""
+      role: ''
     })
 
     const roles = [
@@ -37,15 +37,23 @@ export default {
 </script>
 
 <template>
-  <form @submit.prevent="addUser" class="form-container">
-    <h1>Add User Form</h1>
-    <input v-model="userState.username" type="text" placeholder="username">
-    <input v-model="userState.email" type="email" placeholder="email">
-    <select v-model="userState.role">
-      <option disabled value="">Choisir un rôle</option>
-      <option v-for="role in this.roles" :key="role">{{ role }}</option>
-    </select>
-    <input type="submit" value="Submit">
+  <form @submit.prevent="addUser" class="form">
+      <div class="form-field-container">
+          <div class="form-field">
+              <input class="form-input" v-model="userState.username" type="text" placeholder="username">
+          </div>
+
+          <div class="form-field">
+              <input class="form-input" v-model="userState.email" type="email" placeholder="email">
+          </div>
+
+        <select class="form-input" v-model="userState.role">
+          <option disabled value="">Choisir un rôle</option>
+          <option v-for="role in this.roles" :key="role">{{ role }}</option>
+        </select>
+      </div>
+
+      <button class="form-button" type="submit">Submit</button>
   </form>
 </template>
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 import {defineComponent, watch} from 'vue'
 import {useRouter, useRoute} from 'vue-router'
-import {Routes} from "../../../vars/Routes";
+import {Routes} from "../../../../vars/Routes";
 
 type HeaderData = {
   title: string

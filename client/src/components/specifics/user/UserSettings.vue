@@ -4,6 +4,7 @@ import { UserStore } from "../../../stores/UserStore";
 
 export default {
   name: "UserSettings",
+
   components: {
     EditUser
   },
@@ -18,7 +19,6 @@ export default {
 </script>
 
 <template>
-  <h1>User Settings</h1>
   <EditUser :user="authUser" :auth="true"/>
 </template>
 

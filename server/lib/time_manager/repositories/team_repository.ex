@@ -107,7 +107,7 @@ defmodule TIME_MANAGER.TeamRepo do
   @doc """
   """
   def add_team_member(team_id, user_id) do
-    attrs = %{ team_id: user_id, user_id: user_id }
+    attrs = %{ team_id: team_id, user_id: user_id }
 
     %TeamUser{}
     |> TeamUser.changeset(attrs)

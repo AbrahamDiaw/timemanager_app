@@ -2,7 +2,9 @@ import { createRouter, createWebHistory } from "vue-router";
 import { Routes } from "../vars/Routes";
 import Home from "./components/pages/Home.vue";
 import WorkingTimes from "./components/pages/WorkingTimes.vue";
-import ClockManager from "./components/specifics/ClockManager.vue";
+import ClockManager from "./components/specifics/clock/ClockManager.vue";
+import Dashboard from "./components/pages/Dashboard.vue";
+import Teams from "./components/specifics/team/Teams.vue";
 
 const routes = [
     {
@@ -14,6 +16,11 @@ const routes = [
         path: Routes.HOME_ID,
         name: "HomeId",
         component: Home,
+    },
+    {
+        path: Routes.DASHBOARD,
+        name: "Dashboard",
+        component: Dashboard,
     },
     {
         path: Routes.WORKINGTIMES,
