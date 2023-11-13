@@ -16,7 +16,7 @@ services:
       - -c
       - |
         npm install 
-        npm run build
+        npm run dev
 
   server:
     image: elixir:latest
@@ -37,7 +37,6 @@ services:
         mix local.hex --force
         mix local.rebar --force
         mix deps.get
-        mix ecto.migrate
         mix ecto.setup
         mix phx.server
     restart: always
