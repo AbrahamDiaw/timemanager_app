@@ -9,6 +9,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Run test
+        run: mix test
+
       - name: SSH REMOTE INSTANCE, INSTALL DOCKER, BUILD AND DEPLOY
         run: |
           echo "${{ secrets.EC2_PRIVATE_KEY }}" > ec2_private_key.pem
