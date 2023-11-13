@@ -21,17 +21,13 @@ jobs:
             git clone https://github.com/AbrahamDiaw/timemanager_app.git
             cd timemanager_app && git pull origin main
             cd
-            echo "Downloading Docker..."
             sudo apt-get update
             sudo apt-get install -y docker.io
             docker --version
-            echo "Downloading Docker-Compose..."
             sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
-            echo "Docker-Compose version:"
             docker-compose --version
             sudo systemctl status docker
-            echo "Building and deploying with Docker-Compose..."
             sudo docker-compose -f timemanager_app/docker-compose.yml up -d
             sudo docker-compose -f timemanager_app/docker-compose.yml ps
           '
