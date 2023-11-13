@@ -31,4 +31,4 @@ jobs:
 
       - name: Deployed to EC2 Success
         run: |
-          echo "Déploiement terminé avec succès !"
+          echo "Déploiement Successful  !"
