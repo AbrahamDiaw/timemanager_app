@@ -26,6 +26,7 @@ jobs:
             sudo chmod +x /usr/local/bin/docker-compose
             echo "Docker-Compose version:"
             docker-compose --version
+            sudo systemctl status docker
             echo "Building and deploying with Docker-Compose..."
             sudo docker-compose -f timemanager_app/docker-compose.yml up -d
             sudo docker-compose -f timemanager_app/docker-compose.yml ps
