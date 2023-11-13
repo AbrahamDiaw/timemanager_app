@@ -2,7 +2,7 @@ name: CI CD EC2
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   deploy:
@@ -15,14 +15,18 @@ jobs:
           chmod 600 ec2_private_key.pem
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
-          
+
           ssh -i ec2_private_key.pem ubuntu@${{ secrets.EC2_HOST }} '
+            echo "Cloning the repository..."
             git clone https://github.com/AbrahamDiaw/timemanager_app.git
             cd timemanager_app && git pull origin main
             cd
+            echo "Downloading Docker-Compose..."
             sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
+            echo "Docker-Compose version:"
             docker-compose --version
+            echo "Building and deploying with Docker-Compose..."
             sudo docker-compose -f timemanager_app/docker-compose.yml up -d
             sudo docker-compose -f timemanager_app/docker-compose.yml ps
           '
@@ -31,4 +35,4 @@ jobs:
 
       - name: Deployed to EC2 Success
         run: |
-          echo "Déploiement Successful  !"
+          echo "Déploiement Successful !"
