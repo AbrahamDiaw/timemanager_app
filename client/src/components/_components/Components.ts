@@ -3,5 +3,8 @@ export enum Components {
 	UserSettings = "UserSettings",
 	EditUser = "EditUser",
 	EditWorkingTime = "EditWorkingTime",
-	AddWorkingTime = "AddWorkingTime"
+	AddWorkingTime = "AddWorkingTime",
+	AddTeam = "AddTeam",
+	EditTeam = "EditTeam",
+	TeamUsers = "TeamUsers"
 }

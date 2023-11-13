@@ -12,6 +12,12 @@ defmodule TIME_MANAGERWeb.UserJSON do
   end
 
   @doc """
+  """
+  def index_team(%{users: users}) do
+    %{data: for(user <- users, do: data_team(user))}
+  end
+
+  @doc """
   Renders a single user.
   """
   def show(%{user: user}) do
@@ -27,6 +33,12 @@ defmodule TIME_MANAGERWeb.UserJSON do
       email: user.email,
       role: user.role,
       teams: TeamJSON.index(%{teams: teams})
+    }
+  end
+
+  defp data_team(%User{} = user) do
+    %{
+      id: user.id
     }
   end
 end

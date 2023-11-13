@@ -283,14 +283,14 @@ defmodule TIME_MANAGER.ModelsTest do
     end
   end
 
-  describe "teams" do
+  describe "teams.svg" do
     alias TIME_MANAGER.Models.Team
 
     import TIME_MANAGER.ModelsFixtures
 
     @invalid_attrs %{name: nil}
 
-    test "list_teams/0 returns all teams" do
+    test "list_teams/0 returns all teams.svg" do
       team = team_fixture()
       assert Models.list_teams() == [team]
     end

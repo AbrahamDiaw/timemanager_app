@@ -14,7 +14,11 @@ defmodule TIME_MANAGERWeb.TeamController do
   end
 
   def create(conn, %{"team" => team_params}) do
+    logged_user =  Guardian.Plug.current_resource(conn)
+
     with {:ok, %Team{} = team} <- TeamRepo.create_team(team_params) do
+      TeamRepo.add_team_member(team.id, logged_user.id)
+
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/api/teams/#{team}")

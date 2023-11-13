@@ -4,11 +4,12 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "generate-icons": "fantasticon"
   },
   "dependencies": {
+    "chart.js": "^4.4.0",
     "js-cookie": "^3.0.5",
     "vue": "^3.3.7",
     "vue-router": "^4.2.5",

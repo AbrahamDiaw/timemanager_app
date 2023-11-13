@@ -7,7 +7,7 @@ defmodule TIME_MANAGER.Models.User do
     field :username, :string
     field :email, :string
     field :role, Ecto.Enum, values: [:administrator, :employee, :manager, :general_manager]
-    field :password_hash, :string
+    field :password, :string
     many_to_many :teams, TIME_MANAGER.Models.Team, join_through: "team_users"
 
     timestamps(type: :utc_datetime)
@@ -16,10 +16,10 @@ defmodule TIME_MANAGER.Models.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:username, :email, :role, :password_hash])
+    |> cast(attrs, [:username, :email, :role, :password])
     |> validate_required([:username, :email, :role], message: "Required - can't be null")
     |> unique_constraint(:email)
-    |> validate_length(:password_hash, min: 8, max: 20, message: "The password must contain between 8 and 20 characters.")
+    |> validate_length(:password, min: 6, message: "The password must contain between 6 and 20 characters.")
     |> validate_format(:email, ~r/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, message: "X@X.X")
     |> validate_type(:username, :string, "Username must be a string")
     |> validate_type(:email, :string, "Email must be a string")
@@ -45,9 +45,9 @@ defmodule TIME_MANAGER.Models.User do
 
   defp put_password_hash(changeset) do
     case changeset do
-      %Ecto.Changeset{valid?: true, changes: %{password_hash: pass}}
+      %Ecto.Changeset{valid?: true, changes: %{password: pass}}
       ->
-        put_change(changeset, :password_hash, hashpwsalt(pass))
+        put_change(changeset, :password, hashpwsalt(pass))
       _ ->
         changeset
     end
