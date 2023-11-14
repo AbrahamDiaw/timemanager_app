@@ -12,7 +12,7 @@ jobs:
       - name: SSH REMOTE INSTANCE, INSTALL DOCKER, BUILD AND DEPLOY
         run: |
           echo "${{ secrets.EC2_PRIVATE_KEY }}" > ec2_private_key.pem
-          chmod 600 ec2_private_key.pem
+          chmod 400 ec2_private_key.pem
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
