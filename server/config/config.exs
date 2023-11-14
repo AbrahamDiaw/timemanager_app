@@ -14,7 +14,7 @@ config :time_manager,
 
 # Configures the endpoint
 config :time_manager, TIME_MANAGERWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "13.39.84.25"],
   adapter: Phoenix.Endpoint.Cowboy2Adapter,
   render_errors: [
     formats: [json: TIME_MANAGERWeb.ErrorJSON],
