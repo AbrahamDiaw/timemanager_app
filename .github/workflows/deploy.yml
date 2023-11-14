@@ -29,6 +29,7 @@ jobs:
             docker-compose --version
             sudo systemctl status docker
             sudo docker-compose -f timemanager_app/docker-compose.yml up -d
+            sudo docker-compose -f timemanager_app/docker-compose.yml restart
             sudo docker-compose -f timemanager_app/docker-compose.yml ps
           '
         env:
